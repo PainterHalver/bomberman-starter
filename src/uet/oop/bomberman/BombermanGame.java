@@ -51,6 +51,11 @@ public class BombermanGame extends Application {
         AnimationTimer timer = new AnimationTimer() {
             @Override
             public void handle(long l) {
+                try {
+                    Thread.sleep(10);
+                } catch (Exception ex) {
+                    System.out.println(ex.getMessage());
+                }
                 render();
                 update();
             }
@@ -59,8 +64,17 @@ public class BombermanGame extends Application {
 
         createMap();
 
-        Entity bomberman = new Bomber(1, 1, Sprite.player_right.getFxImage());
+        Entity bomberman = new Bomber(5, 5, Sprite.player_right.getFxImage());
         entities.add(bomberman);
+        new Thread(() -> {
+            try {
+                Thread.sleep(3000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            Entity bomberman1 = new Bomber(7, 5, Sprite.player_right.getFxImage());
+            entities.add(bomberman1);
+        }).start();
     }
 
     public void createMap() {
