@@ -30,6 +30,8 @@ public class BombermanGame extends Application {
 
     public static final int WIDTH = 20;
     public static final int HEIGHT = 13;
+    public int mapHeight = 13;
+    public int mapWidth = 31;
     public int loopCount = 0;
     public long start = System.currentTimeMillis();
     
@@ -47,7 +49,7 @@ public class BombermanGame extends Application {
     @Override
     public void start(Stage stage) {
         // Tao Canvas
-        canvas = new Canvas(Sprite.SCALED_SIZE * 31, Sprite.SCALED_SIZE * 13);
+        canvas = new Canvas(Sprite.SCALED_SIZE * mapWidth, Sprite.SCALED_SIZE * mapHeight);
         gc = canvas.getGraphicsContext2D();
 
         // Tao root container
@@ -83,44 +85,8 @@ public class BombermanGame extends Application {
         mapFromFile();
 
 
-        Bomber bomberman = new Bomber(1, 2, Sprite.player_right.getFxImage());
+        Bomber bomberman = new Bomber(1, 2, Sprite.player_right.getFxImage(), scene);
         entities.add(bomberman);
-        scene.setOnKeyPressed(keyEvent -> {
-            switch (keyEvent.getCode()) {
-                case UP:
-                    bomberman.up = true;
-                    break;
-                case RIGHT:
-                    bomberman.right = true;
-                    break;
-                case DOWN:
-                    bomberman.down = true;
-                    break;
-                case LEFT:
-                    bomberman.left = true;
-                    break;
-                default:
-                    break;
-            }
-        });
-        scene.setOnKeyReleased(keyEvent -> {
-            switch (keyEvent.getCode()) {
-                case UP:
-                    bomberman.up = false;
-                    break;
-                case RIGHT:
-                    bomberman.right = false;
-                    break;
-                case DOWN:
-                    bomberman.down = false;
-                    break;
-                case LEFT:
-                    bomberman.left = false;
-                    break;
-                default:
-                    break;
-            }
-        });
     }
 
     public void mapFromFile() {

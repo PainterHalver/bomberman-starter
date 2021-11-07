@@ -1,6 +1,6 @@
 package uet.oop.bomberman.entities;
 
-import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import uet.oop.bomberman.graphics.Sprite;
 
@@ -12,9 +12,50 @@ public class Bomber extends Entity implements Moveable, Animatable {
     public int anime = 0;
     public boolean moving;
     public String facingDirection = "";
+    public Scene parentScene = null;
 
     public Bomber(int x, int y, Image img) {
         super( x, y, img);
+    }
+    public Bomber(int x, int y, Image img, Scene scene) {
+        super(x,y,img);
+        this.parentScene = scene;
+        scene.setOnKeyPressed(keyEvent -> {
+            switch (keyEvent.getCode()) {
+                case UP:
+                    this.up = true;
+                    break;
+                case RIGHT:
+                    this.right = true;
+                    break;
+                case DOWN:
+                    this.down = true;
+                    break;
+                case LEFT:
+                    this.left = true;
+                    break;
+                default:
+                    break;
+            }
+        });
+        scene.setOnKeyReleased(keyEvent -> {
+            switch (keyEvent.getCode()) {
+                case UP:
+                    this.up = false;
+                    break;
+                case RIGHT:
+                    this.right = false;
+                    break;
+                case DOWN:
+                    this.down = false;
+                    break;
+                case LEFT:
+                    this.left = false;
+                    break;
+                default:
+                    break;
+            }
+        });
     }
 
     public void printLocationInCanvas() {
@@ -25,8 +66,8 @@ public class Bomber extends Entity implements Moveable, Animatable {
     public void update() {
         moveHandler();
         animate();
-        imageHandler();
-        printLocationInCanvas();
+        animateImageHandler();
+        //printLocationInCanvas();
     }
 
     @Override
@@ -71,7 +112,7 @@ public class Bomber extends Entity implements Moveable, Animatable {
 
 
     @Override
-    public void imageHandler() {
+    public void animateImageHandler() {
         switch (facingDirection) {
             case "UP":
                 this.img = Sprite.player_up.getFxImage();

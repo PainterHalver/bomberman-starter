@@ -16,6 +16,7 @@ public class GameScreen {
       if (e instanceof Bomber) bomber = e;
     }
 
+    assert bomber != null;
     if (bomber.getX() > screenPane.getWidth() / 2 && bomber.getX() < canvas.getWidth() - screenPane.getWidth() / 2) {
       canvas.setTranslateX(-bomber.getX() + screenPane.getWidth() / 2);
     }
