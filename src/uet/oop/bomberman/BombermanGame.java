@@ -69,12 +69,13 @@ public class BombermanGame extends Application {
         AnimationTimer timer = new AnimationTimer() {
             @Override
             public void handle(long l) {
-//                loopCount++;
-//                if (System.currentTimeMillis() - start > 1000) {
-//                    System.out.println(loopCount);
-//                    loopCount = 0;
-//                    start = System.currentTimeMillis();
-//                }
+                loopCount++;
+                if (System.currentTimeMillis() - start > 1000) {
+                    log("FPS: " + loopCount, ANSI_BLUE);
+                    stage.setTitle(loopCount + " FPS");
+                    loopCount = 0;
+                    start = System.currentTimeMillis();
+                }
                 render();
                 update();
             }
