@@ -6,6 +6,8 @@ import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.layout.Pane;
+import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 import sun.misc.IOUtils;
 import uet.oop.bomberman.entities.Bomber;
@@ -13,6 +15,8 @@ import uet.oop.bomberman.entities.Entity;
 import uet.oop.bomberman.entities.Grass;
 import uet.oop.bomberman.entities.Wall;
 import uet.oop.bomberman.graphics.Sprite;
+import uet.oop.bomberman.utils.GameScreen;
+
 import static uet.oop.bomberman.utils.TerminalColor.*;
 
 import java.io.*;
@@ -23,14 +27,15 @@ import java.util.List;
 import java.util.Scanner;
 
 public class BombermanGame extends Application {
-    
-    public static final int WIDTH = 31;
+
+    public static final int WIDTH = 20;
     public static final int HEIGHT = 13;
     public int loopCount = 0;
     public long start = System.currentTimeMillis();
     
     private GraphicsContext gc;
     private Canvas canvas;
+    private Pane screenPane;
     private List<Entity> entities = new ArrayList<>();
     private List<Entity> stillObjects = new ArrayList<>();
 
@@ -42,15 +47,18 @@ public class BombermanGame extends Application {
     @Override
     public void start(Stage stage) {
         // Tao Canvas
-        canvas = new Canvas(Sprite.SCALED_SIZE * WIDTH, Sprite.SCALED_SIZE * HEIGHT);
+        canvas = new Canvas(Sprite.SCALED_SIZE * 31, Sprite.SCALED_SIZE * 13);
         gc = canvas.getGraphicsContext2D();
 
         // Tao root container
-        Group root = new Group();
-        root.getChildren().add(canvas);
+        screenPane = new Pane();
+        screenPane.setMaxWidth(Sprite.SCALED_SIZE * 20);
+        screenPane.setMaxHeight(Sprite.SCALED_SIZE * 13);
+        screenPane.getChildren().add(canvas);
 
         // Tao scene
-        Scene scene = new Scene(root);
+        Scene scene = new Scene(screenPane);
+
 
         // Them scene vao stage
         stage.setScene(scene);
@@ -113,15 +121,6 @@ public class BombermanGame extends Application {
                     break;
             }
         });
-        new Thread(() -> {
-            try {
-                Thread.sleep(3000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            Entity b = new Bomber(1, 1, Sprite.player_right.getFxImage());
-            entities.add(b);
-        }).start();
     }
 
     public void mapFromFile() {
@@ -203,6 +202,7 @@ public class BombermanGame extends Application {
 
     public void update() {
         entities.forEach(Entity::update);
+        GameScreen.screenShiftHandler(entities,canvas, screenPane);
     }
 
     public void render() {

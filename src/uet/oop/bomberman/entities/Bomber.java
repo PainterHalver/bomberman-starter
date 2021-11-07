@@ -1,5 +1,6 @@
 package uet.oop.bomberman.entities;
 
+import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import uet.oop.bomberman.graphics.Sprite;
 
@@ -16,11 +17,16 @@ public class Bomber extends Entity implements Moveable, Animatable {
         super( x, y, img);
     }
 
+    public void printLocationInCanvas() {
+        log("x: " + x + ", y: " + y, ANSI_BLUE);
+    }
+
     @Override
     public void update() {
         moveHandler();
         animate();
         imageHandler();
+        printLocationInCanvas();
     }
 
     @Override
@@ -33,10 +39,10 @@ public class Bomber extends Entity implements Moveable, Animatable {
     @Override
     public void moveHandler() {
         int xS = 0, yS = 0;
-        if (up) yS -= 2;
-        if (down) yS += 2;
-        if (left) xS -= 2;
-        if (right) xS += 2;
+        if (up) yS -= 3;
+        if (down) yS += 3;
+        if (left) xS -= 3;
+        if (right) xS += 3;
 
         if (xS == 0 && yS == 0) {
             moving = false;
