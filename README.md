@@ -1,6 +1,6 @@
 #TODO
-- Class Board chứa màn chơi, phương thức để lấy Entity trên cùng của 1 ô
-- Tạo class cho các Entity: Brick, Portal, Các Item, Quái (Balloon, Oneal)
+- ~~Class Board chứa màn chơi, phương thức để lấy Entity trên cùng của 1 ô~~
+- ~~Tạo class cho các Entity: Brick, Portal, Các Item, Quái (Balloon, Oneal)~~
 - Xử lý di chuyển của Bomber không cho chạm vào tường đá
 - Thêm trạng thái sống chết cho Bomber
 - Thêm quái vào game, Bomber chạm vào quái thì đứt

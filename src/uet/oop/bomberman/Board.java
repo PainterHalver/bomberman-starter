@@ -2,10 +2,7 @@ package uet.oop.bomberman;
 
 import javafx.scene.Scene;
 import javafx.scene.canvas.GraphicsContext;
-import uet.oop.bomberman.entities.Bomber;
-import uet.oop.bomberman.entities.Entity;
-import uet.oop.bomberman.entities.Grass;
-import uet.oop.bomberman.entities.Wall;
+import uet.oop.bomberman.entities.*;
 import uet.oop.bomberman.graphics.Sprite;
 import uet.oop.bomberman.utils.GameScreen;
 
@@ -40,6 +37,17 @@ public class Board {
 
   public List<Entity> getStillObjects() {
     return stillObjects;
+  }
+
+  public Entity getStillObject(int boardX, int boardY) {
+    // Trả về StillObject ở trên cùng
+    for (int i = stillObjects.size() - 1; i >= 0; --i) {
+      Entity object = stillObjects.get(i);
+      if (object.getBoardX() == boardX && object.getBoardY() == boardY) {
+        return object;
+      }
+    }
+    return null;
   }
 
   public void loadLevel(int level) {
@@ -83,36 +91,36 @@ public class Board {
             object = new Wall(j, i, Sprite.wall.getFxImage());
             break;
           case '*':
-            object = new Wall(j, i, Sprite.brick.getFxImage());
+            object = new Brick(j, i, Sprite.brick.getFxImage());
             break;
           case 'x':
-            object = new Wall(j, i, Sprite.portal.getFxImage());
+            object = new Portal(j, i, Sprite.portal.getFxImage());
             stillObjects.add(object);
-            object = new Wall(j, i, Sprite.brick.getFxImage());
+            object = new Brick(j, i, Sprite.brick.getFxImage());
             break;
           case 'p':
             entities.add(new Bomber(j, i, Sprite.player_right.getFxImage(), this));
             break;
           case '1':
-            entities.add(new Wall(j, i, Sprite.balloom_right1.getFxImage()));
+            entities.add(new Balloon(j, i, Sprite.balloom_right1.getFxImage()));
             break;
           case '2':
-            entities.add(new Wall(j, i, Sprite.oneal_right1.getFxImage()));
+            entities.add(new Oneal(j, i, Sprite.oneal_right1.getFxImage()));
             break;
           case 'b':
-            object = new Wall(j, i, Sprite.powerup_bombs.getFxImage());
+            object = new BombItem(j, i, Sprite.powerup_bombs.getFxImage());
             stillObjects.add(object);
-            object = new Wall(j, i, Sprite.brick.getFxImage());
+            object = new Brick(j, i, Sprite.brick.getFxImage());
             break;
           case 'f':
-            object = new Wall(j, i, Sprite.powerup_flames.getFxImage());
+            object = new FlameItem(j, i, Sprite.powerup_flames.getFxImage());
             stillObjects.add(object);
-            object = new Wall(j, i, Sprite.brick.getFxImage());
+            object = new Brick(j, i, Sprite.brick.getFxImage());
             break;
           case 's':
-            object = new Wall(j, i, Sprite.powerup_speed.getFxImage());
+            object = new SpeedItem(j, i, Sprite.powerup_speed.getFxImage());
             stillObjects.add(object);
-            object = new Wall(j, i, Sprite.brick.getFxImage());
+            object = new Brick(j, i, Sprite.brick.getFxImage());
             break;
           default:
             break;

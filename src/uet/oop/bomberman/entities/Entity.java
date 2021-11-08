@@ -14,12 +14,17 @@ public abstract class Entity {
     //Tọa độ Y tính từ góc trái trên trong Canvas
     protected int y;
 
+    protected int boardX;
+    protected int boardY;
+
     protected Image img;
 
     //Khởi tạo đối tượng, chuyển từ tọa độ đơn vị sang tọa độ trong canvas
-    public Entity( int xUnit, int yUnit, Image img) {
-        this.x = xUnit * Sprite.SCALED_SIZE;
-        this.y = yUnit * Sprite.SCALED_SIZE;
+    public Entity( int boardX, int boardY, Image img) {
+        this.boardX = boardX;
+        this.boardY = boardY;
+        this.x = boardX * Sprite.SCALED_SIZE;
+        this.y = boardY * Sprite.SCALED_SIZE;
         this.img = img;
     }
 
@@ -37,6 +42,22 @@ public abstract class Entity {
 
     public int getY() {
         return y;
+    }
+
+    public int getBoardX() {
+        return boardX;
+    }
+
+    public void setBoardX(int boardX) {
+        this.boardX = boardX;
+    }
+
+    public int getBoardY() {
+        return boardY;
+    }
+
+    public void setBoardY(int boardY) {
+        this.boardY = boardY;
     }
 
     public void render(GraphicsContext gc) {

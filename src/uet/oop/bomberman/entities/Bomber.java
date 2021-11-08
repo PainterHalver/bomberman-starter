@@ -2,6 +2,7 @@ package uet.oop.bomberman.entities;
 
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
+import javafx.stage.Stage;
 import uet.oop.bomberman.Board;
 import uet.oop.bomberman.graphics.Sprite;
 
@@ -16,8 +17,8 @@ public class Bomber extends Entity implements Moveable, Animatable {
     public Board board = null;
     private Scene scene = null;
 
-    public Bomber(int x, int y, Image img) {
-        super( x, y, img);
+    public Bomber(int boardX, int boardY, Image img) {
+        super( boardX, boardY, img);
     }
     public Bomber(int x, int y, Image img, Board board) {
         super(x,y,img);
@@ -63,7 +64,9 @@ public class Bomber extends Entity implements Moveable, Animatable {
             return;
         }
 
-        move(xS,yS);
+        if(canMove(xS,yS)) {
+            move(xS,yS);
+        }
         moving = true;
     }
 
@@ -71,11 +74,16 @@ public class Bomber extends Entity implements Moveable, Animatable {
     public void move(double xS, double yS) {
         this.x += xS;
         this.y += yS;
+        //Cập nhật boardX,Y
+        boardX = x / Sprite.SCALED_SIZE;
+        boardY = y / Sprite.SCALED_SIZE;
     }
 
     @Override
-    public void canMove(int x, int y) {
-
+    public boolean canMove(double xS, double yS) {
+        Stage stage = (Stage) this.scene.getWindow();
+        stage.setTitle(boardX + " " + boardY);
+        return true;
     }
 
     private void inputHandler(Scene scene) {
