@@ -1,9 +1,9 @@
-#TODO
+# TODO
 - ~~Class Board chứa màn chơi, phương thức để lấy Entity trên cùng của 1 ô~~
 - ~~Tạo class cho các Entity: Brick, Portal, Các Item, Quái (Balloon, Oneal)~~
 - ~~Xử lý di chuyển của Bomber không cho chạm vào tường và gạch~~
 - Xử lý hàm va chạm chung chung
-- Thêm trạng thái và xử lý sống chết cho Bomber
+- Thêm trạng thái(speed, bombsize, flamesize) và xử lý sống chết cho Bomber
 - Thêm quái vào game, Bomber chạm vào quái thì đứt
 - Thuật toán tìm đường trong một ma trận MxN (A* hoặc gì đó)
 - Class Bomb có thuộc tính độ dài bom
@@ -12,7 +12,7 @@
 - Thêm Scene màn hình New Game, Pause, Game Over (chắc là làm fxml mỗi cái)
 
 
-#Notes
+# Notes
 - StillEntity(Không di chuyển): Bomb, Grass, Wall, Brick, Portal.
 - MoveableEntity (Di chuyển được trong Board): Bomber, Enemy.
 - Animatable Interface: Gồm các MoveableEntity và Bomb.

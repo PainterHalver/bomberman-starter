@@ -1,10 +1,8 @@
 package uet.oop.bomberman.entities.moveableEntities;
 
 import javafx.scene.image.Image;
-import uet.oop.bomberman.entities.Animatable;
-import uet.oop.bomberman.entities.Entity;
 
-public class Oneal extends MoveableEntities implements Animatable {
+public class Oneal extends MovableEntities {
 
   public Oneal(int boardX, int boardY, Image img) {
     super( boardX, boardY, img);
@@ -15,11 +13,6 @@ public class Oneal extends MoveableEntities implements Animatable {
 
   }
 
-
-  @Override
-  public void animate() {
-
-  }
 
   @Override
   public void animateImageHandler() {
@@ -37,7 +30,7 @@ public class Oneal extends MoveableEntities implements Animatable {
   }
 
   @Override
-  public boolean canMove(int xS, int yS) {
+  public boolean canMoveBrickAndWall(int xS, int yS) {
     return false;
   }
 }

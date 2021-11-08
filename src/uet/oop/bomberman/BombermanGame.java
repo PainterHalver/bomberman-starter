@@ -5,6 +5,7 @@ import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import uet.oop.bomberman.graphics.Sprite;
@@ -47,6 +48,8 @@ public class BombermanGame extends Application {
 
         // Them scene vao stage
         stage.setScene(scene);
+        Pane pane = (Pane) scene.getRoot();
+        pane.getChildren().add(new Label("Hello"));
         stage.show();
 
         AnimationTimer timer = new AnimationTimer() {
