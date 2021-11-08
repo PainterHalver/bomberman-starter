@@ -2,6 +2,7 @@ package uet.oop.bomberman.entities;
 
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
+import uet.oop.bomberman.Board;
 import uet.oop.bomberman.graphics.Sprite;
 
 
@@ -12,14 +13,72 @@ public class Bomber extends Entity implements Moveable, Animatable {
     public int anime = 0;
     public boolean moving;
     public String facingDirection = "";
-    public Scene parentScene = null;
+    public Board board = null;
+    private Scene scene = null;
 
     public Bomber(int x, int y, Image img) {
         super( x, y, img);
     }
-    public Bomber(int x, int y, Image img, Scene scene) {
+    public Bomber(int x, int y, Image img, Board board) {
         super(x,y,img);
-        this.parentScene = scene;
+        this.board = board;
+        this.scene = board.getScene();
+        inputHandler(scene);
+    }
+
+    public void printLocationInCanvas() {
+        log("x: " + x + ", y: " + y, ANSI_BLUE);
+    }
+
+    @Override
+    public void update() {
+        moveHandler();
+        animate();
+        animateImageHandler();
+        //printLocationInCanvas();
+    }
+
+    @Override
+    public void animate() {
+        if(anime < 60) anime++;
+        else anime = 0;
+    }
+
+
+    @Override
+    public void moveHandler() {
+        int xS = 0, yS = 0;
+        if (up) yS -= 3;
+        if (down) yS += 3;
+        if (left) xS -= 3;
+        if (right) xS += 3;
+        //Thứ tự 4 cái này là quan trọng khi nhiều nút đươc bấm cùng lúc
+        if (xS > 0) facingDirection = "RIGHT";
+        if (xS < 0) facingDirection = "LEFT";
+        if (yS > 0) facingDirection = "DOWN";
+        if (yS < 0) facingDirection = "UP";
+
+        if (xS == 0 && yS == 0) {
+            moving = false;
+            return;
+        }
+
+        move(xS,yS);
+        moving = true;
+    }
+
+    @Override
+    public void move(double xS, double yS) {
+        this.x += xS;
+        this.y += yS;
+    }
+
+    @Override
+    public void canMove(int x, int y) {
+
+    }
+
+    private void inputHandler(Scene scene) {
         scene.setOnKeyPressed(keyEvent -> {
             switch (keyEvent.getCode()) {
                 case UP:
@@ -57,59 +116,6 @@ public class Bomber extends Entity implements Moveable, Animatable {
             }
         });
     }
-
-    public void printLocationInCanvas() {
-        log("x: " + x + ", y: " + y, ANSI_BLUE);
-    }
-
-    @Override
-    public void update() {
-        moveHandler();
-        animate();
-        animateImageHandler();
-        //printLocationInCanvas();
-    }
-
-    @Override
-    public void animate() {
-        if(anime < 60) anime++;
-        else anime = 0;
-    }
-
-
-    @Override
-    public void moveHandler() {
-        int xS = 0, yS = 0;
-        if (up) yS -= 3;
-        if (down) yS += 3;
-        if (left) xS -= 3;
-        if (right) xS += 3;
-
-        if (xS == 0 && yS == 0) {
-            moving = false;
-            return;
-        }
-        move(xS,yS);
-        moving = true;
-    }
-
-    @Override
-    public void move(double xS, double yS) {
-        //Thứ tự 4 cái này là quan trọng khi nhiều nút đươc bấm cùng lúc
-        if (xS >0) facingDirection = "RIGHT";
-        if (xS <0) facingDirection = "LEFT";
-        if (yS >0) facingDirection = "DOWN";
-        if (yS <0) facingDirection = "UP";
-
-        this.x += xS;
-        this.y += yS;
-    }
-
-    @Override
-    public void canMove(int x, int y) {
-
-    }
-
 
     @Override
     public void animateImageHandler() {

@@ -1,4 +1,13 @@
 #TODO
+- Class Board chứa màn chơi, phương thức để lấy Entity trên cùng của 1 ô
+- Tạo class cho các Entity: Brick, Portal, Các Item, Quái (Balloon, Oneal)
+- Xử lý di chuyển của Bomber không cho chạm vào tường đá
+- Thêm trạng thái sống chết cho Bomber
+- Thêm quái vào game, Bomber chạm vào quái thì đứt
+- Thuật toán tìm đường trong một ma trận MxN (A* hoặc gì đó)
+- Class Bomb có thuộc tính độ dài bom
+- Thêm Bomb, thuộc tính tốc độ, độ dài, số bom cùng 1 thời điểm  cho Bomber
+- Xử lý Bomb nổ
 
 
 
