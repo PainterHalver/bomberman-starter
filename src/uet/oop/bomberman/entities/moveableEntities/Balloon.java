@@ -1,8 +1,10 @@
-package uet.oop.bomberman.entities;
+package uet.oop.bomberman.entities.moveableEntities;
 
 import javafx.scene.image.Image;
+import uet.oop.bomberman.entities.Animatable;
+import uet.oop.bomberman.entities.Entity;
 
-public class Balloon extends Entity implements Moveable, Animatable {
+public class Balloon extends MoveableEntities implements Animatable {
 
   public Balloon(int boardX, int boardY, Image img) {
     super( boardX, boardY, img);

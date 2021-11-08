@@ -3,8 +3,10 @@ package uet.oop.bomberman;
 import javafx.scene.Scene;
 import javafx.scene.canvas.GraphicsContext;
 import uet.oop.bomberman.entities.*;
+import uet.oop.bomberman.entities.moveableEntities.Balloon;
+import uet.oop.bomberman.entities.moveableEntities.Bomber;
+import uet.oop.bomberman.entities.moveableEntities.Oneal;
 import uet.oop.bomberman.graphics.Sprite;
-import uet.oop.bomberman.utils.GameScreen;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -12,7 +14,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-import static uet.oop.bomberman.utils.TerminalColor.ANSI_GREEN;
 import static uet.oop.bomberman.utils.TerminalColor.log;
 
 public class Board {

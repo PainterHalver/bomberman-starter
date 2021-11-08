@@ -1,8 +1,10 @@
-package uet.oop.bomberman.entities;
+package uet.oop.bomberman.entities.moveableEntities;
 
 import javafx.scene.image.Image;
+import uet.oop.bomberman.entities.Animatable;
+import uet.oop.bomberman.entities.Entity;
 
-public class Oneal extends Entity implements Animatable, Moveable {
+public class Oneal extends MoveableEntities implements Animatable {
 
   public Oneal(int boardX, int boardY, Image img) {
     super( boardX, boardY, img);

@@ -1,15 +1,19 @@
-package uet.oop.bomberman.entities;
+package uet.oop.bomberman.entities.moveableEntities;
 
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import uet.oop.bomberman.Board;
+import uet.oop.bomberman.entities.Animatable;
+import uet.oop.bomberman.entities.Brick;
+import uet.oop.bomberman.entities.Entity;
+import uet.oop.bomberman.entities.Wall;
 import uet.oop.bomberman.graphics.Sprite;
 
 
 import static uet.oop.bomberman.utils.TerminalColor.*;
 
-public class Bomber extends Entity implements Moveable, Animatable {
+public class Bomber extends MoveableEntities implements Animatable {
     public boolean up, left, down, right;
     public int anime = 0;
     public boolean moving;
