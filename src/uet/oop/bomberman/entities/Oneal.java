@@ -30,12 +30,12 @@ public class Oneal extends Entity implements Animatable, Moveable {
   }
 
   @Override
-  public void move(double xS, double yS) {
+  public void move(int xS, int yS) {
 
   }
 
   @Override
-  public boolean canMove(double xS, double yS) {
+  public boolean canMove(int xS, int yS) {
     return false;
   }
 }

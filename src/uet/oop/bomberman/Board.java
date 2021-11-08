@@ -39,11 +39,22 @@ public class Board {
     return stillObjects;
   }
 
-  public Entity getStillObject(int boardX, int boardY) {
+  public Entity getStillObjectByBoard(int boardX, int boardY) {
     // Trả về StillObject ở trên cùng
     for (int i = stillObjects.size() - 1; i >= 0; --i) {
       Entity object = stillObjects.get(i);
       if (object.getBoardX() == boardX && object.getBoardY() == boardY) {
+        return object;
+      }
+    }
+    return null;
+  }
+
+  public Entity getStillObjectByCanvas(int x, int y) {
+    // Trả về StillObject ở trên cùng
+    for (int i = stillObjects.size() - 1; i >= 0; --i) {
+      Entity object = stillObjects.get(i);
+      if (object.getBoardX() == x / Sprite.SCALED_SIZE && object.getBoardY() == y / Sprite.SCALED_SIZE) {
         return object;
       }
     }

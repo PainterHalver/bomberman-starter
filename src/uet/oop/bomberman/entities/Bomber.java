@@ -53,6 +53,7 @@ public class Bomber extends Entity implements Moveable, Animatable {
         if (down) yS += 3;
         if (left) xS -= 3;
         if (right) xS += 3;
+
         //Thứ tự 4 cái này là quan trọng khi nhiều nút đươc bấm cùng lúc
         if (xS > 0) facingDirection = "RIGHT";
         if (xS < 0) facingDirection = "LEFT";
@@ -64,25 +65,48 @@ public class Bomber extends Entity implements Moveable, Animatable {
             return;
         }
 
-        if(canMove(xS,yS)) {
-            move(xS,yS);
-        }
+        move(xS,yS);
         moving = true;
     }
 
     @Override
-    public void move(double xS, double yS) {
-        this.x += xS;
-        this.y += yS;
+    public void move(int xS, int yS) {
+        if (canMove(xS, 0)) this.x += xS;
+        if (canMove(0, yS))this.y += yS;
         //Cập nhật boardX,Y
         boardX = x / Sprite.SCALED_SIZE;
         boardY = y / Sprite.SCALED_SIZE;
     }
 
     @Override
-    public boolean canMove(double xS, double yS) {
+    public boolean canMove(int xS, int yS) {
         Stage stage = (Stage) this.scene.getWindow();
         stage.setTitle(boardX + " " + boardY);
+
+        int topLeftX = x + xS;
+        int topLeftY = y + yS + 5 * Sprite.SCALE; // cúi cái đầu xuống 1 chút :)
+        int topRightX = topLeftX + (Sprite.player_down.getRealWidth() - 1) * Sprite.SCALE;
+        int topRightY = topLeftY;
+        int botLeftX = topLeftX;
+        int botLeftY = topLeftY + (Sprite.player_down.getRealHeight() - 5) * Sprite.SCALE;
+        int botRightX = topRightX;
+        int botRightY = botLeftY;
+
+
+        Entity object = null;
+
+        object = board.getStillObjectByCanvas(topLeftX, topLeftY);
+        if((object instanceof Wall || object instanceof Brick)) return false;
+
+        object = board.getStillObjectByCanvas(topRightX, topRightY);
+        if((object instanceof Wall || object instanceof Brick)) return false;
+
+        object = board.getStillObjectByCanvas(botLeftX, botLeftY);
+        if((object instanceof Wall || object instanceof Brick)) return false;
+
+        object = board.getStillObjectByCanvas(botRightX, botRightY);
+        if((object instanceof Wall || object instanceof Brick)) return false;
+
         return true;
     }
 

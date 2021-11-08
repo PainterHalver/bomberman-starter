@@ -4,7 +4,7 @@ public interface Moveable {
   boolean up = false, left = false, down = false, right = false;
 
   void moveHandler();
-  void move(double xS, double yS);
+  void move(int xS, int yS);
 
-  boolean canMove(double xS, double yS);
+  boolean canMove(int xS, int yS);
 }

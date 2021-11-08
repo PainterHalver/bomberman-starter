@@ -29,12 +29,12 @@ public class Balloon extends Entity implements Moveable, Animatable {
   }
 
   @Override
-  public void move(double xS, double yS) {
+  public void move(int xS, int yS) {
 
   }
 
   @Override
-  public boolean canMove(double xS, double yS) {
+  public boolean canMove(int xS, int yS) {
     return false;
   }
 }
