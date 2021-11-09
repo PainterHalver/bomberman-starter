@@ -1,18 +1,17 @@
 package uet.oop.bomberman.entities.moveableEntities;
 
 import javafx.scene.Scene;
+import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
-import javafx.stage.Stage;
 import uet.oop.bomberman.Board;
-import uet.oop.bomberman.entities.Brick;
 import uet.oop.bomberman.entities.Entity;
-import uet.oop.bomberman.entities.Wall;
 import uet.oop.bomberman.graphics.Sprite;
 
 
-import static uet.oop.bomberman.utils.TerminalColor.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Bomber extends MovableEntities {
     private Scene scene = null;
@@ -23,19 +22,35 @@ public class Bomber extends MovableEntities {
         inputHandler(scene);
     }
 
-    public void printLocationInCanvas() {
+    public void printToScene(String s) {
         Pane screenPane = (Pane) scene.getRoot();
         Label label = (Label) screenPane.getChildren().get(1);
         label.styleProperty().set("-fx-text-fill: blue;-fx-font-size: 20px;");
-        label.setText("x: " + boardX + ", y: " + boardY + " " + facingDirection);
+        //label.setText("x: " + boardX + ", y: " + boardY + " " + facingDirection + ", Rectangle: " + realBodyRectangle.getX() + " " + realBodyRectangle.getY());
+        label.setText(s);
+    }
+
+    public void collisionHandler() {
+        List<Entity> collidedEntities = new ArrayList<>();
+        board.getEntities().forEach(entity -> {
+            if (entity != this && this.realBodyRectangle.overlaps(entity.getRealBodyRectangle())) {
+                collidedEntities.add(entity);
+            }
+        });
+        printToScene("I'm on" + collidedEntities);
+    }
+
+    @Override
+    public void render(GraphicsContext gc) {
+        gc.fillRect(realBodyRectangle.getX(), realBodyRectangle.getY(),realBodyRectangle.getWidth(),realBodyRectangle.getHeight());
     }
 
     @Override
     public void update() {
         moveHandler();
+        collisionHandler();
         animate();
         animateImageHandler();
-        printLocationInCanvas();
     }
 
     private void inputHandler(Scene scene) {

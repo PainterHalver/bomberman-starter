@@ -1,5 +1,6 @@
 package uet.oop.bomberman.entities.moveableEntities;
 
+import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 
 public class Balloon extends MovableEntities {
@@ -12,6 +13,7 @@ public class Balloon extends MovableEntities {
   public void animateImageHandler() {
 
   }
+
 
   @Override
   public void update() {

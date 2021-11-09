@@ -5,6 +5,7 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
 import uet.oop.bomberman.graphics.Sprite;
 
 public abstract class Entity {
@@ -18,6 +19,7 @@ public abstract class Entity {
     protected int boardY;
 
     protected Image img;
+    protected EntityRectangle realBodyRectangle;
 
     //Khởi tạo đối tượng, chuyển từ tọa độ đơn vị sang tọa độ trong canvas
     public Entity( int boardX, int boardY, Image img) {
@@ -26,6 +28,11 @@ public abstract class Entity {
         this.x = boardX * Sprite.SCALED_SIZE;
         this.y = boardY * Sprite.SCALED_SIZE;
         this.img = img;
+        this.realBodyRectangle = new EntityRectangle(x,y, Sprite.SCALED_SIZE, Sprite.SCALED_SIZE);
+    }
+
+    public Rectangle getRealBodyRectangle() {
+        return realBodyRectangle;
     }
 
     public void setX(int x) {

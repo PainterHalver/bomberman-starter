@@ -42,7 +42,7 @@ public class BombermanGame extends Application {
         screenPane.setMaxHeight(Sprite.SCALED_SIZE * SCREEN_HEIGHT);
 
         // Tao Canvas
-        canvas = new Canvas(Sprite.SCALED_SIZE * board.WIDTH, Sprite.SCALED_SIZE * board.HEIGHT);
+        canvas = new Canvas(Sprite.SCALED_SIZE * board.width, Sprite.SCALED_SIZE * board.height);
         gc = canvas.getGraphicsContext2D();
         screenPane.getChildren().add(canvas);
 

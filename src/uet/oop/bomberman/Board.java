@@ -17,8 +17,8 @@ import java.util.Scanner;
 import static uet.oop.bomberman.utils.TerminalColor.log;
 
 public class Board {
-  public final int WIDTH = 20;
-  public final int HEIGHT = 13;
+  public int width;
+  public int height;
   private List<Entity> entities = new ArrayList<>();
   private List<Entity> stillObjects = new ArrayList<>();
   private Scene scene = null;
@@ -81,7 +81,9 @@ public class Board {
     String[] lines = sb.toString().split("\n");
     String[] line1 = lines[0].split(" ");
     int rowCount = Integer.parseInt(line1[1].trim());
+    this.height = rowCount;
     int colCount = Integer.parseInt(line1[2].trim());
+    this.width = colCount;
     Character[][] mapMatrix = new Character[rowCount][colCount];
     for(int i = 1; i<= rowCount; ++i) {
       for (int j = 0; j < colCount; ++j) {

@@ -41,15 +41,20 @@ public abstract class MovableEntities extends AnimatableEntities {
       moving = false;
       return;
     }
-
     move(xS,yS);
     moving = true;
   }
 
   public void move(int xS, int yS) {
     // Chia ra làm 2 để xử lý ấn 2 nút khi 1 nút đang đâm đầu vào tường
-    if (canMoveBrickAndWall(xS, 0)) this.x += xS;
-    if (canMoveBrickAndWall(0, yS)) this.y += yS;
+    if (canMoveBrickAndWall(xS, 0)) {
+      this.x += xS;
+      realBodyRectangle.setX(realBodyRectangle.getX() + xS);
+    }
+    if (canMoveBrickAndWall(0, yS)) {
+      this.y += yS;
+      realBodyRectangle.setY(realBodyRectangle.getY() + yS);
+    }
 
     // Cập nhật boardX,Y
     boardX = x / Sprite.SCALED_SIZE;
