@@ -18,6 +18,8 @@ public class BombermanGame extends Application {
     public static final int SCREEN_WIDTH = 15;
     public static final int SCREEN_HEIGHT = 13;
 
+    public static boolean running = false;
+
     public int loopCount = 0;
     public long start = System.currentTimeMillis();
     
@@ -29,6 +31,7 @@ public class BombermanGame extends Application {
 
     // Tao board
     Board board = new Board(scene);
+
 
 
     public static void main(String[] args) {
@@ -62,12 +65,16 @@ public class BombermanGame extends Application {
                     loopCount = 0;
                     start = System.currentTimeMillis();
                 }
+                if (!running) {
+                    screenPane.getChildren().setAll(new Label("GAME OVER"));
+                    this.stop();
+                }
                 render();
                 update();
             }
         };
+        running = true;
         timer.start();
-
     }
 
     public void update() {

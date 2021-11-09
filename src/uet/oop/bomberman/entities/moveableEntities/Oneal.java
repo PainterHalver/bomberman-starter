@@ -16,7 +16,7 @@ public class Oneal extends MovableEntities {
 
 
   @Override
-  public void animateImageHandler() {
+  public void moveAnimationHandler() {
 
   }
 

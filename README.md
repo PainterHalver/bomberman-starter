@@ -3,10 +3,8 @@
 - ~~Tạo class cho các Entity: Brick, Portal, Các Item, Quái (Balloon, Oneal)~~
 - ~~Xử lý di chuyển của Bomber không cho chạm vào tường và gạch~~
 - ~~Xử lý cấu trúc hàm va chạm chung chung~~
-- Thêm trạng thái(speed, bombsize, flamesize) và xử lý sống chết cho Bomber
-- Thêm quái vào game, Bomber chạm vào quái thì đứt
+- ~~Thêm quái vào game, Bomber chạm vào quái thì đứt~~
 - Thuật toán tìm đường trong một ma trận MxN (A* hoặc gì đó)
-- Class Bomb có thuộc tính độ dài bom
 - Thêm Bomb, thuộc tính tốc độ, độ dài, số bom cùng 1 thời điểm  cho Bomber
 - Xử lý Bomb nổ
 - Thêm Scene màn hình New Game, Pause, Game Over (chắc là làm fxml mỗi cái)

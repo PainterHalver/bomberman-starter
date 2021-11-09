@@ -3,9 +3,16 @@ package uet.oop.bomberman;
 import javafx.scene.Scene;
 import javafx.scene.canvas.GraphicsContext;
 import uet.oop.bomberman.entities.*;
+import uet.oop.bomberman.entities.items.BombItem;
+import uet.oop.bomberman.entities.items.FlameItem;
+import uet.oop.bomberman.entities.items.SpeedItem;
 import uet.oop.bomberman.entities.moveableEntities.Balloon;
 import uet.oop.bomberman.entities.moveableEntities.Bomber;
 import uet.oop.bomberman.entities.moveableEntities.Oneal;
+import uet.oop.bomberman.entities.stillEntities.Brick;
+import uet.oop.bomberman.entities.stillEntities.Grass;
+import uet.oop.bomberman.entities.Portal;
+import uet.oop.bomberman.entities.stillEntities.Wall;
 import uet.oop.bomberman.graphics.Sprite;
 
 import java.io.FileNotFoundException;

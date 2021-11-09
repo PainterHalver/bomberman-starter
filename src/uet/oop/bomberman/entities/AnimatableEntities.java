@@ -14,6 +14,6 @@ public abstract class AnimatableEntities extends Entity {
     else anime = 0;
   }
 
-  public abstract void animateImageHandler();
+  public abstract void moveAnimationHandler();
 
 }

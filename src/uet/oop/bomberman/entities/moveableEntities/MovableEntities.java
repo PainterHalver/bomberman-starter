@@ -1,12 +1,11 @@
 package uet.oop.bomberman.entities.moveableEntities;
 
 import javafx.scene.image.Image;
-import javafx.stage.Stage;
 import uet.oop.bomberman.Board;
 import uet.oop.bomberman.entities.AnimatableEntities;
-import uet.oop.bomberman.entities.Brick;
+import uet.oop.bomberman.entities.stillEntities.Brick;
 import uet.oop.bomberman.entities.Entity;
-import uet.oop.bomberman.entities.Wall;
+import uet.oop.bomberman.entities.stillEntities.Wall;
 import uet.oop.bomberman.graphics.Sprite;
 
 public abstract class MovableEntities extends AnimatableEntities {
@@ -15,6 +14,9 @@ public abstract class MovableEntities extends AnimatableEntities {
   protected boolean moving;
   protected Board board = null;
   protected boolean alive = true;
+  protected double speed = 1;
+  protected final int DIE_TIME_SECOND = 3;
+  protected int deadAnimeTime = 60 * DIE_TIME_SECOND;
 
   public MovableEntities(int boardX, int boardY, Image img) {
     super(boardX, boardY, img);
@@ -27,10 +29,10 @@ public abstract class MovableEntities extends AnimatableEntities {
 
   public void moveHandler() {
     int xS = 0, yS = 0;
-    if (up) yS -= 3;
-    if (down) yS += 3;
-    if (left) xS -= 3;
-    if (right) xS += 3;
+    if (up) yS -= speed * Sprite.SCALE;
+    if (down) yS += speed * Sprite.SCALE;
+    if (left) xS -= speed * Sprite.SCALE;
+    if (right) xS += speed * Sprite.SCALE;
 
     //Thứ tự 4 cái này là quan trọng khi nhiều nút đươc bấm cùng lúc
     if (xS > 0) facingDirection = "RIGHT";
@@ -88,6 +90,14 @@ public abstract class MovableEntities extends AnimatableEntities {
     if((object instanceof Wall || object instanceof Brick)) return false;
 
     return true;
+  }
+
+  public void seftDestruct() {
+    alive = false;
+    this.up = false;
+    this.right = false;
+    this.down = false;
+    this.left = false;
   }
 
   public abstract void collisionHandler();

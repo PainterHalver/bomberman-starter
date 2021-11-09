@@ -1,12 +1,12 @@
 package uet.oop.bomberman.entities.moveableEntities;
 
 import javafx.scene.Scene;
-import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
-import javafx.scene.shape.Shape;
 import uet.oop.bomberman.Board;
+import uet.oop.bomberman.BombermanGame;
+import uet.oop.bomberman.entities.Bomb;
 import uet.oop.bomberman.entities.Entity;
 import uet.oop.bomberman.graphics.Sprite;
 
@@ -16,6 +16,9 @@ import java.util.List;
 
 public class Bomber extends MovableEntities {
     private Scene scene = null;
+    private int maxBombCount = 1;
+    private int flameSize = 1;
+    private List<Bomb> bombs = new ArrayList<>();
 
     public Bomber(int x, int y, Image img, Board board) {
         super(x,y,img, board);
@@ -27,10 +30,18 @@ public class Bomber extends MovableEntities {
 
     @Override
     public void update() {
+        moveAnimationHandler();
+        if(!alive) {
+            if (deadAnimeTime > 0) {
+                --deadAnimeTime;
+            } else {
+                BombermanGame.running = false;
+            }
+            return;
+        }
         moveHandler();
         collisionHandler();
-        animate();
-        animateImageHandler();
+
     }
 
     public void printToScene(String s) {
@@ -54,7 +65,7 @@ public class Bomber extends MovableEntities {
 
     public void collide(Entity entity) {
         if (entity instanceof Balloon) {
-            alive = false;
+            seftDestruct();
         }
     }
 
@@ -63,7 +74,6 @@ public class Bomber extends MovableEntities {
 //    public void render(GraphicsContext gc) {
 //        gc.fillRect(realBodyRectangle.getX(), realBodyRectangle.getY(),realBodyRectangle.getWidth(),realBodyRectangle.getHeight());
 //    }
-
 
     private void inputHandler(Scene scene) {
         scene.setOnKeyPressed(keyEvent -> {
@@ -105,9 +115,11 @@ public class Bomber extends MovableEntities {
     }
 
     @Override
-    public void animateImageHandler() {
-        if (!alive) {
-            this.img = Sprite.movingSprite(Sprite.player_dead1, Sprite.player_dead2, Sprite.player_dead3, anime, 60).getFxImage();
+    public void moveAnimationHandler() {
+        animate();
+
+        if(!alive) {
+            this.img = Sprite.movingSprite(Sprite.player_dead3, Sprite.player_dead2, Sprite.player_dead1, deadAnimeTime, 180).getFxImage();
             return;
         }
 
