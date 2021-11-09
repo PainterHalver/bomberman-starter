@@ -2,7 +2,7 @@
 - ~~Class Board chứa màn chơi, phương thức để lấy Entity trên cùng của 1 ô~~
 - ~~Tạo class cho các Entity: Brick, Portal, Các Item, Quái (Balloon, Oneal)~~
 - ~~Xử lý di chuyển của Bomber không cho chạm vào tường và gạch~~
-- Xử lý hàm va chạm chung chung
+- ~~Xử lý cấu trúc hàm va chạm chung chung~~
 - Thêm trạng thái(speed, bombsize, flamesize) và xử lý sống chết cho Bomber
 - Thêm quái vào game, Bomber chạm vào quái thì đứt
 - Thuật toán tìm đường trong một ma trận MxN (A* hoặc gì đó)
@@ -10,6 +10,7 @@
 - Thêm Bomb, thuộc tính tốc độ, độ dài, số bom cùng 1 thời điểm  cho Bomber
 - Xử lý Bomb nổ
 - Thêm Scene màn hình New Game, Pause, Game Over (chắc là làm fxml mỗi cái)
+- Tự động điều chỉnh trong trường hợp đi vào góc cạnh của tường (nhích sang 1 chút để luồn qua được)
 
 
 # Notes

@@ -2,6 +2,7 @@ package uet.oop.bomberman.entities.moveableEntities;
 
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
+import uet.oop.bomberman.entities.Entity;
 
 public class Balloon extends MovableEntities {
 
@@ -33,5 +34,15 @@ public class Balloon extends MovableEntities {
   @Override
   public boolean canMoveBrickAndWall(int xS, int yS) {
     return false;
+  }
+
+  @Override
+  public void collisionHandler() {
+
+  }
+
+  @Override
+  public void collide(Entity entity) {
+
   }
 }

@@ -11,9 +11,10 @@ import uet.oop.bomberman.graphics.Sprite;
 
 public abstract class MovableEntities extends AnimatableEntities {
   protected boolean up = false, left = false, down = false, right = false;
-  public String facingDirection = "";
-  public boolean moving;
-  public Board board = null;
+  protected String facingDirection = "";
+  protected boolean moving;
+  protected Board board = null;
+  protected boolean alive = true;
 
   public MovableEntities(int boardX, int boardY, Image img) {
     super(boardX, boardY, img);
@@ -88,5 +89,9 @@ public abstract class MovableEntities extends AnimatableEntities {
 
     return true;
   }
+
+  public abstract void collisionHandler();
+
+  public abstract void collide(Entity entity);
 
 }

@@ -5,6 +5,7 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
+import javafx.scene.shape.Shape;
 import uet.oop.bomberman.Board;
 import uet.oop.bomberman.entities.Entity;
 import uet.oop.bomberman.graphics.Sprite;
@@ -20,6 +21,16 @@ public class Bomber extends MovableEntities {
         super(x,y,img, board);
         this.scene = board.getScene();
         inputHandler(scene);
+        // Chỉnh hình chữ nhật cho khớp với nhân vật
+        this.realBodyRectangle.setWidth(this.realBodyRectangle.getWidth() - 3 * Sprite.SCALE);
+    }
+
+    @Override
+    public void update() {
+        moveHandler();
+        collisionHandler();
+        animate();
+        animateImageHandler();
     }
 
     public void printToScene(String s) {
@@ -35,23 +46,24 @@ public class Bomber extends MovableEntities {
         board.getEntities().forEach(entity -> {
             if (entity != this && this.realBodyRectangle.overlaps(entity.getRealBodyRectangle())) {
                 collidedEntities.add(entity);
+                collide(entity);
             }
         });
         printToScene("I'm on" + collidedEntities);
     }
 
-    @Override
-    public void render(GraphicsContext gc) {
-        gc.fillRect(realBodyRectangle.getX(), realBodyRectangle.getY(),realBodyRectangle.getWidth(),realBodyRectangle.getHeight());
+    public void collide(Entity entity) {
+        if (entity instanceof Balloon) {
+            alive = false;
+        }
     }
 
-    @Override
-    public void update() {
-        moveHandler();
-        collisionHandler();
-        animate();
-        animateImageHandler();
-    }
+    // Hàm vẽ hình chữ nhật để debug
+//    @Override
+//    public void render(GraphicsContext gc) {
+//        gc.fillRect(realBodyRectangle.getX(), realBodyRectangle.getY(),realBodyRectangle.getWidth(),realBodyRectangle.getHeight());
+//    }
+
 
     private void inputHandler(Scene scene) {
         scene.setOnKeyPressed(keyEvent -> {
@@ -94,6 +106,11 @@ public class Bomber extends MovableEntities {
 
     @Override
     public void animateImageHandler() {
+        if (!alive) {
+            this.img = Sprite.movingSprite(Sprite.player_dead1, Sprite.player_dead2, Sprite.player_dead3, anime, 60).getFxImage();
+            return;
+        }
+
         switch (facingDirection) {
             case "UP":
                 this.img = Sprite.player_up.getFxImage();
