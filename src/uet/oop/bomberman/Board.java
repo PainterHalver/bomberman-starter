@@ -40,7 +40,6 @@ public class Board {
   public Board(Scene scene) {
     this.scene = scene;
     loadLevel(1);
-    stillObjects.add(new Bomb(6, 3, Sprite.bomb.getFxImage(), this));
   }
 
   public Scene getScene() {

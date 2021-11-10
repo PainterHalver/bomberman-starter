@@ -7,12 +7,13 @@ import javafx.scene.layout.Pane;
 import uet.oop.bomberman.Board;
 import uet.oop.bomberman.BombermanGame;
 import uet.oop.bomberman.entities.Entity;
+import uet.oop.bomberman.entities.animatableEntities.Bomb;
 import uet.oop.bomberman.graphics.Sprite;
 
 public class Bomber extends MovableEntities {
     private Scene scene = null;
     private int maxBombCount = 1;
-    public static int flameSize = 1;
+    public static int flameSize = 2;
 
     public Bomber(int x, int y, Image img, Board board) {
         super(x,y,img, board);
@@ -36,6 +37,13 @@ public class Bomber extends MovableEntities {
         moveHandler();
         collisionHandler();
         printToScene("x: " + boardX + ", y: " + boardY + " " + facingDirection + ", Rectangle: " + realBodyRectangle.getX() + " " + realBodyRectangle.getY());
+    }
+
+    public void plantBomb() {
+        // Đặt bomb ở tâm của Bomber
+        int boardPositionX = (int) (x + realBodyRectangle.getWidth() / 2) / Sprite.SCALED_SIZE;
+        int boardPositionY = (int) (y + realBodyRectangle.getHeight() / 2) / Sprite.SCALED_SIZE;
+        board.addStillObject(new Bomb(boardPositionX, boardPositionY, Sprite.bomb.getFxImage(), board));
     }
 
     public void printToScene(String s) {
@@ -73,6 +81,8 @@ public class Bomber extends MovableEntities {
                 case LEFT:
                     this.left = true;
                     break;
+                case SPACE:
+                    plantBomb();
                 default:
                     break;
             }

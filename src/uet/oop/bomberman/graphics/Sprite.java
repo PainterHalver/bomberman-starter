@@ -239,6 +239,16 @@ public class Sprite {
 			
 		return x2;
 	}
+
+	public static Sprite oneCycleMovingSprite(Sprite normal, Sprite x1, Sprite x2, int animate, int time) {
+		if(animate < time) {
+			return normal;
+		} else 	if(animate < time * 2) {
+			return x1;
+		}
+
+		return x2;
+	}
 	
 	public static Sprite movingSprite(Sprite x1, Sprite x2, int animate, int time) {
 		int diff = time / 2;

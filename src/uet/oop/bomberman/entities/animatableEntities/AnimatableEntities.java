@@ -28,6 +28,11 @@ public abstract class AnimatableEntities extends Entity {
         collide(entity);
       }
     });
+    board.getStillObjects().forEach(entity -> {
+      if (entity != this && this.realBodyRectangle.overlaps(entity.getRealBodyRectangle())) {
+        collide(entity);
+      }
+    });
   }
 
   public abstract void collide(Entity entity);

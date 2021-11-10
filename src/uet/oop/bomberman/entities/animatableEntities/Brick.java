@@ -8,6 +8,10 @@ public class Brick extends Entity {
     super( boardX, boardY, img);
   }
 
+  public void destroy() {
+    removedFromBoard = true;
+  }
+
   @Override
   public void update() {
 

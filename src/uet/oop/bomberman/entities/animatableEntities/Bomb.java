@@ -38,7 +38,6 @@ public class Bomb extends AnimatableEntities {
   public void explode() {
     exploded = true;
     removedFromBoard = true;
-
     board.addStillObject(new Flame(boardX, boardY, Bomber.flameSize, board));
   }
 
@@ -54,5 +53,6 @@ public class Bomb extends AnimatableEntities {
   @Override
   public void update() {
     animate();
+    collisionHandler();
   }
 }
