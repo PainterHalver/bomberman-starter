@@ -3,13 +3,14 @@ package uet.oop.bomberman;
 import javafx.scene.Scene;
 import javafx.scene.canvas.GraphicsContext;
 import uet.oop.bomberman.entities.*;
+import uet.oop.bomberman.entities.animatableEntities.Bomb;
 import uet.oop.bomberman.entities.items.BombItem;
 import uet.oop.bomberman.entities.items.FlameItem;
 import uet.oop.bomberman.entities.items.SpeedItem;
-import uet.oop.bomberman.entities.moveableEntities.Balloon;
-import uet.oop.bomberman.entities.moveableEntities.Bomber;
-import uet.oop.bomberman.entities.moveableEntities.Oneal;
-import uet.oop.bomberman.entities.stillEntities.Brick;
+import uet.oop.bomberman.entities.animatableEntities.moveableEntities.Balloon;
+import uet.oop.bomberman.entities.animatableEntities.moveableEntities.Bomber;
+import uet.oop.bomberman.entities.animatableEntities.moveableEntities.Oneal;
+import uet.oop.bomberman.entities.animatableEntities.Brick;
 import uet.oop.bomberman.entities.stillEntities.Grass;
 import uet.oop.bomberman.entities.Portal;
 import uet.oop.bomberman.entities.stillEntities.Wall;
@@ -18,6 +19,7 @@ import uet.oop.bomberman.graphics.Sprite;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Scanner;
 
@@ -28,11 +30,17 @@ public class Board {
   public int height;
   private List<Entity> entities = new ArrayList<>();
   private List<Entity> stillObjects = new ArrayList<>();
+
+  // Tránh java.util.ConcurrentModificationException
+  private List<Entity> entitiesBuffer = new ArrayList<>();
+  private List<Entity> stillObjectsBuffer = new ArrayList<>();
+
   private Scene scene = null;
 
   public Board(Scene scene) {
     this.scene = scene;
     loadLevel(1);
+    stillObjects.add(new Bomb(6, 3, Sprite.bomb.getFxImage(), this));
   }
 
   public Scene getScene() {
@@ -152,9 +160,30 @@ public class Board {
     }
   }
 
+  public void addEntity(Entity entity) {
+    entitiesBuffer.add(entity);
+  }
+
+  public void addStillObject (Entity entity) {
+    stillObjectsBuffer.add(entity);
+  }
+
+  private void commitBufferedArray() {
+    entities.addAll(entitiesBuffer);
+    stillObjects.addAll(stillObjectsBuffer);
+    entitiesBuffer.clear();
+    stillObjectsBuffer.clear();
+  }
+
   public void update() {
+    entities.removeIf(Entity::isRemovedFromBoard);
+    stillObjects.removeIf(Entity::isRemovedFromBoard);
+
+
     entities.forEach(Entity::update);
     stillObjects.forEach(Entity::update);
+
+    commitBufferedArray();
   }
 
   public void render(GraphicsContext gc) {

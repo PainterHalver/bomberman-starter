@@ -1,4 +1,4 @@
-package uet.oop.bomberman.entities.moveableEntities;
+package uet.oop.bomberman.entities.animatableEntities.moveableEntities;
 
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
@@ -6,19 +6,13 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
 import uet.oop.bomberman.Board;
 import uet.oop.bomberman.BombermanGame;
-import uet.oop.bomberman.entities.Bomb;
 import uet.oop.bomberman.entities.Entity;
 import uet.oop.bomberman.graphics.Sprite;
-
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class Bomber extends MovableEntities {
     private Scene scene = null;
     private int maxBombCount = 1;
-    private int flameSize = 1;
-    private List<Bomb> bombs = new ArrayList<>();
+    public static int flameSize = 1;
 
     public Bomber(int x, int y, Image img, Board board) {
         super(x,y,img, board);
@@ -30,7 +24,7 @@ public class Bomber extends MovableEntities {
 
     @Override
     public void update() {
-        moveAnimationHandler();
+        imageAnimationHandler();
         if(!alive) {
             if (deadAnimeTime > 0) {
                 --deadAnimeTime;
@@ -41,26 +35,15 @@ public class Bomber extends MovableEntities {
         }
         moveHandler();
         collisionHandler();
-
+        printToScene("x: " + boardX + ", y: " + boardY + " " + facingDirection + ", Rectangle: " + realBodyRectangle.getX() + " " + realBodyRectangle.getY());
     }
 
     public void printToScene(String s) {
         Pane screenPane = (Pane) scene.getRoot();
         Label label = (Label) screenPane.getChildren().get(1);
-        label.styleProperty().set("-fx-text-fill: blue;-fx-font-size: 20px;");
+        label.styleProperty().set("-fx-text-fill: blue;-fx-font-size: 16px;");
         //label.setText("x: " + boardX + ", y: " + boardY + " " + facingDirection + ", Rectangle: " + realBodyRectangle.getX() + " " + realBodyRectangle.getY());
         label.setText(s);
-    }
-
-    public void collisionHandler() {
-        List<Entity> collidedEntities = new ArrayList<>();
-        board.getEntities().forEach(entity -> {
-            if (entity != this && this.realBodyRectangle.overlaps(entity.getRealBodyRectangle())) {
-                collidedEntities.add(entity);
-                collide(entity);
-            }
-        });
-        printToScene("I'm on" + collidedEntities);
     }
 
     public void collide(Entity entity) {
@@ -115,7 +98,7 @@ public class Bomber extends MovableEntities {
     }
 
     @Override
-    public void moveAnimationHandler() {
+    public void imageAnimationHandler() {
         animate();
 
         if(!alive) {

@@ -1,22 +1,22 @@
-package uet.oop.bomberman.entities.moveableEntities;
+package uet.oop.bomberman.entities.animatableEntities.moveableEntities;
 
 import javafx.scene.image.Image;
 import uet.oop.bomberman.entities.Entity;
 
-public class Oneal extends MovableEntities {
+public class Balloon extends MovableEntities {
 
-  public Oneal(int boardX, int boardY, Image img) {
+  public Balloon(int boardX, int boardY, Image img) {
     super( boardX, boardY, img);
   }
 
   @Override
-  public void update() {
+  public void imageAnimationHandler() {
 
   }
 
 
   @Override
-  public void moveAnimationHandler() {
+  public void update() {
 
   }
 

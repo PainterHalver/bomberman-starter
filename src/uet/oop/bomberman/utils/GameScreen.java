@@ -2,7 +2,7 @@ package uet.oop.bomberman.utils;
 
 import javafx.scene.canvas.Canvas;
 import javafx.scene.layout.Pane;
-import uet.oop.bomberman.entities.moveableEntities.Bomber;
+import uet.oop.bomberman.entities.animatableEntities.moveableEntities.Bomber;
 import uet.oop.bomberman.entities.Entity;
 
 import java.util.List;

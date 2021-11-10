@@ -14,7 +14,8 @@
 # Notes
 - StillEntity(Không di chuyển): Bomb, Grass, Wall, Brick, Portal.
 - MoveableEntity (Di chuyển được trong Board): Bomber, Enemy.
-- Animatable Interface: Gồm các MoveableEntity và Bomb.
+- Nếu Enemy đang trong hoạt ảnh chết thì Bomber chạm vào sẽ đứt hay không?
+- Có lỗi java.util.ConcurrentModificationException nên phải dùng List khác để đệm
 
 
 # Bài tập lớn OOP - Bomberman Game

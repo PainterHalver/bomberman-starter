@@ -1,9 +1,9 @@
-package uet.oop.bomberman.entities.moveableEntities;
+package uet.oop.bomberman.entities.animatableEntities.moveableEntities;
 
 import javafx.scene.image.Image;
 import uet.oop.bomberman.Board;
-import uet.oop.bomberman.entities.AnimatableEntities;
-import uet.oop.bomberman.entities.stillEntities.Brick;
+import uet.oop.bomberman.entities.animatableEntities.AnimatableEntities;
+import uet.oop.bomberman.entities.animatableEntities.Brick;
 import uet.oop.bomberman.entities.Entity;
 import uet.oop.bomberman.entities.stillEntities.Wall;
 import uet.oop.bomberman.graphics.Sprite;
@@ -12,7 +12,6 @@ public abstract class MovableEntities extends AnimatableEntities {
   protected boolean up = false, left = false, down = false, right = false;
   protected String facingDirection = "";
   protected boolean moving;
-  protected Board board = null;
   protected boolean alive = true;
   protected double speed = 1;
   protected final int DIE_TIME_SECOND = 3;
@@ -23,8 +22,7 @@ public abstract class MovableEntities extends AnimatableEntities {
   }
 
   public MovableEntities(int x, int y, Image img, Board board) {
-    super(x,y,img);
-    this.board = board;
+    super(x,y,img, board);
   }
 
   public void moveHandler() {
@@ -99,8 +97,6 @@ public abstract class MovableEntities extends AnimatableEntities {
     this.down = false;
     this.left = false;
   }
-
-  public abstract void collisionHandler();
 
   public abstract void collide(Entity entity);
 

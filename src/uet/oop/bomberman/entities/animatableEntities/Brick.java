@@ -1,4 +1,4 @@
-package uet.oop.bomberman.entities.stillEntities;
+package uet.oop.bomberman.entities.animatableEntities;
 
 import javafx.scene.image.Image;
 import uet.oop.bomberman.entities.Entity;

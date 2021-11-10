@@ -21,6 +21,12 @@ public abstract class Entity {
     protected Image img;
     protected EntityRectangle realBodyRectangle;
 
+    public boolean isRemovedFromBoard() {
+        return removedFromBoard;
+    }
+
+    protected boolean removedFromBoard = false;
+
     //Khởi tạo đối tượng, chuyển từ tọa độ đơn vị sang tọa độ trong canvas
     public Entity( int boardX, int boardY, Image img) {
         this.boardX = boardX;
