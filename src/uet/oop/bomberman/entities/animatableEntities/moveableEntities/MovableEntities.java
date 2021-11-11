@@ -86,6 +86,8 @@ public abstract class MovableEntities extends AnimatableEntities {
     return true;
   }
 
+
+
   public void seftDestruct() {
     alive = false;
     this.up = false;

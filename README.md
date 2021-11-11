@@ -10,11 +10,10 @@
 - ~~Giới hạn số Bomb cùng 1 thời điểm của Bomber.~~
 - ~~Xử lý va chạm với 3 item.~~
 - ~~Mở Portal khi clear hết quái.~~
+- ~~Giảm height realBodyRectangle của Bomber để dễ né Flame hơn. (Sprite giữ nguyên)~~
 - Thuật toán tìm đường trong một ma trận MxN (A* hoặc gì đó)
 - Thêm Scene màn hình New Game, Pause, Game Over (chắc là làm fxml mỗi cái)
 - THÊM ÂM THANH
-- Tự động điều chỉnh trong trường hợp đi vào góc cạnh của tường (nhích sang 1 chút để luồn qua được)
-- Giảm height realBodyRectangle của Bomber để dễ né Flame hơn. (Sprite giữ nguyên)
 - Xử lý khi qua portal.
 - Làm level mới.
 
@@ -24,6 +23,7 @@
 - Nếu Enemy đang trong hoạt ảnh chết thì Bomber chạm vào sẽ đứt hay không?
 - Có lỗi java.util.ConcurrentModificationException nên phải dùng List khác để đệm
 - Board của Entity không được null nếu check collide
+- Có đi qua hay đặt Bomb được lên Portal không?
 
 
 # Bài tập lớn OOP - Bomberman Game
