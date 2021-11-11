@@ -3,13 +3,12 @@ package uet.oop.bomberman;
 import javafx.scene.Scene;
 import javafx.scene.canvas.GraphicsContext;
 import uet.oop.bomberman.entities.*;
-import uet.oop.bomberman.entities.animatableEntities.Bomb;
 import uet.oop.bomberman.entities.items.BombItem;
 import uet.oop.bomberman.entities.items.FlameItem;
 import uet.oop.bomberman.entities.items.SpeedItem;
-import uet.oop.bomberman.entities.animatableEntities.moveableEntities.Balloon;
+import uet.oop.bomberman.entities.animatableEntities.moveableEntities.enemies.Balloon;
 import uet.oop.bomberman.entities.animatableEntities.moveableEntities.Bomber;
-import uet.oop.bomberman.entities.animatableEntities.moveableEntities.Oneal;
+import uet.oop.bomberman.entities.animatableEntities.moveableEntities.enemies.Oneal;
 import uet.oop.bomberman.entities.animatableEntities.Brick;
 import uet.oop.bomberman.entities.stillEntities.Grass;
 import uet.oop.bomberman.entities.Portal;
@@ -19,7 +18,6 @@ import uet.oop.bomberman.graphics.Sprite;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Scanner;
 
@@ -119,36 +117,36 @@ public class Board {
             object = new Wall(j, i, Sprite.wall.getFxImage());
             break;
           case '*':
-            object = new Brick(j, i, Sprite.brick.getFxImage());
+            object = new Brick(j, i, Sprite.brick.getFxImage(), this);
             break;
           case 'x':
             object = new Portal(j, i, Sprite.portal.getFxImage());
             stillObjects.add(object);
-            object = new Brick(j, i, Sprite.brick.getFxImage());
+            object = new Brick(j, i, Sprite.brick.getFxImage(), this);
             break;
           case 'p':
             entities.add(new Bomber(j, i, Sprite.player_right.getFxImage(), this));
             break;
           case '1':
-            entities.add(new Balloon(j, i, Sprite.balloom_right1.getFxImage()));
+            entities.add(new Balloon(j, i, Sprite.balloom_right1.getFxImage(), this));
             break;
           case '2':
-            entities.add(new Oneal(j, i, Sprite.oneal_right1.getFxImage()));
+            entities.add(new Oneal(j, i, Sprite.oneal_right1.getFxImage(), this));
             break;
           case 'b':
             object = new BombItem(j, i, Sprite.powerup_bombs.getFxImage());
             stillObjects.add(object);
-            object = new Brick(j, i, Sprite.brick.getFxImage());
+            object = new Brick(j, i, Sprite.brick.getFxImage(), this);
             break;
           case 'f':
             object = new FlameItem(j, i, Sprite.powerup_flames.getFxImage());
             stillObjects.add(object);
-            object = new Brick(j, i, Sprite.brick.getFxImage());
+            object = new Brick(j, i, Sprite.brick.getFxImage(), this);
             break;
           case 's':
             object = new SpeedItem(j, i, Sprite.powerup_speed.getFxImage());
             stillObjects.add(object);
-            object = new Brick(j, i, Sprite.brick.getFxImage());
+            object = new Brick(j, i, Sprite.brick.getFxImage(), this);
             break;
           default:
             break;

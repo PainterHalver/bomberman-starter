@@ -9,7 +9,8 @@
 - ~~Xử lý Bomb nổ~~
 - Thêm Scene màn hình New Game, Pause, Game Over (chắc là làm fxml mỗi cái)
 - Tự động điều chỉnh trong trường hợp đi vào góc cạnh của tường (nhích sang 1 chút để luồn qua được)
-- Xử lý va chạm với Flame (Brick, Bomber, quái)
+- ~~Xử lý va chạm với Flame (Brick, Bomber, quái)~~
+- Giảm height realBodyRectangle của Bomber để dễ né Flame hơn. (Sprite giữ nguyên)
 
 
 # Notes
@@ -17,6 +18,7 @@
 - MoveableEntity (Di chuyển được trong Board): Bomber, Enemy.
 - Nếu Enemy đang trong hoạt ảnh chết thì Bomber chạm vào sẽ đứt hay không?
 - Có lỗi java.util.ConcurrentModificationException nên phải dùng List khác để đệm
+- Board của Entity không được null nếu check collide
 
 
 # Bài tập lớn OOP - Bomberman Game

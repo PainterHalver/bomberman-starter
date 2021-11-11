@@ -5,10 +5,11 @@ import uet.oop.bomberman.Board;
 import uet.oop.bomberman.entities.Entity;
 import uet.oop.bomberman.entities.Portal;
 import uet.oop.bomberman.entities.animatableEntities.moveableEntities.Bomber;
+import uet.oop.bomberman.entities.animatableEntities.moveableEntities.MovableEntities;
 import uet.oop.bomberman.entities.stillEntities.Wall;
 import uet.oop.bomberman.graphics.Sprite;
 
-public class Flame extends AnimatableEntities{
+public class Flame extends AnimatableEntities {
   private int size = 1;
   private String direction = "CENTER";
   private boolean edge = false;
@@ -20,24 +21,10 @@ public class Flame extends AnimatableEntities{
     addFlameIfPossible();
   }
 
-  private Flame(int boardX, int boardY, String direction, boolean isEdge) {
-    super(boardX, boardY, null);
+  private Flame(int boardX, int boardY, String direction, boolean isEdge, Board board) {
+    super(boardX, boardY, null, board);
     this.direction = direction;
     this.edge = isEdge;
-  }
-
-  private void ignite() {
-
-    for (int i = 1; i < size; ++i) {
-      board.addStillObject(new Flame(boardX, boardY - i, "UP", false));
-      board.addStillObject(new Flame(boardX + i, boardY, "RIGHT", false));
-      board.addStillObject(new Flame(boardX, boardY + i, "DOWN", false));
-      board.addStillObject(new Flame(boardX - i, boardY, "LEFT", false));
-    }
-    board.addStillObject(new Flame(boardX, boardY - size, "UP", true));
-    board.addStillObject(new Flame(boardX + size, boardY, "RIGHT", true));
-    board.addStillObject(new Flame(boardX, boardY + size, "DOWN", true));
-    board.addStillObject(new Flame(boardX - size, boardY, "LEFT", true));
   }
 
   private void addFlameIfPossible() {
@@ -58,9 +45,9 @@ public class Flame extends AnimatableEntities{
     }
     if (up > 0) {
       for (int i = 1; i < up; ++i) {
-        board.addStillObject(new Flame(boardX, boardY - i, "UP", false));
+        board.addStillObject(new Flame(boardX, boardY - i, "UP", false, board));
       }
-      board.addStillObject(new Flame(boardX, boardY - up, "UP", true));
+      board.addStillObject(new Flame(boardX, boardY - up, "UP", true, board));
     }
 
     //RIGHT
@@ -78,9 +65,9 @@ public class Flame extends AnimatableEntities{
     }
     if (right > 0) {
       for (int i = 1; i < right; ++i) {
-        board.addStillObject(new Flame(boardX + i, boardY, "RIGHT", false));
+        board.addStillObject(new Flame(boardX + i, boardY, "RIGHT", false, board));
       }
-      board.addStillObject(new Flame(boardX + right, boardY, "RIGHT", true));
+      board.addStillObject(new Flame(boardX + right, boardY, "RIGHT", true, board));
     }
 
     //DOWN
@@ -98,9 +85,9 @@ public class Flame extends AnimatableEntities{
     }
     if (down > 0) {
       for (int i = 1; i < down; ++i) {
-        board.addStillObject(new Flame(boardX, boardY + i, "DOWN", false));
+        board.addStillObject(new Flame(boardX, boardY + i, "DOWN", false, board));
       }
-      board.addStillObject(new Flame(boardX, boardY + down, "DOWN", true));
+      board.addStillObject(new Flame(boardX, boardY + down, "DOWN", true, board));
     }
 
     //LEFT
@@ -118,16 +105,18 @@ public class Flame extends AnimatableEntities{
     }
     if (left > 0) {
       for (int i = 1; i < left; ++i) {
-        board.addStillObject(new Flame(boardX - i, boardY, "LEFT", false));
+        board.addStillObject(new Flame(boardX - i, boardY, "LEFT", false, board));
       }
-      board.addStillObject(new Flame(boardX - left, boardY, "LEFT", true));
+      board.addStillObject(new Flame(boardX - left, boardY, "LEFT", true, board));
     }
 
   }
 
   @Override
   public void collide(Entity entity) {
-
+    if (entity instanceof MovableEntities) {
+      ((MovableEntities) entity).seftDestruct();
+    }
   }
 
   public void animate() {
@@ -170,5 +159,6 @@ public class Flame extends AnimatableEntities{
   @Override
   public void update() {
     animate();
+    collisionHandler();
   }
 }

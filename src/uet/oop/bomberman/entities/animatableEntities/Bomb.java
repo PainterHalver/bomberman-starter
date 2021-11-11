@@ -9,10 +9,6 @@ import uet.oop.bomberman.graphics.Sprite;
 public class Bomb extends AnimatableEntities {
   private boolean exploded = false;
 
-  public Bomb(int boardX, int boardY, Image img) {
-    super(boardX, boardY, img);
-  }
-
   public Bomb(int boardX, int boardY, Image img, Board board) {
     super(boardX, boardY, img, board);
   }

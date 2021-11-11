@@ -10,16 +10,12 @@ import uet.oop.bomberman.graphics.Sprite;
 
 public abstract class MovableEntities extends AnimatableEntities {
   protected boolean up = false, left = false, down = false, right = false;
-  protected String facingDirection = "";
+  protected String facingDirection = "RIGHT";
   protected boolean moving;
   protected boolean alive = true;
   protected double speed = 1;
-  protected final int DIE_TIME_SECOND = 3;
+  protected final int DIE_TIME_SECOND = 2;
   protected int deadAnimeTime = 60 * DIE_TIME_SECOND;
-
-  public MovableEntities(int boardX, int boardY, Image img) {
-    super(boardX, boardY, img);
-  }
 
   public MovableEntities(int x, int y, Image img, Board board) {
     super(x,y,img, board);

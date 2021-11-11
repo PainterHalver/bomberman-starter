@@ -8,6 +8,7 @@ import uet.oop.bomberman.Board;
 import uet.oop.bomberman.BombermanGame;
 import uet.oop.bomberman.entities.Entity;
 import uet.oop.bomberman.entities.animatableEntities.Bomb;
+import uet.oop.bomberman.entities.animatableEntities.moveableEntities.enemies.Balloon;
 import uet.oop.bomberman.graphics.Sprite;
 
 public class Bomber extends MovableEntities {
@@ -36,7 +37,7 @@ public class Bomber extends MovableEntities {
         }
         moveHandler();
         collisionHandler();
-        printToScene("x: " + boardX + ", y: " + boardY + " " + facingDirection + ", Rectangle: " + realBodyRectangle.getX() + " " + realBodyRectangle.getY());
+        printToScene("Entities: " + board.getEntities().size() + " StillObjects: " + board.getStillObjects().size());
     }
 
     public void plantBomb() {
@@ -112,7 +113,7 @@ public class Bomber extends MovableEntities {
         animate();
 
         if(!alive) {
-            this.img = Sprite.movingSprite(Sprite.player_dead3, Sprite.player_dead2, Sprite.player_dead1, deadAnimeTime, 180).getFxImage();
+            this.img = Sprite.oneCycleMovingSprite(Sprite.player_dead3, Sprite.player_dead2, Sprite.player_dead1, deadAnimeTime, 40).getFxImage();
             return;
         }
 
