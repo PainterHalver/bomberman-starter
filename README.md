@@ -24,6 +24,7 @@
 - Có lỗi java.util.ConcurrentModificationException nên phải dùng List khác để đệm
 - Board của Entity không được null nếu check collide
 - Có đi qua hay đặt Bomb được lên Portal không?
+- Chỉ collide với Entity ở trên cùng (fix ăn Item trước cả khi phá Brick)
 
 
 # Bài tập lớn OOP - Bomberman Game

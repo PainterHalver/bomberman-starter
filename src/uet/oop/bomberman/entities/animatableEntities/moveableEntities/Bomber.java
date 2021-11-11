@@ -28,8 +28,8 @@ public class Bomber extends MovableEntities {
         inputHandler(scene);
         // Chỉnh hình chữ nhật cho khớp với nhân vật
         this.realBodyRectangle.setWidth(this.realBodyRectangle.getWidth() - 6 * Sprite.SCALE);
-        this.realBodyRectangle.setHeight(this.realBodyRectangle.getHeight() - 4 * Sprite.SCALE);
-        this.realBodyRectangle.setY(this.realBodyRectangle.getY() + 2 * Sprite.SCALE);
+        this.realBodyRectangle.setHeight(this.realBodyRectangle.getHeight() - 5 * Sprite.SCALE);
+        this.realBodyRectangle.setY(this.realBodyRectangle.getY() + 5 * Sprite.SCALE);
         this.realBodyRectangle.setX(this.realBodyRectangle.getX() + 1 * Sprite.SCALE);
     }
 
@@ -67,7 +67,7 @@ public class Bomber extends MovableEntities {
     }
 
     public void collide(Entity entity) {
-        if (entity instanceof Balloon) {
+        if (entity instanceof MovableEntities) {
             seftDestruct();
         }
         if (entity instanceof BombItem) {

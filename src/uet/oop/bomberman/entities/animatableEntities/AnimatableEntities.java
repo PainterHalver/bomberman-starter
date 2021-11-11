@@ -4,8 +4,6 @@ import javafx.scene.image.Image;
 import uet.oop.bomberman.Board;
 import uet.oop.bomberman.entities.Entity;
 
-import java.util.List;
-
 public abstract class AnimatableEntities extends Entity {
   protected int anime = 0;
 
@@ -19,26 +17,20 @@ public abstract class AnimatableEntities extends Entity {
   }
 
   public void collisionHandler() {
-    // Chỉ collide với Entity ở trên cùng
-
-    List<Entity> entities = board.getEntities();
-    for (int i = entities.size() - 1; i >=0; --i) {
-      if (entities.get(i) == null) {
+    for (Entity entity : board.getEntities()) {
+      if (entity == null) {
         continue;
       }
-      if (entities.get(i) != this && this.realBodyRectangle.overlaps(entities.get(i).getRealBodyRectangle())) {
-        collide(entities.get(i));
-        break;
+      if (entity != this && this.realBodyRectangle.overlaps(entity.getRealBodyRectangle())) {
+        collide(entity);
       }
     }
-    List<Entity> stillObjects = board.getStillObjects();
-    for (int i = stillObjects.size() - 1; i >=0; --i) {
-      if (stillObjects.get(i) == null) {
+    for (Entity entity : board.getStillObjects()) {
+      if (entity == null) {
         continue;
       }
-      if (stillObjects.get(i) != this && this.realBodyRectangle.overlaps(stillObjects.get(i).getRealBodyRectangle())) {
-        collide(stillObjects.get(i));
-        break;
+      if (entity != this && this.realBodyRectangle.overlaps(entity.getRealBodyRectangle())) {
+        collide(entity);
       }
     }
   }
