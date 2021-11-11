@@ -4,14 +4,19 @@
 - ~~Xử lý di chuyển của Bomber không cho chạm vào tường và gạch~~
 - ~~Xử lý cấu trúc hàm va chạm chung chung~~
 - ~~Thêm quái vào game, Bomber chạm vào quái thì đứt~~
-- Thuật toán tìm đường trong một ma trận MxN (A* hoặc gì đó)
 - ~~Thêm Bomb, thuộc tính tốc độ, độ dài, số bom cùng 1 thời điểm  cho Bomber~~
 - ~~Xử lý Bomb nổ~~
-- Thêm Scene màn hình New Game, Pause, Game Over (chắc là làm fxml mỗi cái)
-- Tự động điều chỉnh trong trường hợp đi vào góc cạnh của tường (nhích sang 1 chút để luồn qua được)
 - ~~Xử lý va chạm với Flame (Brick, Bomber, quái)~~
+- ~~Giới hạn số Bomb cùng 1 thời điểm của Bomber.~~
+- ~~Xử lý va chạm với 3 item.~~
+- ~~Mở Portal khi clear hết quái.~~
+- Thuật toán tìm đường trong một ma trận MxN (A* hoặc gì đó)
+- Thêm Scene màn hình New Game, Pause, Game Over (chắc là làm fxml mỗi cái)
+- THÊM ÂM THANH
+- Tự động điều chỉnh trong trường hợp đi vào góc cạnh của tường (nhích sang 1 chút để luồn qua được)
 - Giảm height realBodyRectangle của Bomber để dễ né Flame hơn. (Sprite giữ nguyên)
-
+- Xử lý khi qua portal.
+- Làm level mới.
 
 # Notes
 - StillEntity(Không di chuyển): Bomb, Grass, Wall, Brick, Portal.

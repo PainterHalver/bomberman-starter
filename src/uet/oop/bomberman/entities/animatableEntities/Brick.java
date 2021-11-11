@@ -18,7 +18,7 @@ public class Brick extends AnimatableEntities {
         anime++;
         imageAnimationHandler();
       } else {
-        removedFromBoard = true;
+        removeFromBoard();
       }
     }
   }

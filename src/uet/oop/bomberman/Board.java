@@ -3,6 +3,7 @@ package uet.oop.bomberman;
 import javafx.scene.Scene;
 import javafx.scene.canvas.GraphicsContext;
 import uet.oop.bomberman.entities.*;
+import uet.oop.bomberman.entities.animatableEntities.Bomb;
 import uet.oop.bomberman.entities.items.BombItem;
 import uet.oop.bomberman.entities.items.FlameItem;
 import uet.oop.bomberman.entities.items.SpeedItem;
@@ -74,6 +75,16 @@ public class Board {
     return null;
   }
 
+  public int bombCount() {
+    int count = 0;
+    for (Entity entity : stillObjects) {
+      if (entity instanceof Bomb) {
+        count++;
+      }
+    }
+    return count;
+  }
+
   public void loadLevel(int level) {
     Scanner scan = null;
     try {
@@ -105,7 +116,7 @@ public class Board {
     //Create map from matrix
     for(int i = 0; i< rowCount; ++i) {
       for (int j = 0; j < colCount; ++j) {
-        stillObjects.add(new Grass(j, i ,Sprite.grass.getFxImage()));
+        stillObjects.add(new Grass(j, i ,Sprite.grass.getFxImage(), this));
       }
     }
     for(int i = 0; i< rowCount; ++i) {
@@ -114,13 +125,13 @@ public class Board {
         char c = mapMatrix[i][j];
         switch (c) {
           case '#':
-            object = new Wall(j, i, Sprite.wall.getFxImage());
+            object = new Wall(j, i, Sprite.wall.getFxImage(), this);
             break;
           case '*':
             object = new Brick(j, i, Sprite.brick.getFxImage(), this);
             break;
           case 'x':
-            object = new Portal(j, i, Sprite.portal.getFxImage());
+            object = new Portal(j, i, Sprite.portal.getFxImage(), this);
             stillObjects.add(object);
             object = new Brick(j, i, Sprite.brick.getFxImage(), this);
             break;
@@ -134,17 +145,17 @@ public class Board {
             entities.add(new Oneal(j, i, Sprite.oneal_right1.getFxImage(), this));
             break;
           case 'b':
-            object = new BombItem(j, i, Sprite.powerup_bombs.getFxImage());
+            object = new BombItem(j, i, Sprite.powerup_bombs.getFxImage(), this);
             stillObjects.add(object);
             object = new Brick(j, i, Sprite.brick.getFxImage(), this);
             break;
           case 'f':
-            object = new FlameItem(j, i, Sprite.powerup_flames.getFxImage());
+            object = new FlameItem(j, i, Sprite.powerup_flames.getFxImage(), this);
             stillObjects.add(object);
             object = new Brick(j, i, Sprite.brick.getFxImage(), this);
             break;
           case 's':
-            object = new SpeedItem(j, i, Sprite.powerup_speed.getFxImage());
+            object = new SpeedItem(j, i, Sprite.powerup_speed.getFxImage(), this);
             stillObjects.add(object);
             object = new Brick(j, i, Sprite.brick.getFxImage(), this);
             break;

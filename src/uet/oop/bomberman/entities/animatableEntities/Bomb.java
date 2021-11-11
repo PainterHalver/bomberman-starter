@@ -33,7 +33,7 @@ public class Bomb extends AnimatableEntities {
 
   public void explode() {
     exploded = true;
-    removedFromBoard = true;
+    removeFromBoard();
     board.addStillObject(new Flame(boardX, boardY, Bomber.flameSize, board));
   }
 

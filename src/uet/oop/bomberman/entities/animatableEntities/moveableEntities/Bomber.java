@@ -1,27 +1,36 @@
 package uet.oop.bomberman.entities.animatableEntities.moveableEntities;
 
 import javafx.scene.Scene;
+import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
 import uet.oop.bomberman.Board;
 import uet.oop.bomberman.BombermanGame;
 import uet.oop.bomberman.entities.Entity;
+import uet.oop.bomberman.entities.Portal;
 import uet.oop.bomberman.entities.animatableEntities.Bomb;
+import uet.oop.bomberman.entities.animatableEntities.Flame;
 import uet.oop.bomberman.entities.animatableEntities.moveableEntities.enemies.Balloon;
+import uet.oop.bomberman.entities.items.BombItem;
+import uet.oop.bomberman.entities.items.FlameItem;
+import uet.oop.bomberman.entities.items.SpeedItem;
 import uet.oop.bomberman.graphics.Sprite;
 
 public class Bomber extends MovableEntities {
     private Scene scene = null;
-    private int maxBombCount = 1;
-    public static int flameSize = 2;
+    private int maxBomb = 1;
+    public static int flameSize = 1;
 
     public Bomber(int x, int y, Image img, Board board) {
         super(x,y,img, board);
         this.scene = board.getScene();
         inputHandler(scene);
         // Chỉnh hình chữ nhật cho khớp với nhân vật
-        this.realBodyRectangle.setWidth(this.realBodyRectangle.getWidth() - 3 * Sprite.SCALE);
+        this.realBodyRectangle.setWidth(this.realBodyRectangle.getWidth() - 6 * Sprite.SCALE);
+        this.realBodyRectangle.setHeight(this.realBodyRectangle.getHeight() - 4 * Sprite.SCALE);
+        this.realBodyRectangle.setY(this.realBodyRectangle.getY() + 2 * Sprite.SCALE);
+        this.realBodyRectangle.setX(this.realBodyRectangle.getX() + 1 * Sprite.SCALE);
     }
 
     @Override
@@ -41,6 +50,8 @@ public class Bomber extends MovableEntities {
     }
 
     public void plantBomb() {
+        if (!(board.bombCount() < maxBomb)) return;
+
         // Đặt bomb ở tâm của Bomber
         int boardPositionX = (int) (x + realBodyRectangle.getWidth() / 2) / Sprite.SCALED_SIZE;
         int boardPositionY = (int) (y + realBodyRectangle.getHeight() / 2) / Sprite.SCALED_SIZE;
@@ -59,11 +70,30 @@ public class Bomber extends MovableEntities {
         if (entity instanceof Balloon) {
             seftDestruct();
         }
+        if (entity instanceof BombItem) {
+            this.maxBomb++;
+            entity.removeFromBoard();
+        }
+        if (entity instanceof FlameItem) {
+            Bomber.flameSize++;
+            entity.removeFromBoard();
+        }
+        if (entity instanceof SpeedItem) {
+            this.speed+= 0.5;
+            entity.removeFromBoard();
+        }
+        if (entity instanceof Portal) {
+            if (((Portal) entity).isOpened()) {
+                // TODO: Xử lý qua màn
+                seftDestruct();
+            }
+        }
     }
 
     // Hàm vẽ hình chữ nhật để debug
 //    @Override
 //    public void render(GraphicsContext gc) {
+//        gc.drawImage(img, x, y);
 //        gc.fillRect(realBodyRectangle.getX(), realBodyRectangle.getY(),realBodyRectangle.getWidth(),realBodyRectangle.getHeight());
 //    }
 

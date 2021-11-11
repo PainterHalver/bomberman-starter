@@ -19,7 +19,7 @@ public abstract class Enemy extends MovableEntities {
       if (deadAnimeTime > 0) {
         --deadAnimeTime;
       } else {
-        removedFromBoard = true;
+        removeFromBoard();
       }
       return;
     }

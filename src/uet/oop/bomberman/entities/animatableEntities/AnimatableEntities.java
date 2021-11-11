@@ -6,11 +6,9 @@ import uet.oop.bomberman.entities.Entity;
 
 public abstract class AnimatableEntities extends Entity {
   protected int anime = 0;
-  protected Board board = null;
 
   public AnimatableEntities(int boardX, int boardY, Image img, Board board) {
-    super(boardX, boardY, img);
-    this.board = board;
+    super(boardX, boardY, img, board);
   }
 
   public void animate() {

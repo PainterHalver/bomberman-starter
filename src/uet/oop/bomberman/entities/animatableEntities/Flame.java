@@ -125,7 +125,7 @@ public class Flame extends AnimatableEntities {
         anime++;
         imageAnimationHandler();
       } else {
-        removedFromBoard = true;
+        removeFromBoard();
       }
     }
   }
