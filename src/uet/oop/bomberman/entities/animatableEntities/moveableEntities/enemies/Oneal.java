@@ -12,6 +12,11 @@ public class Oneal extends Enemy {
   }
 
   @Override
+  public void AImove() {
+
+  }
+
+  @Override
   public void collide(Entity entity) {
 
   }

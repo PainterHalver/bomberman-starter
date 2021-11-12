@@ -60,11 +60,11 @@ public abstract class MovableEntities extends AnimatableEntities {
 
   public boolean canMoveBrickAndWall(int xS, int yS) {
     int topLeftX = x + xS;
-    int topLeftY = y + yS + 5 * Sprite.SCALE; // cúi cái đầu xuống 1 chút :)
-    int topRightX = topLeftX + (Sprite.player_down.getRealWidth() - 1) * Sprite.SCALE;
+    int topLeftY = y + yS;
+    int topRightX = topLeftX + Sprite.SCALED_SIZE - (3 * Sprite.SCALE);
     int topRightY = topLeftY;
     int botLeftX = topLeftX;
-    int botLeftY = topLeftY + (Sprite.player_down.getRealHeight() - 5) * Sprite.SCALE;
+    int botLeftY = topLeftY + Sprite.SCALED_SIZE - (3 * Sprite.SCALE);
     int botRightX = topRightX;
     int botRightY = botLeftY;
 

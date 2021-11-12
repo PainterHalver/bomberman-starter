@@ -11,10 +11,11 @@
 - ~~Xử lý va chạm với 3 item.~~
 - ~~Mở Portal khi clear hết quái.~~
 - ~~Giảm height realBodyRectangle của Bomber để dễ né Flame hơn. (Sprite giữ nguyên)~~
+- ~~Xử lý khi qua portal.~~
 - Thuật toán tìm đường trong một ma trận MxN (A* hoặc gì đó)
 - Thêm Scene màn hình New Game, Pause, Game Over (chắc là làm fxml mỗi cái)
 - THÊM ÂM THANH
-- Xử lý khi qua portal.
+- Điều khiển quái (hàm đi đến ô có tọa độ x,y)
 - Làm level mới.
 
 # Notes

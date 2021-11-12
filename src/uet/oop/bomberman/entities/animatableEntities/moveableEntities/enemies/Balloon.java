@@ -13,6 +13,30 @@ public class Balloon extends Enemy {
     super( boardX, boardY, img, board);
   }
 
+
+  @Override
+  public void AImove() {
+    int move = (int) ((Math.random() * 3));
+//    switch (move){
+//      case 0:
+//        stopMoving();
+//        this.left = true;
+//        break;
+//      case 1:
+//        stopMoving();
+//        this.right = true;
+//        break;
+//      case 2:
+//        stopMoving();
+//        this.down = true;
+//        break;
+//      case 3:
+//        stopMoving();
+//        this.up = true;
+//        break;
+//    }
+  }
+
   @Override
   public void collide(Entity entity) {
 

@@ -13,6 +13,13 @@ public abstract class Enemy extends MovableEntities {
     super(x,y,img, board);
   }
 
+  public void stopMoving() {
+    this.up = false;
+    this.right = false;
+    this.down = false;
+    this.left = false;
+  }
+
   public void update() {
     imageAnimationHandler();
     if(!alive) {
@@ -23,9 +30,12 @@ public abstract class Enemy extends MovableEntities {
       }
       return;
     }
+    AImove();
     moveHandler();
     collisionHandler();
   }
+
+  public abstract void AImove();
 
   @Override
   public abstract void collide(Entity entity);

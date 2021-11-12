@@ -10,11 +10,13 @@ import uet.oop.bomberman.BombermanGame;
 import uet.oop.bomberman.entities.Entity;
 import uet.oop.bomberman.entities.Portal;
 import uet.oop.bomberman.entities.animatableEntities.Bomb;
+import uet.oop.bomberman.entities.animatableEntities.Brick;
 import uet.oop.bomberman.entities.animatableEntities.Flame;
 import uet.oop.bomberman.entities.animatableEntities.moveableEntities.enemies.Balloon;
 import uet.oop.bomberman.entities.items.BombItem;
 import uet.oop.bomberman.entities.items.FlameItem;
 import uet.oop.bomberman.entities.items.SpeedItem;
+import uet.oop.bomberman.entities.stillEntities.Wall;
 import uet.oop.bomberman.graphics.Sprite;
 
 public class Bomber extends MovableEntities {
@@ -95,6 +97,34 @@ public class Bomber extends MovableEntities {
     public void render(GraphicsContext gc) {
         gc.drawImage(img, x, y);
         gc.fillRect(realBodyRectangle.getX(), realBodyRectangle.getY(),realBodyRectangle.getWidth(),realBodyRectangle.getHeight());
+    }
+
+    public boolean canMoveBrickAndWall(int xS, int yS) {
+        int topLeftX = x + xS;
+        int topLeftY = y + yS + 5 * Sprite.SCALE; // cúi cái đầu xuống 1 chút :)
+        int topRightX = topLeftX + (Sprite.player_down.getRealWidth() - 1) * Sprite.SCALE;
+        int topRightY = topLeftY;
+        int botLeftX = topLeftX;
+        int botLeftY = topLeftY + (Sprite.player_down.getRealHeight() - 5) * Sprite.SCALE;
+        int botRightX = topRightX;
+        int botRightY = botLeftY;
+
+
+        Entity object = null;
+
+        object = board.getStillObjectByCanvas(topLeftX, topLeftY);
+        if((object instanceof Wall || object instanceof Brick)) return false;
+
+        object = board.getStillObjectByCanvas(topRightX, topRightY);
+        if((object instanceof Wall || object instanceof Brick)) return false;
+
+        object = board.getStillObjectByCanvas(botLeftX, botLeftY);
+        if((object instanceof Wall || object instanceof Brick)) return false;
+
+        object = board.getStillObjectByCanvas(botRightX, botRightY);
+        if((object instanceof Wall || object instanceof Brick)) return false;
+
+        return true;
     }
 
     private void inputHandler(Scene scene) {
