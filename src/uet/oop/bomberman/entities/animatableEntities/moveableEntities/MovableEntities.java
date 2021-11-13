@@ -23,10 +23,10 @@ public abstract class MovableEntities extends AnimatableEntities {
 
   public void moveHandler() {
     int xS = 0, yS = 0;
-    if (up) yS -= speed * Sprite.SCALE;
-    if (down) yS += speed * Sprite.SCALE;
-    if (left) xS -= speed * Sprite.SCALE;
-    if (right) xS += speed * Sprite.SCALE;
+    if (up) yS -= Math.ceil(speed * Sprite.SCALE);
+    if (down) yS += Math.ceil(speed * Sprite.SCALE);
+    if (left) xS -= Math.ceil(speed * Sprite.SCALE);
+    if (right) xS += Math.ceil(speed * Sprite.SCALE);
 
     //Thứ tự 4 cái này là quan trọng khi nhiều nút đươc bấm cùng lúc
     if (xS > 0) facingDirection = "RIGHT";

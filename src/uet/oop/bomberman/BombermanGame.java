@@ -19,6 +19,7 @@ public class BombermanGame extends Application {
     public static final int SCREEN_HEIGHT = 13;
 
     public static boolean running = false;
+    public static int level = 1;
 
     public int loopCount = 0;
     public long start = System.currentTimeMillis();
@@ -30,7 +31,7 @@ public class BombermanGame extends Application {
     Scene scene = new Scene(screenPane);
 
     // Tao board
-    Board board = new Board(scene);
+    Board board = new Board(scene, level);
 
 
 

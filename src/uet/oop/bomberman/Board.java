@@ -27,6 +27,7 @@ import static uet.oop.bomberman.utils.TerminalColor.log;
 public class Board {
   public int width;
   public int height;
+  private int level = 0;
   private List<Entity> entities = new ArrayList<>();
   private List<Entity> stillObjects = new ArrayList<>();
 
@@ -36,9 +37,14 @@ public class Board {
 
   private Scene scene = null;
 
-  public Board(Scene scene) {
+  public Board(Scene scene, int level) {
     this.scene = scene;
-    loadLevel(1);
+    this.level = level;
+    loadLevel(level);
+  }
+
+  public int getLevel() {
+    return level;
   }
 
   public Scene getScene() {
@@ -85,7 +91,16 @@ public class Board {
     return count;
   }
 
+  public void nextLevel() {
+    loadLevel(level + 1);
+  }
+
   public void loadLevel(int level) {
+    this.level = level;
+    entities.forEach(Entity::removeFromBoard);
+    stillObjects.forEach(Entity::removeFromBoard);
+    entitiesBuffer.forEach(Entity::removeFromBoard);
+    stillObjectsBuffer.forEach(Entity::removeFromBoard);
     Scanner scan = null;
     try {
       scan = new Scanner(new FileReader("./res/levels/Level"+ level + ".txt")).useDelimiter("\\A");

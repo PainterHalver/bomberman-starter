@@ -1,5 +1,6 @@
 package uet.oop.bomberman.entities.animatableEntities.moveableEntities;
 
+import javafx.application.Platform;
 import javafx.scene.Scene;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Label;
@@ -30,7 +31,7 @@ public class Bomber extends MovableEntities {
         inputHandler(scene);
         // Chỉnh hình chữ nhật cho khớp với nhân vật
         this.realBodyRectangle.setWidth(this.realBodyRectangle.getWidth() - 6 * Sprite.SCALE);
-        this.realBodyRectangle.setHeight(this.realBodyRectangle.getHeight() - 5 * Sprite.SCALE);
+        this.realBodyRectangle.setHeight(this.realBodyRectangle.getHeight() - 6 * Sprite.SCALE);
         this.realBodyRectangle.setY(this.realBodyRectangle.getY() + 5 * Sprite.SCALE);
         this.realBodyRectangle.setX(this.realBodyRectangle.getX() + 1 * Sprite.SCALE);
     }
@@ -81,13 +82,12 @@ public class Bomber extends MovableEntities {
             entity.removeFromBoard();
         }
         if (entity instanceof SpeedItem) {
-            this.speed+= 0.5;
+            this.speed+= 0.2;
             entity.removeFromBoard();
         }
         if (entity instanceof Portal) {
             if (((Portal) entity).isOpened()) {
-                // TODO: Xử lý qua màn
-                seftDestruct();
+                Platform.runLater(() -> {board.nextLevel();});
             }
         }
     }

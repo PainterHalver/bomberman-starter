@@ -16,7 +16,7 @@ public class Balloon extends Enemy {
 
   @Override
   public void AImove() {
-    int move = (int) ((Math.random() * 3));
+    int move = (int) (System.currentTimeMillis() / 1000 % 4);
 //    switch (move){
 //      case 0:
 //        stopMoving();
