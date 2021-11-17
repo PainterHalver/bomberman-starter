@@ -7,9 +7,16 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 import uet.oop.bomberman.graphics.Sprite;
 import uet.oop.bomberman.utils.GameScreen;
+
+import java.io.File;
+import java.net.URI;
+import java.nio.file.Paths;
 
 import static uet.oop.bomberman.utils.TerminalColor.*;
 
@@ -56,6 +63,19 @@ public class BombermanGame extends Application {
         pane.getChildren().add(new Label("Hello"));
         stage.show();
 
+        String path = "music.mp3";
+        Media hit = new Media(new File(path).toURI().toString());
+        MediaPlayer mediaPlayer = new MediaPlayer(hit);
+        mediaPlayer.play();
+        new Thread(() -> {
+            while (true) {
+                if (mediaPlayer.getCurrentTime().toMillis() > 100) {
+                    mediaPlayer.seek(new Duration(35000));
+                    break;
+                }
+            }
+        }).start();
+
         AnimationTimer timer = new AnimationTimer() {
             @Override
             public void handle(long l) {
@@ -68,6 +88,7 @@ public class BombermanGame extends Application {
                 }
                 if (!running) {
                     screenPane.getChildren().setAll(new Label("GAME OVER"));
+                    mediaPlayer.stop();
                     this.stop();
                 }
                 render();
