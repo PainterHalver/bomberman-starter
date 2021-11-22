@@ -246,9 +246,28 @@ public class Sprite {
 		} else 	if(animate < time * 2) {
 			return x1;
 		}
-
 		return x2;
 	}
+
+	public static Sprite outThenInSprite(Sprite start, Sprite middle, Sprite last, int animate, int time, int cycle) {
+		int oneCycleTime = time / cycle;
+		int halfCycleTime = oneCycleTime / 2;
+		animate %= oneCycleTime;
+		if(animate < halfCycleTime / 3) {
+			return start;
+		} else 	if(animate < halfCycleTime * 3 / 4) {
+			return middle;
+		} else if (animate < halfCycleTime) {
+			return last;
+		} else if (animate < halfCycleTime * 4 / 3) {
+			return last;
+		} else if (animate < halfCycleTime * 5 / 3) {
+			return middle;
+		} else {
+			return start;
+		}
+	}
+
 	
 	public static Sprite movingSprite(Sprite x1, Sprite x2, int animate, int time) {
 		int diff = time / 2;

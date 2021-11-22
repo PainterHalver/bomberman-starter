@@ -13,7 +13,7 @@ public class Flame extends AnimatableEntities {
   private int size = 1;
   private String direction = "CENTER";
   private boolean edge = false;
-  private int time = 20;
+  private final double animationTime = 0.35 * 60;
 
   public Flame(int boardX, int boardY, int size, Board board) {
     super(boardX, boardY, Sprite.bomb_exploded.getFxImage(), board);
@@ -121,7 +121,7 @@ public class Flame extends AnimatableEntities {
 
   public void animate() {
     if (!removedFromBoard){
-      if (anime < 60) {
+      if (anime < animationTime) {
         anime++;
         imageAnimationHandler();
       } else {
@@ -134,23 +134,23 @@ public class Flame extends AnimatableEntities {
   public void imageAnimationHandler() {
     switch (direction) {
       case "CENTER":
-        this.img = Sprite.oneCycleMovingSprite(Sprite.bomb_exploded, Sprite.bomb_exploded1, Sprite.bomb_exploded2, anime, time).getFxImage();
+        this.img = Sprite.outThenInSprite(Sprite.bomb_exploded, Sprite.bomb_exploded1, Sprite.bomb_exploded2, anime, (int)animationTime, 1).getFxImage();
         break;
       case "UP":
-        if (edge) this.img = Sprite.oneCycleMovingSprite(Sprite.explosion_vertical_top_last, Sprite.explosion_vertical_top_last1, Sprite.explosion_vertical_top_last2, anime, time).getFxImage();
-        else this.img = Sprite.oneCycleMovingSprite(Sprite.explosion_vertical, Sprite.explosion_vertical1, Sprite.explosion_vertical2, anime, time).getFxImage();
+        if (edge) this.img = Sprite.outThenInSprite(Sprite.explosion_vertical_top_last, Sprite.explosion_vertical_top_last1, Sprite.explosion_vertical_top_last2, anime, (int)animationTime, 1).getFxImage();
+        else this.img = Sprite.outThenInSprite(Sprite.explosion_vertical, Sprite.explosion_vertical1, Sprite.explosion_vertical2, anime, (int)animationTime, 1).getFxImage();
         break;
       case "RIGHT":
-        if (edge) this.img = Sprite.oneCycleMovingSprite(Sprite.explosion_horizontal_right_last, Sprite.explosion_horizontal_right_last1, Sprite.explosion_horizontal_right_last2, anime, time).getFxImage();
-        else this.img = Sprite.oneCycleMovingSprite(Sprite.explosion_horizontal, Sprite.explosion_horizontal1, Sprite.explosion_horizontal2, anime, time).getFxImage();
+        if (edge) this.img = Sprite.outThenInSprite(Sprite.explosion_horizontal_right_last, Sprite.explosion_horizontal_right_last1, Sprite.explosion_horizontal_right_last2, anime, (int)animationTime, 1).getFxImage();
+        else this.img = Sprite.outThenInSprite(Sprite.explosion_horizontal, Sprite.explosion_horizontal1, Sprite.explosion_horizontal2, anime, (int)animationTime, 1).getFxImage();
         break;
       case "DOWN":
-        if (edge) this.img = Sprite.oneCycleMovingSprite(Sprite.explosion_vertical_down_last, Sprite.explosion_vertical_down_last1, Sprite.explosion_vertical_down_last2, anime, time).getFxImage();
-        else this.img = Sprite.oneCycleMovingSprite(Sprite.explosion_vertical, Sprite.explosion_vertical1, Sprite.explosion_vertical2, anime, time).getFxImage();
+        if (edge) this.img = Sprite.outThenInSprite(Sprite.explosion_vertical_down_last, Sprite.explosion_vertical_down_last1, Sprite.explosion_vertical_down_last2, anime, (int)animationTime, 1).getFxImage();
+        else this.img = Sprite.outThenInSprite(Sprite.explosion_vertical, Sprite.explosion_vertical1, Sprite.explosion_vertical2, anime, (int)animationTime, 1).getFxImage();
         break;
       case "LEFT":
-        if (edge) this.img = Sprite.oneCycleMovingSprite(Sprite.explosion_horizontal_left_last, Sprite.explosion_horizontal_left_last1, Sprite.explosion_horizontal_left_last2, anime, time).getFxImage();
-        else this.img = Sprite.oneCycleMovingSprite(Sprite.explosion_horizontal, Sprite.explosion_horizontal1, Sprite.explosion_horizontal2, anime, time).getFxImage();
+        if (edge) this.img = Sprite.outThenInSprite(Sprite.explosion_horizontal_left_last, Sprite.explosion_horizontal_left_last1, Sprite.explosion_horizontal_left_last2, anime, (int)animationTime, 1).getFxImage();
+        else this.img = Sprite.outThenInSprite(Sprite.explosion_horizontal, Sprite.explosion_horizontal1, Sprite.explosion_horizontal2, anime, (int)animationTime, 1).getFxImage();
         break;
 
     }

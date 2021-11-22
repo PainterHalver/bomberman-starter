@@ -12,21 +12,23 @@
 - ~~Mở Portal khi clear hết quái.~~
 - ~~Giảm height realBodyRectangle của Bomber để dễ né Flame hơn. (Sprite giữ nguyên)~~
 - ~~Xử lý khi qua portal.~~
+- ~~Sửa lại hoạt ảnh Bomb nổ (Nở ra rồi co vào thay vì nở ra rồi biến mất)~~
 - Thuật toán tìm đường trong một ma trận MxN (A* hoặc gì đó)
 - Thêm Scene màn hình New Game, Pause, Game Over (chắc là làm fxml mỗi cái)
 - THÊM ÂM THANH
 - Điều khiển quái (hàm đi đến ô có tọa độ x,y)
 - Làm level mới.
-- Sửa lại hoạt ảnh Bomb nổ (Nở ra rồi co vào thay vì nở ra rồi biến mất)
+- Bomber đi qua được Bomb nhưng Enemy thì không
 
 # Notes
 - StillEntity(Không di chuyển): Bomb, Grass, Wall, Brick, Portal.
 - MoveableEntity (Di chuyển được trong Board): Bomber, Enemy.
-- Nếu Enemy đang trong hoạt ảnh chết thì Bomber chạm vào sẽ đứt hay không?
+- Nếu Enemy đang trong hoạt ảnh chết thì Bomber chạm vào sẽ đứt hay không? (KHÔNG)
 - Có lỗi java.util.ConcurrentModificationException nên phải dùng List khác để đệm
 - Board của Entity không được null nếu check collide
 - Có đi qua hay đặt Bomb được lên Portal không?
 - Chỉ collide với Entity ở trên cùng (fix ăn Item trước cả khi phá Brick)
+- Bomb nở ra và co vào 2 lần rồi nổ (Tổng ~2,6s lv1), lửa nở ra rồi co vào 1 lần (~0.35s)
 
 
 # Bài tập lớn OOP - Bomberman Game

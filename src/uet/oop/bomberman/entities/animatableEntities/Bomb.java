@@ -8,6 +8,7 @@ import uet.oop.bomberman.graphics.Sprite;
 
 public class Bomb extends AnimatableEntities {
   private boolean exploded = false;
+  private final double animateTime = 2.65 * 60;
 
   public Bomb(int boardX, int boardY, Image img, Board board) {
     super(boardX, boardY, img, board);
@@ -15,7 +16,7 @@ public class Bomb extends AnimatableEntities {
 
   public void animate() {
     if (!exploded) {
-      if (anime < 150) {
+      if (anime < animateTime) {
         anime++;
         imageAnimationHandler();
       } else {
@@ -40,9 +41,9 @@ public class Bomb extends AnimatableEntities {
   @Override
   public void imageAnimationHandler() {
     if (!exploded) {
-      this.img = Sprite.movingSprite(Sprite.bomb_2, Sprite.bomb_1, Sprite.bomb, anime, 100).getFxImage();
+      this.img = Sprite.outThenInSprite(Sprite.bomb_2, Sprite.bomb_1, Sprite.bomb, anime, (int)animateTime, 2).getFxImage();
     } else {
-      this.img = Sprite.movingSprite(Sprite.bomb_exploded, Sprite.bomb_exploded1, Sprite.bomb_exploded2, anime, 120).getFxImage();
+      this.img = Sprite.outThenInSprite(Sprite.bomb_exploded, Sprite.bomb_exploded1, Sprite.bomb_exploded2, anime, (int)animateTime, 2).getFxImage();
     }
   }
 

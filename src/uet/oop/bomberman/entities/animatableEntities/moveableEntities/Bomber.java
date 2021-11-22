@@ -58,7 +58,7 @@ public class Bomber extends MovableEntities {
         // Đặt bomb ở tâm của Bomber
         int boardPositionX = (int) (x + realBodyRectangle.getWidth() / 2) / Sprite.SCALED_SIZE;
         int boardPositionY = (int) (y + realBodyRectangle.getHeight() / 2) / Sprite.SCALED_SIZE;
-        board.addStillObject(new Bomb(boardPositionX, boardPositionY, Sprite.bomb.getFxImage(), board));
+        board.addStillObject(new Bomb(boardPositionX, boardPositionY, Sprite.bomb_2.getFxImage(), board));
     }
 
     public void printToScene(String s) {
