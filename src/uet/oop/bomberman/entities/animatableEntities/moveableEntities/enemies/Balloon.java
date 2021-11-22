@@ -47,7 +47,7 @@ public class Balloon extends Enemy {
     animate();
 
     if (!alive) {
-      this.img = Sprite.oneCycleMovingSprite(Sprite.mob_dead3, Sprite.mob_dead2, Sprite.balloom_dead, deadAnimeTime, 40).getFxImage();
+      this.img = Sprite.enemyDeathSprite(Sprite.balloom_dead, Sprite.mob_dead1, Sprite.mob_dead2, Sprite.mob_dead3, deadAnime, deadAnimeTime).getFxImage();
       return;
     }
     switch (facingDirection) {

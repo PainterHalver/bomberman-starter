@@ -66,16 +66,8 @@ public class BombermanGame extends Application {
         String path = "res/sounds/03_Stage Theme.mp3";
         Media hit = new Media(new File(path).toURI().toString());
         MediaPlayer mediaPlayer = new MediaPlayer(hit);
-//        mediaPlayer.play();
-        new Thread(() -> {
-            while (true) {
-                if (mediaPlayer.getCurrentTime().toMillis() > 100) {
-                    mediaPlayer.setVolume(0.1);
-                    mediaPlayer.seek(new Duration(35000));
-                    break;
-                }
-            }
-        }).start();
+        mediaPlayer.setVolume(0.1);
+        mediaPlayer.play();
 
         AnimationTimer timer = new AnimationTimer() {
             @Override

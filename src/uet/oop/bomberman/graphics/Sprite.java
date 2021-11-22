@@ -268,6 +268,24 @@ public class Sprite {
 		}
 	}
 
+	public static Sprite enemyDeathSprite(Sprite amazed, Sprite first, Sprite second, Sprite last, int animate, int time) {
+		// Giai đoạn 1: Lú
+		if (animate < time / 2) {
+			return amazed;
+		}
+		// Giai đoạn 2: Đứt
+		else {
+			int half = time / 2;
+			animate -= half;
+			if (animate < half / 3) {
+				return first;
+			} else if (animate < half * 2 /3) {
+				return second;
+			} else {
+				return last;
+			}
+		}
+	}
 	
 	public static Sprite movingSprite(Sprite x1, Sprite x2, int animate, int time) {
 		int diff = time / 2;

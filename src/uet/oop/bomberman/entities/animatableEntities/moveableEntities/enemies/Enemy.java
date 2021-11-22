@@ -8,6 +8,8 @@ import uet.oop.bomberman.entities.animatableEntities.moveableEntities.MovableEnt
 public abstract class Enemy extends MovableEntities {
   //Vì Sprite của enemy chỉ có 2 hướng trái phải nên cần 1 biến lưu hướng trái hay phải đang hướng tới
   protected String lastHorizontalDirection = "LEFT"; // LEFT, RIGHT
+  protected final double dieAnimationTime = 0.85 * 2 * 60;
+  protected int deadAnime = 0;
 
   public Enemy(int x, int y, Image img, Board board) {
     super(x,y,img, board);
@@ -23,8 +25,8 @@ public abstract class Enemy extends MovableEntities {
   public void update() {
     imageAnimationHandler();
     if(!alive) {
-      if (deadAnimeTime > 0) {
-        --deadAnimeTime;
+      if (deadAnime < dieAnimationTime) {
+        deadAnime++;
       } else {
         removeFromBoard();
       }

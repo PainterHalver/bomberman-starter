@@ -18,7 +18,7 @@
 - THÊM ÂM THANH
 - Điều khiển quái (hàm đi đến ô có tọa độ x,y)
 - Làm level mới.
-- Bomber đi qua được Bomb nhưng Enemy thì không
+- Bomber đi qua được Bomb nhưng Enemy thì không (low prio)
 
 # Notes
 - StillEntity(Không di chuyển): Bomb, Grass, Wall, Brick, Portal.
@@ -29,6 +29,10 @@
 - Có đi qua hay đặt Bomb được lên Portal không?
 - Chỉ collide với Entity ở trên cùng (fix ăn Item trước cả khi phá Brick)
 - Bomb nở ra và co vào 2 lần rồi nổ (Tổng ~2,6s lv1), lửa nở ra rồi co vào 1 lần (~0.35s)
+- Enemy khi chết thì lú (~0.85s) rồi cycle 3 sprite chết (~0.85s)
+
+
+
 
 
 # Bài tập lớn OOP - Bomberman Game
