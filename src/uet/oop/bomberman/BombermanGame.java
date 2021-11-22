@@ -63,13 +63,14 @@ public class BombermanGame extends Application {
         pane.getChildren().add(new Label("Hello"));
         stage.show();
 
-        String path = "music.mp3";
+        String path = "res/sounds/03_Stage Theme.mp3";
         Media hit = new Media(new File(path).toURI().toString());
         MediaPlayer mediaPlayer = new MediaPlayer(hit);
         mediaPlayer.play();
         new Thread(() -> {
             while (true) {
                 if (mediaPlayer.getCurrentTime().toMillis() > 100) {
+                    mediaPlayer.setVolume(0.1);
                     mediaPlayer.seek(new Duration(35000));
                     break;
                 }
@@ -97,6 +98,19 @@ public class BombermanGame extends Application {
         };
         running = true;
         timer.start();
+
+//        new Thread(() -> {
+//            try {
+//                Thread.sleep(3000);
+//                timer.stop();
+//                mediaPlayer.pause();
+//                Thread.sleep(5000);
+//                timer.start();
+//                mediaPlayer.play();
+//            } catch (InterruptedException e) {
+//                e.printStackTrace();
+//            }
+//        }).start();
     }
 
     public void update() {

@@ -17,6 +17,7 @@
 - THÊM ÂM THANH
 - Điều khiển quái (hàm đi đến ô có tọa độ x,y)
 - Làm level mới.
+- Sửa lại hoạt ảnh Bomb nổ (Nở ra rồi co vào thay vì nở ra rồi biến mất)
 
 # Notes
 - StillEntity(Không di chuyển): Bomb, Grass, Wall, Brick, Portal.
