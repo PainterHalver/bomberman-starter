@@ -6,8 +6,11 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
+import javafx.scene.media.MediaPlayer;
+import javafx.util.Duration;
 import uet.oop.bomberman.Board;
 import uet.oop.bomberman.BombermanGame;
+import uet.oop.bomberman.Sound;
 import uet.oop.bomberman.entities.Entity;
 import uet.oop.bomberman.entities.Portal;
 import uet.oop.bomberman.entities.animatableEntities.Bomb;
@@ -24,6 +27,7 @@ public class Bomber extends MovableEntities {
     private Scene scene = null;
     private int maxBomb = 1;
     public static int flameSize = 1;
+    private MediaPlayer footstep = Sound.footstepHorizontalFx;
 
     public Bomber(int x, int y, Image img, Board board) {
         super(x,y,img, board);
@@ -38,6 +42,7 @@ public class Bomber extends MovableEntities {
 
     @Override
     public void update() {
+        footStepFxHandler();
         imageAnimationHandler();
         if(!alive) {
             if (deadAnimeTime > 0) {
@@ -76,14 +81,17 @@ public class Bomber extends MovableEntities {
         if (entity instanceof BombItem) {
             this.maxBomb++;
             entity.removeFromBoard();
+            Sound.play(Sound.boostedFx);
         }
         if (entity instanceof FlameItem) {
             Bomber.flameSize++;
             entity.removeFromBoard();
+            Sound.play(Sound.boostedFx);
         }
         if (entity instanceof SpeedItem) {
             this.speed+= 0.2;
             entity.removeFromBoard();
+            Sound.play(Sound.boostedFx);
         }
         if (entity instanceof Portal) {
             if (((Portal) entity).isOpened()) {
@@ -99,7 +107,7 @@ public class Bomber extends MovableEntities {
         gc.fillRect(realBodyRectangle.getX(), realBodyRectangle.getY(),realBodyRectangle.getWidth(),realBodyRectangle.getHeight());
     }
 
-    public boolean canMoveBrickAndWall(int xS, int yS) {
+    public boolean canMove(int xS, int yS) {
         int topLeftX = x + xS;
         int topLeftY = y + yS + 5 * Sprite.SCALE; // cúi cái đầu xuống 1 chút :)
         int topRightX = topLeftX + (Sprite.player_down.getRealWidth() - 1) * Sprite.SCALE;
@@ -125,6 +133,47 @@ public class Bomber extends MovableEntities {
         if((object instanceof Wall || object instanceof Brick)) return false;
 
         return true;
+    }
+
+    public void footStepFxHandler() {
+        switch (facingDirection) {
+            case "UP":
+            case "DOWN":
+                if (moving) {
+                    if (footstep.getStatus().equals(MediaPlayer.Status.PLAYING)) {
+                        footstep.setOnEndOfMedia(new Runnable() {
+                            public void run() {
+                                footstep.stop();
+                            }
+                        });
+                    }
+                    footstep = Sound.footstepVerticalFx;
+                    Sound.infinitePlay(footstep, 1);
+                } else {
+                    if (footstep != null){
+                        footstep.stop();
+                    }
+                }
+                break;
+            case "LEFT":
+            default:
+                if (moving) {
+                    if (footstep.getStatus().equals(MediaPlayer.Status.PLAYING)) {
+                        footstep.setOnEndOfMedia(new Runnable() {
+                            public void run() {
+                                footstep.stop();
+                            }
+                        });
+                    }
+                    footstep = Sound.footstepHorizontalFx;
+                    Sound.infinitePlay(footstep, 1);
+                } else {
+                    if (footstep != null){
+                        footstep.stop();
+                    }
+                }
+                break;
+        }
     }
 
     private void inputHandler(Scene scene) {

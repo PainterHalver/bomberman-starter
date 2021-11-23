@@ -2,9 +2,11 @@ package uet.oop.bomberman.entities.animatableEntities.moveableEntities;
 
 import javafx.scene.image.Image;
 import uet.oop.bomberman.Board;
+import uet.oop.bomberman.Sound;
 import uet.oop.bomberman.entities.animatableEntities.AnimatableEntities;
 import uet.oop.bomberman.entities.animatableEntities.Brick;
 import uet.oop.bomberman.entities.Entity;
+import uet.oop.bomberman.entities.animatableEntities.moveableEntities.enemies.Enemy;
 import uet.oop.bomberman.entities.stillEntities.Wall;
 import uet.oop.bomberman.graphics.Sprite;
 
@@ -44,11 +46,11 @@ public abstract class MovableEntities extends AnimatableEntities {
 
   public void move(int xS, int yS) {
     // Chia ra làm 2 để xử lý ấn 2 nút khi 1 nút đang đâm đầu vào tường
-    if (canMoveBrickAndWall(xS, 0)) {
+    if (canMove(xS, 0)) {
       this.x += xS;
       realBodyRectangle.setX(realBodyRectangle.getX() + xS);
     }
-    if (canMoveBrickAndWall(0, yS)) {
+    if (canMove(0, yS)) {
       this.y += yS;
       realBodyRectangle.setY(realBodyRectangle.getY() + yS);
     }
@@ -58,7 +60,7 @@ public abstract class MovableEntities extends AnimatableEntities {
     boardY = y / Sprite.SCALED_SIZE;
   }
 
-  public boolean canMoveBrickAndWall(int xS, int yS) {
+  public boolean canMove(int xS, int yS) {
     int topLeftX = x + xS;
     int topLeftY = y + yS;
     int topRightX = topLeftX + Sprite.SCALED_SIZE - (3 * Sprite.SCALE);
@@ -86,14 +88,17 @@ public abstract class MovableEntities extends AnimatableEntities {
     return true;
   }
 
-
-
   public void seftDestruct() {
     alive = false;
     this.up = false;
     this.right = false;
     this.down = false;
     this.left = false;
+
+    // Khi giết được chú quái cuối cùng
+    if (this instanceof Enemy && board.getEntities().size() == 2) {
+      Sound.play(Sound.stageClearedFx);
+    }
   }
 
   public abstract void collide(Entity entity);

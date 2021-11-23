@@ -63,12 +63,6 @@ public class BombermanGame extends Application {
         pane.getChildren().add(new Label("Hello"));
         stage.show();
 
-        String path = "res/sounds/03_Stage Theme.mp3";
-        Media hit = new Media(new File(path).toURI().toString());
-        MediaPlayer mediaPlayer = new MediaPlayer(hit);
-        mediaPlayer.setVolume(0.1);
-        mediaPlayer.play();
-
         AnimationTimer timer = new AnimationTimer() {
             @Override
             public void handle(long l) {
@@ -81,7 +75,6 @@ public class BombermanGame extends Application {
                 }
                 if (!running) {
                     screenPane.getChildren().setAll(new Label("GAME OVER"));
-                    mediaPlayer.stop();
                     this.stop();
                 }
                 render();
@@ -107,6 +100,7 @@ public class BombermanGame extends Application {
 
     public void update() {
         board.update();
+//        Sound.update();
         GameScreen.screenShiftHandler(board.getEntities(), canvas, screenPane);
     }
 

@@ -2,6 +2,7 @@ package uet.oop.bomberman.entities.animatableEntities;
 
 import javafx.scene.image.Image;
 import uet.oop.bomberman.Board;
+import uet.oop.bomberman.Sound;
 import uet.oop.bomberman.entities.Entity;
 import uet.oop.bomberman.entities.animatableEntities.moveableEntities.Bomber;
 import uet.oop.bomberman.graphics.Sprite;
@@ -12,6 +13,7 @@ public class Bomb extends AnimatableEntities {
 
   public Bomb(int boardX, int boardY, Image img, Board board) {
     super(boardX, boardY, img, board);
+    Sound.play(Sound.placeBombFx);
   }
 
   public void animate() {
@@ -36,6 +38,7 @@ public class Bomb extends AnimatableEntities {
     exploded = true;
     removeFromBoard();
     board.addStillObject(new Flame(boardX, boardY, Bomber.flameSize, board));
+    Sound.play(Sound.bombExplodeFx);
   }
 
   @Override

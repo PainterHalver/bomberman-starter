@@ -34,13 +34,13 @@ public class Board {
   // Tránh java.util.ConcurrentModificationException
   private List<Entity> entitiesBuffer = new ArrayList<>();
   private List<Entity> stillObjectsBuffer = new ArrayList<>();
-
   private Scene scene = null;
 
   public Board(Scene scene, int level) {
     this.scene = scene;
     this.level = level;
     loadLevel(level);
+    Sound.playBackground(Sound.stageThemeMusic);
   }
 
   public int getLevel() {
