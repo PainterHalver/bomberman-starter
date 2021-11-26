@@ -19,6 +19,10 @@ public abstract class MovableEntities extends AnimatableEntities {
   protected final int DIE_TIME_SECOND = 2;
   protected int deadAnimeTime = 60 * DIE_TIME_SECOND;
 
+  public boolean isAlive() {
+    return alive;
+  }
+
   public MovableEntities(int x, int y, Image img, Board board) {
     super(x,y,img, board);
   }

@@ -17,6 +17,7 @@ import uet.oop.bomberman.entities.animatableEntities.Bomb;
 import uet.oop.bomberman.entities.animatableEntities.Brick;
 import uet.oop.bomberman.entities.animatableEntities.Flame;
 import uet.oop.bomberman.entities.animatableEntities.moveableEntities.enemies.Balloon;
+import uet.oop.bomberman.entities.animatableEntities.moveableEntities.enemies.Enemy;
 import uet.oop.bomberman.entities.items.BombItem;
 import uet.oop.bomberman.entities.items.FlameItem;
 import uet.oop.bomberman.entities.items.SpeedItem;
@@ -75,7 +76,7 @@ public class Bomber extends MovableEntities {
     }
 
     public void collide(Entity entity) {
-        if (entity instanceof MovableEntities) {
+        if (entity instanceof Enemy && ((Enemy) entity).isAlive()) {
             seftDestruct();
         }
         if (entity instanceof BombItem) {
