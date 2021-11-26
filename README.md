@@ -14,13 +14,14 @@
 - ~~Xử lý khi qua portal.~~
 - ~~Sửa lại hoạt ảnh Bomb nổ (Nở ra rồi co vào thay vì nở ra rồi biến mất)~~
 - Thuật toán tìm đường trong một ma trận MxN (A* hoặc gì đó)
-- Thêm Scene màn hình New Game, Pause, Game Over (chắc là làm fxml mỗi cái)
+- Scene chuyển cảnh giứa các level/stage (Không cần NewGame hay Pause nx @@)
 - THÊM ÂM THANH
 - Điều khiển quái (hàm đi đến ô có tọa độ x,y)
 - Làm level mới.
 - Bomber đi qua được Bomb nhưng Enemy thì không (low prio)
 
 # Notes
+- Dùng Java 1.8 (Bản của Amazon coretto không dùng được Media, MediaPlayer)
 - StillEntity(Không di chuyển): Bomb, Grass, Wall, Brick, Portal.
 - MoveableEntity (Di chuyển được trong Board): Bomber, Enemy.
 - Nếu Enemy đang trong hoạt ảnh chết thì Bomber chạm vào sẽ đứt hay không? (KHÔNG)
