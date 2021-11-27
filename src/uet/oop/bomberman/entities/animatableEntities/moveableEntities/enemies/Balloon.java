@@ -17,24 +17,24 @@ public class Balloon extends Enemy {
   @Override
   public void AImove() {
     int move = (int) (System.currentTimeMillis() / 1000 % 4);
-//    switch (move){
-//      case 0:
-//        stopMoving();
-//        this.left = true;
-//        break;
-//      case 1:
-//        stopMoving();
-//        this.right = true;
-//        break;
-//      case 2:
-//        stopMoving();
-//        this.down = true;
-//        break;
-//      case 3:
-//        stopMoving();
-//        this.up = true;
-//        break;
-//    }
+    switch (move){
+      case 0:
+        stopMoving();
+        this.left = true;
+        break;
+      case 1:
+        stopMoving();
+        this.right = true;
+        break;
+      case 2:
+        stopMoving();
+        this.down = true;
+        break;
+      case 3:
+        stopMoving();
+        this.up = true;
+        break;
+    }
   }
 
   @Override

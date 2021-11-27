@@ -2,6 +2,8 @@ package uet.oop.bomberman;
 
 import javafx.scene.Scene;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.control.Label;
+import javafx.scene.layout.Pane;
 import uet.oop.bomberman.entities.*;
 import uet.oop.bomberman.entities.animatableEntities.Bomb;
 import uet.oop.bomberman.entities.items.BombItem;

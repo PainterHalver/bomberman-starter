@@ -55,7 +55,7 @@ public class Bomber extends MovableEntities {
         }
         moveHandler();
         collisionHandler();
-        printToScene("Entities: " + board.getEntities().size() + " StillObjects: " + board.getStillObjects().size());
+//        printToScene("Entities: " + board.getEntities().size() + " StillObjects: " + board.getStillObjects().size());
     }
 
     public void plantBomb() {
@@ -78,6 +78,7 @@ public class Bomber extends MovableEntities {
     public void collide(Entity entity) {
         if (entity instanceof Enemy && ((Enemy) entity).isAlive()) {
             seftDestruct();
+            Sound.play(Sound.bomberDieFx);
         }
         if (entity instanceof BombItem) {
             this.maxBomb++;
@@ -96,7 +97,14 @@ public class Bomber extends MovableEntities {
         }
         if (entity instanceof Portal) {
             if (((Portal) entity).isOpened()) {
-                Platform.runLater(() -> {board.nextLevel();});
+                moving = false;
+                Platform.runLater(() -> {
+                    MediaPlayer completeMusic = Sound.stageCompleteMusic;
+                    completeMusic.play();
+                    completeMusic.setOnEndOfMedia(() -> {
+                        board.nextLevel();
+                    });
+                });
             }
         }
     }

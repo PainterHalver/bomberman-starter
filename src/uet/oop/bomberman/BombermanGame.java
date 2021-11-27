@@ -38,7 +38,7 @@ public class BombermanGame extends Application {
     Scene scene = new Scene(screenPane);
 
     // Tao board
-    Board board = new Board(scene, level);
+    Board board = null;
 
 
 
@@ -52,51 +52,52 @@ public class BombermanGame extends Application {
         screenPane.setMaxWidth(Sprite.SCALED_SIZE * SCREEN_WIDTH);
         screenPane.setMaxHeight(Sprite.SCALED_SIZE * SCREEN_HEIGHT);
 
-        // Tao Canvas
-        canvas = new Canvas(Sprite.SCALED_SIZE * board.width, Sprite.SCALED_SIZE * board.height);
-        gc = canvas.getGraphicsContext2D();
-        screenPane.getChildren().add(canvas);
-
-        // Them scene vao stage
+        Pane stageInfo = new Pane();
+        stageInfo.setMinWidth(Sprite.SCALED_SIZE * SCREEN_WIDTH);
+        stageInfo.setMinHeight(Sprite.SCALED_SIZE * SCREEN_HEIGHT);
+        Label stageLevel = new Label("Stage " + level);
+        stageInfo.getChildren().add(stageLevel);
+        scene.setRoot(stageInfo);
         stage.setScene(scene);
-        Pane pane = (Pane) scene.getRoot();
-        pane.getChildren().add(new Label("Hello"));
         stage.show();
+        MediaPlayer music = Sound.stageStartMusic;
+        music.play();
+        music.setOnEndOfMedia(() -> {
+            board = new Board(scene, level);
+            // Tao Canvas
+            canvas = new Canvas(Sprite.SCALED_SIZE * board.width, Sprite.SCALED_SIZE * board.height);
+            gc = canvas.getGraphicsContext2D();
+            screenPane.getChildren().add(canvas);
 
-        AnimationTimer timer = new AnimationTimer() {
-            @Override
-            public void handle(long l) {
-                loopCount++;
-                if (System.currentTimeMillis() - start > 1000) {
-                    log("FPS: " + loopCount, ANSI_BLUE);
-                    stage.setTitle(loopCount + " FPS");
-                    loopCount = 0;
-                    start = System.currentTimeMillis();
-                }
-                if (!running) {
-                    screenPane.getChildren().setAll(new Label("GAME OVER"));
-                    this.stop();
-                }
-                render();
-                update();
-            }
-        };
-        running = true;
-        timer.start();
+            // Them scene vao stage
+            scene.setRoot(screenPane);
+            stage.setScene(scene);
+            stage.show();
 
-//        new Thread(() -> {
-//            try {
-//                Thread.sleep(3000);
-//                timer.stop();
-//                mediaPlayer.pause();
-//                Thread.sleep(5000);
-//                timer.start();
-//                mediaPlayer.play();
-//            } catch (InterruptedException e) {
-//                e.printStackTrace();
-//            }
-//        }).start();
+            AnimationTimer timer = new AnimationTimer() {
+                @Override
+                public void handle(long l) {
+                    loopCount++;
+                    if (System.currentTimeMillis() - start > 1000) {
+                        log("FPS: " + loopCount, ANSI_BLUE);
+                        stage.setTitle(loopCount + " FPS");
+                        loopCount = 0;
+                        start = System.currentTimeMillis();
+                    }
+                    if (!running) {
+                        screenPane.getChildren().setAll(new Label("GAME OVER"));
+                        Sound.stopAll();
+                        this.stop();
+                    }
+                    render();
+                    update();
+                }
+            };
+            running = true;
+            timer.start();
+        });
     }
+
 
     public void update() {
         board.update();

@@ -26,13 +26,17 @@ public class Sound {
   public static MediaPlayer boostedFx = new MediaPlayer(new Media(new File("res/sounds/effects/boosted_with_item.mp3").toURI().toString()));
   public static MediaPlayer bombExplodeFx = new MediaPlayer(new Media(new File("res/sounds/effects/bomb_explode.mp3").toURI().toString()));
   public static MediaPlayer stageClearedFx = new MediaPlayer(new Media(new File("res/sounds/effects/stage_cleared.mp3").toURI().toString()));
+  public static MediaPlayer bomberDieFx = new MediaPlayer(new Media(new File("res/sounds/effects/bomber_die.mp3").toURI().toString()));
 
   /*
   |--------------------------------------------------------------------------
   | Musics
   |--------------------------------------------------------------------------
   */
+
+  public static MediaPlayer stageStartMusic = new MediaPlayer(new Media(new File("res/sounds/2_stage_start.mp3").toURI().toString()));
   public static MediaPlayer stageThemeMusic = new MediaPlayer(new Media(new File("res/sounds/3_stage_theme.mp3").toURI().toString()));
+  public static MediaPlayer stageCompleteMusic = new MediaPlayer(new Media(new File("res/sounds/5_stage_complete.mp3").toURI().toString()));
 
   public static void playBackground(MediaPlayer music) {
     backgroundMusic = music;
@@ -46,12 +50,19 @@ public class Sound {
   }
 
   public static void play(MediaPlayer mediaPlayer) {
+    soundFxs.add(mediaPlayer);
     mediaPlayer.setVolume(SFX_VOLUME);
     mediaPlayer.seek(Duration.ZERO);
+    mediaPlayer.setOnEndOfMedia(new Runnable() {
+      public void run() {
+        soundFxs.remove(mediaPlayer);
+      }
+    });
     mediaPlayer.play();
   }
 
   public static void infinitePlay(MediaPlayer mediaPlayer, double rate) {
+    soundFxs.add(mediaPlayer);
     mediaPlayer.setVolume(SFX_VOLUME - 0.2);
     mediaPlayer.setRate(rate);
     mediaPlayer.setOnEndOfMedia(new Runnable() {
