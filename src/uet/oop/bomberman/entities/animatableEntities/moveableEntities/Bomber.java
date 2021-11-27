@@ -55,7 +55,7 @@ public class Bomber extends MovableEntities {
         }
         moveHandler();
         collisionHandler();
-//        printToScene("Entities: " + board.getEntities().size() + " StillObjects: " + board.getStillObjects().size());
+//        System.out.println("Entities: " + board.getEntities().size() + " StillObjects: " + board.getStillObjects().size());
     }
 
     public void plantBomb() {
@@ -67,18 +67,9 @@ public class Bomber extends MovableEntities {
         board.addStillObject(new Bomb(boardPositionX, boardPositionY, Sprite.bomb_2.getFxImage(), board));
     }
 
-    public void printToScene(String s) {
-        Pane screenPane = (Pane) scene.getRoot();
-        Label label = (Label) screenPane.getChildren().get(1);
-        label.styleProperty().set("-fx-text-fill: blue;-fx-font-size: 16px;");
-        //label.setText("x: " + boardX + ", y: " + boardY + " " + facingDirection + ", Rectangle: " + realBodyRectangle.getX() + " " + realBodyRectangle.getY());
-        label.setText(s);
-    }
-
     public void collide(Entity entity) {
         if (entity instanceof Enemy && ((Enemy) entity).isAlive()) {
             seftDestruct();
-            Sound.play(Sound.bomberDieFx);
         }
         if (entity instanceof BombItem) {
             this.maxBomb++;
@@ -102,7 +93,8 @@ public class Bomber extends MovableEntities {
                     MediaPlayer completeMusic = Sound.stageCompleteMusic;
                     completeMusic.play();
                     completeMusic.setOnEndOfMedia(() -> {
-                        board.nextLevel();
+                        completeMusic.stop();
+                        BombermanGame.loadGame(BombermanGame.screenStage, BombermanGame.level + 1);
                     });
                 });
             }
@@ -114,6 +106,18 @@ public class Bomber extends MovableEntities {
     public void render(GraphicsContext gc) {
         gc.drawImage(img, x, y);
         gc.fillRect(realBodyRectangle.getX(), realBodyRectangle.getY(),realBodyRectangle.getWidth(),realBodyRectangle.getHeight());
+    }
+
+    @Override
+    public void seftDestruct() {
+        moving = false;
+        alive = false;
+        this.up = false;
+        this.right = false;
+        this.down = false;
+        this.left = false;
+
+        Sound.play(Sound.lifeLostMusic);
     }
 
     public boolean canMove(int xS, int yS) {

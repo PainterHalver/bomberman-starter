@@ -181,7 +181,6 @@ public class Board {
         }
         if(object !=null) stillObjects.add(object);
       }
-      System.out.println();
     }
   }
 

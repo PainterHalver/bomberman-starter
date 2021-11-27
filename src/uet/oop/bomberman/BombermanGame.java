@@ -2,6 +2,7 @@ package uet.oop.bomberman;
 
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
@@ -28,18 +29,43 @@ public class BombermanGame extends Application {
     public static boolean running = false;
     public static int level = 1;
 
-    public int loopCount = 0;
-    public long start = System.currentTimeMillis();
-    
-    private GraphicsContext gc;
-    private Canvas canvas;
-    private Pane screenPane = new Pane();
+    public static int loopCount = 0;
+    public static long start = System.currentTimeMillis();
+
+    public static GraphicsContext gc;
+    public static Canvas canvas;
+    public static Stage screenStage;
+    public static Pane screenPane = new Pane();
     // Tao scene
-    Scene scene = new Scene(screenPane);
+    public static Scene scene = new Scene(screenPane);
 
     // Tao board
-    Board board = null;
+    public static Board board = null;
 
+    public static AnimationTimer timer = new AnimationTimer() {
+        @Override
+        public void handle(long l) {
+            loopCount++;
+            if (System.currentTimeMillis() - start > 1000) {
+                log("FPS: " + loopCount, ANSI_BLUE);
+                screenStage.setTitle(loopCount + " FPS");
+                loopCount = 0;
+                start = System.currentTimeMillis();
+            }
+            if (!running) {
+                screenPane.getChildren().setAll(new Label("GAME OVER"));
+                Sound.stopAll();
+                Sound.play(Sound.gameOverMusic);
+                Sound.gameOverMusic.setOnEndOfMedia(() -> {
+                    Platform.exit();
+                    System.exit(0);
+                });
+                this.stop();
+            }
+            render();
+            update();
+        }
+    };
 
 
     public static void main(String[] args) {
@@ -48,6 +74,13 @@ public class BombermanGame extends Application {
 
     @Override
     public void start(Stage stage) {
+        screenStage = stage;
+        loadGame(screenStage, level);
+    }
+
+    public static void loadGame(Stage stage, int curLevel) {
+        level = curLevel;
+
         // Tao root container
         screenPane.setMaxWidth(Sprite.SCALED_SIZE * SCREEN_WIDTH);
         screenPane.setMaxHeight(Sprite.SCALED_SIZE * SCREEN_HEIGHT);
@@ -60,9 +93,13 @@ public class BombermanGame extends Application {
         scene.setRoot(stageInfo);
         stage.setScene(scene);
         stage.show();
+
+        Sound.stopAll();
+        timer.stop();
         MediaPlayer music = Sound.stageStartMusic;
         music.play();
         music.setOnEndOfMedia(() -> {
+            music.stop();
             board = new Board(scene, level);
             // Tao Canvas
             canvas = new Canvas(Sprite.SCALED_SIZE * board.width, Sprite.SCALED_SIZE * board.height);
@@ -74,38 +111,18 @@ public class BombermanGame extends Application {
             stage.setScene(scene);
             stage.show();
 
-            AnimationTimer timer = new AnimationTimer() {
-                @Override
-                public void handle(long l) {
-                    loopCount++;
-                    if (System.currentTimeMillis() - start > 1000) {
-                        log("FPS: " + loopCount, ANSI_BLUE);
-                        stage.setTitle(loopCount + " FPS");
-                        loopCount = 0;
-                        start = System.currentTimeMillis();
-                    }
-                    if (!running) {
-                        screenPane.getChildren().setAll(new Label("GAME OVER"));
-                        Sound.stopAll();
-                        this.stop();
-                    }
-                    render();
-                    update();
-                }
-            };
             running = true;
             timer.start();
         });
     }
 
 
-    public void update() {
+    public static void update() {
         board.update();
-//        Sound.update();
         GameScreen.screenShiftHandler(board.getEntities(), canvas, screenPane);
     }
 
-    public void render() {
+    public static void render() {
         gc.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
         board.render(gc);
     }

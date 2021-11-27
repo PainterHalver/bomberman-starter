@@ -3,6 +3,7 @@ package uet.oop.bomberman.entities.animatableEntities.moveableEntities;
 import javafx.scene.image.Image;
 import uet.oop.bomberman.Board;
 import uet.oop.bomberman.Sound;
+import uet.oop.bomberman.entities.Portal;
 import uet.oop.bomberman.entities.animatableEntities.AnimatableEntities;
 import uet.oop.bomberman.entities.animatableEntities.Brick;
 import uet.oop.bomberman.entities.Entity;

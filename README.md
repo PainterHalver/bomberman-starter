@@ -13,12 +13,13 @@
 - ~~Giảm height realBodyRectangle của Bomber để dễ né Flame hơn. (Sprite giữ nguyên)~~
 - ~~Xử lý khi qua portal.~~
 - ~~Sửa lại hoạt ảnh Bomb nổ (Nở ra rồi co vào thay vì nở ra rồi biến mất)~~
-- Thuật toán tìm đường trong một ma trận MxN (A* hoặc gì đó)
+- ~~Bomber đi qua được Bomb nhưng Enemy thì không (low prio)~~
 - Scene chuyển cảnh giứa các level/stage (Không cần NewGame hay Pause nx @@)
+- Thuật toán tìm đường trong một ma trận MxN (A* hoặc gì đó)
 - THÊM ÂM THANH
 - Điều khiển quái (hàm đi đến ô có tọa độ x,y)
 - Làm level mới.
-- Bomber đi qua được Bomb nhưng Enemy thì không (low prio)
+- 
 
 # Notes
 - Dùng Java 1.8 (Bản của Amazon coretto không dùng được Media, MediaPlayer)
@@ -31,6 +32,7 @@
 - Chỉ collide với Entity ở trên cùng (fix ăn Item trước cả khi phá Brick)
 - Bomb nở ra và co vào 2 lần rồi nổ (Tổng ~2,6s lv1), lửa nở ra rồi co vào 1 lần (~0.35s)
 - Enemy khi chết thì lú (~0.85s) rồi cycle 3 sprite chết (~0.85s)
+- MediaPlayer sau khi play thì phải stop nếu không lần sau sẽ không play được nữa
 
 
 

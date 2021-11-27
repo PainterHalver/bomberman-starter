@@ -37,6 +37,8 @@ public class Sound {
   public static MediaPlayer stageStartMusic = new MediaPlayer(new Media(new File("res/sounds/2_stage_start.mp3").toURI().toString()));
   public static MediaPlayer stageThemeMusic = new MediaPlayer(new Media(new File("res/sounds/3_stage_theme.mp3").toURI().toString()));
   public static MediaPlayer stageCompleteMusic = new MediaPlayer(new Media(new File("res/sounds/5_stage_complete.mp3").toURI().toString()));
+  public static MediaPlayer lifeLostMusic = new MediaPlayer(new Media(new File("res/sounds/8_life_lost.mp3").toURI().toString()));
+  public static MediaPlayer gameOverMusic = new MediaPlayer(new Media(new File("res/sounds/9_game_over.mp3").toURI().toString()));
 
   public static void playBackground(MediaPlayer music) {
     backgroundMusic = music;
@@ -52,15 +54,16 @@ public class Sound {
   public static void play(MediaPlayer mediaPlayer) {
     soundFxs.add(mediaPlayer);
     mediaPlayer.setVolume(SFX_VOLUME);
-    mediaPlayer.seek(Duration.ZERO);
     mediaPlayer.setOnEndOfMedia(new Runnable() {
       public void run() {
+        mediaPlayer.stop();
         soundFxs.remove(mediaPlayer);
       }
     });
     mediaPlayer.play();
   }
 
+  // Chỉ dùng cho tiếng bước chân, không dùng cho các tiếng khác
   public static void infinitePlay(MediaPlayer mediaPlayer, double rate) {
     soundFxs.add(mediaPlayer);
     mediaPlayer.setVolume(SFX_VOLUME - 0.2);
@@ -73,28 +76,19 @@ public class Sound {
     mediaPlayer.play();
   }
 
-//  public static void play(MediaPlayer mediaPlayer, int times) {
-//    for (int i = 0; i < times; ++i) {
-//      mediaPlayer.setVolume(SFX_VOLUME);
-//      mediaPlayer.play();
-//      mediaPlayer.setOnEndOfMedia(new Runnable() {
-//        public void run() {
-//          mediaPlayer.seek(Duration.ZERO);
-//          mediaPlayer.stop();
-//        }
-//      });
-//    }
-//  }
-
   public static void stopAll() {
-    backgroundMusic.stop();
+    if (backgroundMusic != null) {
+      backgroundMusic.stop();
+    }
     for (MediaPlayer m : soundFxs) {
       m.stop();
     }
   }
 
   public static void pauseAll(){
-    backgroundMusic.pause();
+    if (backgroundMusic != null) {
+      backgroundMusic.pause();
+    }
     for (MediaPlayer m : soundFxs) {
       m.pause();
     }
