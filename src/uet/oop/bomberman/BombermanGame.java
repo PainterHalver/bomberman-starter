@@ -3,6 +3,7 @@ package uet.oop.bomberman;
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.application.Platform;
+import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
@@ -21,7 +22,10 @@ import uet.oop.bomberman.graphics.Sprite;
 import uet.oop.bomberman.utils.GameScreen;
 
 import java.io.File;
+import java.io.IOException;
 import java.net.URI;
+import java.net.URISyntaxException;
+import java.net.URL;
 import java.nio.file.Paths;
 import java.util.Objects;
 
@@ -83,7 +87,21 @@ public class BombermanGame extends Application {
     @Override
     public void start(Stage stage) {
         screenStage = stage;
-        loadGame(screenStage, level);
+//        loadGame(screenStage, level);
+        showMenu(screenStage);
+        Sound.playBackground(Sound.menuMusic);
+    }
+
+    public static void showMenu(Stage stage) {
+        Scene menuScene = null;
+        try {
+            URL url = new File("res/scenes/menu.fxml").toURI().toURL();
+            menuScene = new Scene(FXMLLoader.load(url), Sprite.SCALED_SIZE * SCREEN_WIDTH, Sprite.SCALED_SIZE * SCREEN_HEIGHT);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        stage.setScene(menuScene);
+        stage.show();
     }
 
     private static void showStageInfo(Stage stage) {

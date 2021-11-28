@@ -21,6 +21,7 @@
 - Thuật toán tìm đường trong một ma trận MxN (A* hoặc gì đó)
 - Điều khiển quái (hàm đi đến ô có tọa độ x,y)
 - Làm level mới.
+- Không cho resize lại màn hình?
 
 # Notes
 - Dùng Java 1.8 (Bản của Amazon coretto không dùng được Media, MediaPlayer)

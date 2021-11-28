@@ -34,6 +34,7 @@ public class Sound {
   |--------------------------------------------------------------------------
   */
 
+  public static MediaPlayer menuMusic = new MediaPlayer(new Media(new File("res/sounds/1_title_screen.mp3").toURI().toString()));
   public static MediaPlayer stageStartMusic = new MediaPlayer(new Media(new File("res/sounds/2_stage_start.mp3").toURI().toString()));
   public static MediaPlayer stageThemeMusic = new MediaPlayer(new Media(new File("res/sounds/3_stage_theme.mp3").toURI().toString()));
   public static MediaPlayer stageCompleteMusic = new MediaPlayer(new Media(new File("res/sounds/5_stage_complete.mp3").toURI().toString()));

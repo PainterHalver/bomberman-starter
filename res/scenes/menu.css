@@ -1,0 +1,18 @@
+/*@font-face {*/
+/*    font-family: PressStart1;*/
+/*    src: url('PressStart2P-vaV7.ttf');*/
+/*}*/
+
+Button {
+    -fx-cursor: hand;
+}
+
+/*Label {*/
+/*    -fx-text-fill: #fff;*/
+/*    -fx-font-family: "PressStart1";*/
+/*}*/
+
+/*.test {*/
+/*    -fx-font-family: PressStart1;*/
+/*    -fx-font-weight: 1000;*/
+/*}*/
