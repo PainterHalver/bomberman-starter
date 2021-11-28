@@ -19,7 +19,7 @@
 - THÊM ÂM THANH
 - Điều khiển quái (hàm đi đến ô có tọa độ x,y)
 - Làm level mới.
-- 
+- Xử lý khi map rộng hơn màn hình về chiều cao (đi theo Bomber)
 
 # Notes
 - Dùng Java 1.8 (Bản của Amazon coretto không dùng được Media, MediaPlayer)

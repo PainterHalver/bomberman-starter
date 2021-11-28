@@ -3,13 +3,18 @@ package uet.oop.bomberman;
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.application.Platform;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
+import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import uet.oop.bomberman.graphics.Sprite;
@@ -18,6 +23,7 @@ import uet.oop.bomberman.utils.GameScreen;
 import java.io.File;
 import java.net.URI;
 import java.nio.file.Paths;
+import java.util.Objects;
 
 import static uet.oop.bomberman.utils.TerminalColor.*;
 
@@ -53,10 +59,11 @@ public class BombermanGame extends Application {
                 start = System.currentTimeMillis();
             }
             if (!running) {
-                screenPane.getChildren().setAll(new Label("GAME OVER"));
+                showGameOver(screenStage);
                 Sound.stopAll();
                 Sound.play(Sound.gameOverMusic);
                 Sound.gameOverMusic.setOnEndOfMedia(() -> {
+                    Sound.gameOverMusic.stop();
                     Platform.exit();
                     System.exit(0);
                 });
@@ -78,6 +85,38 @@ public class BombermanGame extends Application {
         loadGame(screenStage, level);
     }
 
+    private static void showStageInfo(Stage stage) {
+        Font font = Font.loadFont("file:res/PressStart2P-vaV7.ttf", 50);
+        StackPane stageInfo = new StackPane();
+        stageInfo.setMinWidth(Sprite.SCALED_SIZE * SCREEN_WIDTH);
+        stageInfo.setMinHeight(Sprite.SCALED_SIZE * SCREEN_HEIGHT);
+        stageInfo.styleProperty().set("-fx-background-color: black;");
+        Label stageLevel = new Label("Stage " + level);
+        stageLevel.setFont(font);
+        stageLevel.setTextFill(Color.color(1, 1, 1));
+        StackPane.setAlignment(stageInfo, Pos.CENTER_LEFT);
+        stageInfo.getChildren().add(stageLevel);
+        scene.setRoot(stageInfo);
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    private static void showGameOver(Stage stage) {
+        Font font = Font.loadFont("file:res/PressStart2P-vaV7.ttf", 50);
+        StackPane stageInfo = new StackPane();
+        stageInfo.setMinWidth(Sprite.SCALED_SIZE * SCREEN_WIDTH);
+        stageInfo.setMinHeight(Sprite.SCALED_SIZE * SCREEN_HEIGHT);
+        stageInfo.styleProperty().set("-fx-background-color: black;");
+        Label stageLevel = new Label("Game Over");
+        stageLevel.setFont(font);
+        stageLevel.setTextFill(Color.color(1, 1, 1));
+        StackPane.setAlignment(stageInfo, Pos.CENTER_LEFT);
+        stageInfo.getChildren().add(stageLevel);
+        scene.setRoot(stageInfo);
+        stage.setScene(scene);
+        stage.show();
+    }
+
     public static void loadGame(Stage stage, int curLevel) {
         level = curLevel;
 
@@ -85,14 +124,7 @@ public class BombermanGame extends Application {
         screenPane.setMaxWidth(Sprite.SCALED_SIZE * SCREEN_WIDTH);
         screenPane.setMaxHeight(Sprite.SCALED_SIZE * SCREEN_HEIGHT);
 
-        Pane stageInfo = new Pane();
-        stageInfo.setMinWidth(Sprite.SCALED_SIZE * SCREEN_WIDTH);
-        stageInfo.setMinHeight(Sprite.SCALED_SIZE * SCREEN_HEIGHT);
-        Label stageLevel = new Label("Stage " + level);
-        stageInfo.getChildren().add(stageLevel);
-        scene.setRoot(stageInfo);
-        stage.setScene(scene);
-        stage.show();
+        showStageInfo(stage);
 
         Sound.stopAll();
         timer.stop();
