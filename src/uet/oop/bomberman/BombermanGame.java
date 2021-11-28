@@ -64,15 +64,14 @@ public class BombermanGame extends Application {
                 start = System.currentTimeMillis();
             }
             if (!running) {
+                this.stop();
                 showGameOver(screenStage);
                 Sound.stopAll();
                 Sound.play(Sound.gameOverMusic);
                 Sound.gameOverMusic.setOnEndOfMedia(() -> {
                     Sound.gameOverMusic.stop();
-                    Platform.exit();
-                    System.exit(0);
+                    showMenu(screenStage);
                 });
-                this.stop();
             }
             render();
             update();
