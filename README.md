@@ -14,12 +14,13 @@
 - ~~Xử lý khi qua portal.~~
 - ~~Sửa lại hoạt ảnh Bomb nổ (Nở ra rồi co vào thay vì nở ra rồi biến mất)~~
 - ~~Bomber đi qua được Bomb nhưng Enemy thì không (low prio)~~
-- Scene chuyển cảnh giứa các level/stage (Không cần NewGame hay Pause nx @@)
+- ~~Xử lý khi map rộng hơn màn hình về chiều cao (đi theo Bomber nếu board.height > screen.height)~~
+- ~~Scene chuyển cảnh giứa các level/stage~~
+- ~~THÊM ÂM THANH~~
 - Thuật toán tìm đường trong một ma trận MxN (A* hoặc gì đó)
-- THÊM ÂM THANH
 - Điều khiển quái (hàm đi đến ô có tọa độ x,y)
 - Làm level mới.
-- Xử lý khi map rộng hơn màn hình về chiều cao (đi theo Bomber)
+- Scene và âm thanh khi clear hết tất cả các Level
 
 # Notes
 - Dùng Java 1.8 (Bản của Amazon coretto không dùng được Media, MediaPlayer)
@@ -33,6 +34,7 @@
 - Bomb nở ra và co vào 2 lần rồi nổ (Tổng ~2,6s lv1), lửa nở ra rồi co vào 1 lần (~0.35s)
 - Enemy khi chết thì lú (~0.85s) rồi cycle 3 sprite chết (~0.85s)
 - MediaPlayer sau khi play thì phải stop nếu không lần sau sẽ không play được nữa
+
 
 
 

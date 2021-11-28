@@ -18,5 +18,9 @@ public class GameScreen {
     if (bomber.getX() > screenPane.getWidth() / 2 && bomber.getX() < canvas.getWidth() - screenPane.getWidth() / 2) {
       canvas.setTranslateX(-bomber.getX() + screenPane.getWidth() / 2);
     }
+
+    if (bomber.getY() > screenPane.getHeight() / 2 && bomber.getY() < canvas.getHeight() - screenPane.getHeight() / 2) {
+      canvas.setTranslateY(-bomber.getY() + screenPane.getHeight() / 2);
+    }
   }
 }
