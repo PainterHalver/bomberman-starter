@@ -39,6 +39,7 @@ public class Sound {
   public static MediaPlayer stageCompleteMusic = new MediaPlayer(new Media(new File("res/sounds/5_stage_complete.mp3").toURI().toString()));
   public static MediaPlayer lifeLostMusic = new MediaPlayer(new Media(new File("res/sounds/8_life_lost.mp3").toURI().toString()));
   public static MediaPlayer gameOverMusic = new MediaPlayer(new Media(new File("res/sounds/9_game_over.mp3").toURI().toString()));
+  public static MediaPlayer endingMusic = new MediaPlayer(new Media(new File("res/sounds/10_ending.mp3").toURI().toString()));
 
   public static void playBackground(MediaPlayer music) {
     backgroundMusic = music;

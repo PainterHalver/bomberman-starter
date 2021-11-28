@@ -34,6 +34,7 @@ public class BombermanGame extends Application {
 
     public static boolean running = false;
     public static int level = 1;
+    public static int totalLevels = new File("./res/levels").list().length; //this could cause trouble
 
     public static int loopCount = 0;
     public static long start = System.currentTimeMillis();
@@ -117,7 +118,38 @@ public class BombermanGame extends Application {
         stage.show();
     }
 
+    private static void showEzGame(Stage stage) {
+        Font font = Font.loadFont("file:res/PressStart2P-vaV7.ttf", 50);
+        StackPane stageInfo = new StackPane();
+        stageInfo.setMinWidth(Sprite.SCALED_SIZE * SCREEN_WIDTH);
+        stageInfo.setMinHeight(Sprite.SCALED_SIZE * SCREEN_HEIGHT);
+        stageInfo.styleProperty().set("-fx-background-color: black;");
+        Label stageLevel = new Label("Game is easy\n bye :P");
+        stageLevel.setFont(font);
+        stageLevel.setTextFill(Color.color(1, 1, 1));
+        StackPane.setAlignment(stageInfo, Pos.CENTER_LEFT);
+        stageInfo.getChildren().add(stageLevel);
+        scene.setRoot(stageInfo);
+        stage.setScene(scene);
+        stage.show();
+    }
+
     public static void loadGame(Stage stage, int curLevel) {
+        // Dừng timer để xóa bỏ những gì còn lại từ level trước
+        timer.stop();
+
+        if (curLevel > totalLevels) {
+            showEzGame(stage);
+            Sound.stopAll();
+            Sound.play(Sound.endingMusic);
+            Sound.endingMusic.setOnEndOfMedia(() -> {
+                Sound.endingMusic.stop();
+                Platform.exit();
+                System.exit(0);
+            });
+            return;
+        }
+
         level = curLevel;
 
         // Tao root container
@@ -127,7 +159,6 @@ public class BombermanGame extends Application {
         showStageInfo(stage);
 
         Sound.stopAll();
-        timer.stop();
         MediaPlayer music = Sound.stageStartMusic;
         music.play();
         music.setOnEndOfMedia(() -> {

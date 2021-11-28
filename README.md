@@ -17,10 +17,10 @@
 - ~~Xử lý khi map rộng hơn màn hình về chiều cao (đi theo Bomber nếu board.height > screen.height)~~
 - ~~Scene chuyển cảnh giứa các level/stage~~
 - ~~THÊM ÂM THANH~~
+- ~~Scene và âm thanh khi clear hết tất cả các Level~~
 - Thuật toán tìm đường trong một ma trận MxN (A* hoặc gì đó)
 - Điều khiển quái (hàm đi đến ô có tọa độ x,y)
 - Làm level mới.
-- Scene và âm thanh khi clear hết tất cả các Level
 
 # Notes
 - Dùng Java 1.8 (Bản của Amazon coretto không dùng được Media, MediaPlayer)
