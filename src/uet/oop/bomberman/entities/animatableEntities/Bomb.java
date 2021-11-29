@@ -13,7 +13,7 @@ public class Bomb extends AnimatableEntities {
 
   public Bomb(int boardX, int boardY, Image img, Board board) {
     super(boardX, boardY, img, board);
-    Sound.play(Sound.placeBombFx);
+    Sound.playSFX(Sound.placeBombFx);
   }
 
   public void animate() {
@@ -38,7 +38,7 @@ public class Bomb extends AnimatableEntities {
     exploded = true;
     removeFromBoard();
     board.addStillObject(new Flame(boardX, boardY, Bomber.flameSize, board));
-    Sound.play(Sound.bombExplodeFx);
+    Sound.playSFX(Sound.bombExplodeFx);
   }
 
   @Override

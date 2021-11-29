@@ -67,7 +67,7 @@ public class BombermanGame extends Application {
                 this.stop();
                 showGameOver(screenStage);
                 Sound.stopAll();
-                Sound.play(Sound.gameOverMusic);
+                Sound.playMusic(Sound.gameOverMusic);
                 Sound.gameOverMusic.setOnEndOfMedia(() -> {
                     Sound.gameOverMusic.stop();
                     showMenu(screenStage);
@@ -88,7 +88,6 @@ public class BombermanGame extends Application {
         screenStage = stage;
 //        loadGame(screenStage, level);
         showMenu(screenStage);
-        Sound.playBackground(Sound.menuMusic);
     }
 
     public static void showMenu(Stage stage) {
@@ -101,6 +100,7 @@ public class BombermanGame extends Application {
         }
         stage.setScene(menuScene);
         stage.show();
+        Sound.playBackground(Sound.menuMusic);
     }
 
     private static void showStageInfo(Stage stage) {
@@ -158,7 +158,7 @@ public class BombermanGame extends Application {
         if (curLevel > totalLevels) {
             showEzGame(stage);
             Sound.stopAll();
-            Sound.play(Sound.endingMusic);
+            Sound.playMusic(Sound.endingMusic);
             Sound.endingMusic.setOnEndOfMedia(() -> {
                 Sound.endingMusic.stop();
                 Platform.exit();
@@ -176,10 +176,9 @@ public class BombermanGame extends Application {
         showStageInfo(stage);
 
         Sound.stopAll();
-        MediaPlayer music = Sound.stageStartMusic;
-        music.play();
-        music.setOnEndOfMedia(() -> {
-            music.stop();
+        Sound.playMusic(Sound.stageStartMusic);
+        Sound.stageStartMusic.setOnEndOfMedia(() -> {
+            Sound.stageStartMusic.stop();
             board = new Board(scene, level);
             // Tao Canvas
             canvas = new Canvas(Sprite.SCALED_SIZE * board.width, Sprite.SCALED_SIZE * board.height);

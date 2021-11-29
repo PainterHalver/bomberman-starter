@@ -74,26 +74,24 @@ public class Bomber extends MovableEntities {
         if (entity instanceof BombItem) {
             this.maxBomb++;
             entity.removeFromBoard();
-            Sound.play(Sound.boostedFx);
+            Sound.playSFX(Sound.boostedFx);
         }
         if (entity instanceof FlameItem) {
             Bomber.flameSize++;
             entity.removeFromBoard();
-            Sound.play(Sound.boostedFx);
+            Sound.playSFX(Sound.boostedFx);
         }
         if (entity instanceof SpeedItem) {
             this.speed+= 0.2;
             entity.removeFromBoard();
-            Sound.play(Sound.boostedFx);
+            Sound.playSFX(Sound.boostedFx);
         }
         if (entity instanceof Portal) {
             if (((Portal) entity).isOpened()) {
-                moving = false;
                 Platform.runLater(() -> {
-                    MediaPlayer completeMusic = Sound.stageCompleteMusic;
-                    completeMusic.play();
-                    completeMusic.setOnEndOfMedia(() -> {
-                        completeMusic.stop();
+                    Sound.playSFX(Sound.stageCompleteMusic);
+                    Sound.stageCompleteMusic.setOnEndOfMedia(() -> {
+                        Sound.stageCompleteMusic.stop();
                         BombermanGame.loadGame(BombermanGame.screenStage, BombermanGame.level + 1);
                     });
                 });
@@ -117,7 +115,7 @@ public class Bomber extends MovableEntities {
         this.down = false;
         this.left = false;
 
-        Sound.play(Sound.lifeLostMusic);
+        Sound.playMusic(Sound.lifeLostMusic);
     }
 
     public boolean canMove(int xS, int yS) {

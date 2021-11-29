@@ -12,7 +12,7 @@ public class Sound {
   public static final double MUSIC_VOLUME = 0.1;
   public static final double SFX_VOLUME = 0.4;
 
-  public static List<MediaPlayer> soundFxs = new ArrayList<>();
+  public static List<MediaPlayer> sounds = new ArrayList<>();
   public static MediaPlayer backgroundMusic;
 
   /*
@@ -53,13 +53,24 @@ public class Sound {
     backgroundMusic.play();
   }
 
-  public static void play(MediaPlayer mediaPlayer) {
-    soundFxs.add(mediaPlayer);
+  public static void playMusic(MediaPlayer mediaPlayer) {
+    sounds.add(mediaPlayer);
+    mediaPlayer.setVolume(MUSIC_VOLUME);
+    mediaPlayer.setOnEndOfMedia(new Runnable() {
+      public void run() {
+        mediaPlayer.stop();
+        sounds.remove(mediaPlayer);
+      }
+    });
+    mediaPlayer.play();
+  }
+  public static void playSFX(MediaPlayer mediaPlayer) {
+    sounds.add(mediaPlayer);
     mediaPlayer.setVolume(SFX_VOLUME);
     mediaPlayer.setOnEndOfMedia(new Runnable() {
       public void run() {
         mediaPlayer.stop();
-        soundFxs.remove(mediaPlayer);
+        sounds.remove(mediaPlayer);
       }
     });
     mediaPlayer.play();
@@ -67,7 +78,7 @@ public class Sound {
 
   // Chỉ dùng cho tiếng bước chân, không dùng cho các tiếng khác
   public static void infinitePlay(MediaPlayer mediaPlayer, double rate) {
-    soundFxs.add(mediaPlayer);
+    sounds.add(mediaPlayer);
     mediaPlayer.setVolume(SFX_VOLUME - 0.2);
     mediaPlayer.setRate(rate);
     mediaPlayer.setOnEndOfMedia(new Runnable() {
@@ -82,7 +93,7 @@ public class Sound {
     if (backgroundMusic != null) {
       backgroundMusic.stop();
     }
-    for (MediaPlayer m : soundFxs) {
+    for (MediaPlayer m : sounds) {
       m.stop();
     }
   }
@@ -91,7 +102,7 @@ public class Sound {
     if (backgroundMusic != null) {
       backgroundMusic.pause();
     }
-    for (MediaPlayer m : soundFxs) {
+    for (MediaPlayer m : sounds) {
       m.pause();
     }
   }

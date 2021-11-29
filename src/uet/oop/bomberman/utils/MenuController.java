@@ -33,7 +33,7 @@ public class MenuController implements Initializable {
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
-    btnNewGame.setOnMouseClicked(event -> {
+    btnNewGame.setOnAction(event -> {
       BombermanGame.loadGame(BombermanGame.screenStage, BombermanGame.level);
     });
 
@@ -42,8 +42,10 @@ public class MenuController implements Initializable {
       msgLabel.setVisible(!msgLabel.isVisible());
     });
 
-    btnExit.setOnMouseClicked(event -> {
+    btnExit.setOnAction(event -> {
       Platform.exit();
     });
+
+    sliderMusic.setValue(75);
   }
 }

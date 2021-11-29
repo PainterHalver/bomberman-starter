@@ -103,7 +103,7 @@ public abstract class MovableEntities extends AnimatableEntities {
 
     // Khi giết được chú quái cuối cùng
     if (this instanceof Enemy && board.getEntities().size() == 2) {
-      Sound.play(Sound.stageClearedFx);
+      Sound.playMusic(Sound.stageClearedFx);
     }
   }
 
