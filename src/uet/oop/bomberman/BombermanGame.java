@@ -11,23 +11,16 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
-import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
-import javafx.scene.paint.Paint;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
-import javafx.util.Duration;
 import uet.oop.bomberman.graphics.Sprite;
 import uet.oop.bomberman.utils.GameScreen;
 
 import java.io.File;
 import java.io.IOException;
-import java.net.URI;
-import java.net.URISyntaxException;
 import java.net.URL;
-import java.nio.file.Paths;
-import java.util.Objects;
 
 import static uet.oop.bomberman.utils.TerminalColor.*;
 
@@ -48,7 +41,7 @@ public class BombermanGame extends Application {
     public static Stage screenStage;
     public static Pane screenPane = new Pane();
     // Tao scene
-    public static Scene scene = new Scene(screenPane);
+    public static Scene gameScene = new Scene(screenPane);
 
     // Tao board
     public static Board board = null;
@@ -57,6 +50,10 @@ public class BombermanGame extends Application {
         @Override
         public void handle(long l) {
             loopCount++;
+            for (MediaPlayer m : Sound.sounds) {
+                System.out.print(m + " ");
+            }
+            System.out.println();
             if (System.currentTimeMillis() - start > 1000) {
                 log("FPS: " + loopCount, ANSI_BLUE);
                 screenStage.setTitle(loopCount + " FPS");
@@ -70,7 +67,7 @@ public class BombermanGame extends Application {
                 Sound.playMusic(Sound.gameOverMusic);
                 Sound.gameOverMusic.setOnEndOfMedia(() -> {
                     Sound.gameOverMusic.stop();
-                    showMenu(screenStage);
+                    showMainMenu(screenStage);
                 });
             }
             render();
@@ -85,15 +82,16 @@ public class BombermanGame extends Application {
 
     @Override
     public void start(Stage stage) {
+//        stage.setResizable(false);
         screenStage = stage;
 //        loadGame(screenStage, level);
-        showMenu(screenStage);
+        showMainMenu(screenStage);
     }
 
-    public static void showMenu(Stage stage) {
+    public static void showMainMenu(Stage stage) {
         Scene menuScene = null;
         try {
-            URL url = new File("res/scenes/menu.fxml").toURI().toURL();
+            URL url = new File("res/scenes/main-menu.fxml").toURI().toURL();
             menuScene = new Scene(FXMLLoader.load(url), Sprite.SCALED_SIZE * SCREEN_WIDTH, Sprite.SCALED_SIZE * SCREEN_HEIGHT);
         } catch (IOException e) {
             e.printStackTrace();
@@ -101,6 +99,31 @@ public class BombermanGame extends Application {
         stage.setScene(menuScene);
         stage.show();
         Sound.playBackground(Sound.menuMusic);
+    }
+
+    private static void showPauseMenu(Stage stage) {
+        Scene pauseScene = null;
+        try {
+            URL url = new File("res/scenes/pause-menu.fxml").toURI().toURL();
+            pauseScene = new Scene(FXMLLoader.load(url), Sprite.SCALED_SIZE * SCREEN_WIDTH, Sprite.SCALED_SIZE * SCREEN_HEIGHT);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        stage.setScene(pauseScene);
+        stage.show();
+    }
+
+    public static void pauseGame() {
+        Sound.pauseAll();
+        showPauseMenu(screenStage);
+        timer.stop();
+    }
+
+    public static void resumeGame() {
+        Sound.resumeAll();
+        screenStage.setScene(gameScene);
+        screenStage.show();
+        timer.start();
     }
 
     private static void showStageInfo(Stage stage) {
@@ -114,8 +137,8 @@ public class BombermanGame extends Application {
         stageLevel.setTextFill(Color.color(1, 1, 1));
         StackPane.setAlignment(stageInfo, Pos.CENTER_LEFT);
         stageInfo.getChildren().add(stageLevel);
-        scene.setRoot(stageInfo);
-        stage.setScene(scene);
+        gameScene.setRoot(stageInfo);
+        stage.setScene(gameScene);
         stage.show();
     }
 
@@ -130,8 +153,8 @@ public class BombermanGame extends Application {
         stageLevel.setTextFill(Color.color(1, 1, 1));
         StackPane.setAlignment(stageInfo, Pos.CENTER_LEFT);
         stageInfo.getChildren().add(stageLevel);
-        scene.setRoot(stageInfo);
-        stage.setScene(scene);
+        gameScene.setRoot(stageInfo);
+        stage.setScene(gameScene);
         stage.show();
     }
 
@@ -146,14 +169,16 @@ public class BombermanGame extends Application {
         stageLevel.setTextFill(Color.color(1, 1, 1));
         StackPane.setAlignment(stageInfo, Pos.CENTER_LEFT);
         stageInfo.getChildren().add(stageLevel);
-        scene.setRoot(stageInfo);
-        stage.setScene(scene);
+        gameScene.setRoot(stageInfo);
+        stage.setScene(gameScene);
         stage.show();
     }
 
     public static void loadGame(Stage stage, int curLevel) {
         // Dừng timer để xóa bỏ những gì còn lại từ level trước
         timer.stop();
+        // Clear hết Sound còn lại tránh lỗi
+        Sound.sounds.clear();
 
         if (curLevel > totalLevels) {
             showEzGame(stage);
@@ -179,15 +204,16 @@ public class BombermanGame extends Application {
         Sound.playMusic(Sound.stageStartMusic);
         Sound.stageStartMusic.setOnEndOfMedia(() -> {
             Sound.stageStartMusic.stop();
-            board = new Board(scene, level);
+            Sound.sounds.remove(Sound.stageStartMusic);
+            board = new Board(gameScene, level);
             // Tao Canvas
             canvas = new Canvas(Sprite.SCALED_SIZE * board.width, Sprite.SCALED_SIZE * board.height);
             gc = canvas.getGraphicsContext2D();
             screenPane.getChildren().add(canvas);
 
             // Them scene vao stage
-            scene.setRoot(screenPane);
-            stage.setScene(scene);
+            gameScene.setRoot(screenPane);
+            stage.setScene(gameScene);
             stage.show();
 
             running = true;

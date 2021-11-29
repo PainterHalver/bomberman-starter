@@ -94,6 +94,11 @@ public abstract class MovableEntities extends AnimatableEntities {
   }
 
   public void seftDestruct() {
+    // Khi giết được chú quái cuối cùng, alive để chỉ gọi hàm 1 lần
+    if (this instanceof Enemy && board.getEntities().size() == 2 && alive) {
+      Sound.playMusic(Sound.stageClearedFx);
+    }
+
     moving = false;
     alive = false;
     this.up = false;
@@ -101,10 +106,6 @@ public abstract class MovableEntities extends AnimatableEntities {
     this.down = false;
     this.left = false;
 
-    // Khi giết được chú quái cuối cùng
-    if (this instanceof Enemy && board.getEntities().size() == 2) {
-      Sound.playMusic(Sound.stageClearedFx);
-    }
   }
 
   public abstract void collide(Entity entity);

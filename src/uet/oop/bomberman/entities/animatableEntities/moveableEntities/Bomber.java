@@ -29,6 +29,7 @@ public class Bomber extends MovableEntities {
     private int maxBomb = 1;
     public static int flameSize = 1;
     private MediaPlayer footstep = Sound.footstepHorizontalFx;
+    private boolean currentStageCleared = false;
 
     public Bomber(int x, int y, Image img, Board board) {
         super(x,y,img, board);
@@ -87,11 +88,13 @@ public class Bomber extends MovableEntities {
             Sound.playSFX(Sound.boostedFx);
         }
         if (entity instanceof Portal) {
-            if (((Portal) entity).isOpened()) {
+            if (((Portal) entity).isOpened() && !currentStageCleared) {
+                currentStageCleared = true;
                 Platform.runLater(() -> {
                     Sound.playSFX(Sound.stageCompleteMusic);
                     Sound.stageCompleteMusic.setOnEndOfMedia(() -> {
                         Sound.stageCompleteMusic.stop();
+                        Sound.sounds.remove(Sound.stageCompleteMusic);
                         BombermanGame.loadGame(BombermanGame.screenStage, BombermanGame.level + 1);
                     });
                 });
@@ -108,14 +111,17 @@ public class Bomber extends MovableEntities {
 
     @Override
     public void seftDestruct() {
+        // Play die music only once
+        if (alive) {
+            Sound.playMusic(Sound.lifeLostMusic);
+        }
+
         moving = false;
         alive = false;
         this.up = false;
         this.right = false;
         this.down = false;
         this.left = false;
-
-        Sound.playMusic(Sound.lifeLostMusic);
     }
 
     public boolean canMove(int xS, int yS) {
@@ -204,6 +210,11 @@ public class Bomber extends MovableEntities {
                     break;
                 case SPACE:
                     plantBomb();
+                    break;
+                case ESCAPE:
+                    BombermanGame.pauseGame();
+                    up = down = left = right = false;
+                    break;
                 default:
                     break;
             }

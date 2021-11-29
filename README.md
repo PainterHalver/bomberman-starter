@@ -18,10 +18,10 @@
 - ~~Scene chuyển cảnh giứa các level/stage~~
 - ~~THÊM ÂM THANH~~
 - ~~Scene và âm thanh khi clear hết tất cả các Level~~
+- Không cho resize lại màn hình (uncomment dòng đầu tiên hàm start trong BombermanGame)
 - Thuật toán tìm đường trong một ma trận MxN (A* hoặc gì đó)
 - Điều khiển quái (hàm đi đến ô có tọa độ x,y)
 - Làm level mới.
-- Không cho resize lại màn hình?
 
 # Notes
 - Dùng Java 1.8 (Bản của Amazon coretto không dùng được Media, MediaPlayer)
@@ -35,6 +35,7 @@
 - Bomb nở ra và co vào 2 lần rồi nổ (Tổng ~2,6s lv1), lửa nở ra rồi co vào 1 lần (~0.35s)
 - Enemy khi chết thì lú (~0.85s) rồi cycle 3 sprite chết (~0.85s)
 - MediaPlayer sau khi play thì phải stop nếu không lần sau sẽ không play được nữa
+- Các hàm va chạm chỉ nên xảy ra 1 lần (đặc biệt là các hàm có chứa code play Media)
 
 
 

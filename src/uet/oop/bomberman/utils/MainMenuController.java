@@ -11,7 +11,7 @@ import uet.oop.bomberman.BombermanGame;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class MenuController implements Initializable {
+public class MainMenuController implements Initializable {
   @FXML
   private Button btnNewGame;
 

@@ -78,7 +78,6 @@ public class Sound {
 
   // Chỉ dùng cho tiếng bước chân, không dùng cho các tiếng khác
   public static void infinitePlay(MediaPlayer mediaPlayer, double rate) {
-    sounds.add(mediaPlayer);
     mediaPlayer.setVolume(SFX_VOLUME - 0.2);
     mediaPlayer.setRate(rate);
     mediaPlayer.setOnEndOfMedia(new Runnable() {
@@ -90,6 +89,8 @@ public class Sound {
   }
 
   public static void stopAll() {
+    footstepHorizontalFx.stop();
+    footstepVerticalFx.stop();
     if (backgroundMusic != null) {
       backgroundMusic.stop();
     }
@@ -99,11 +100,22 @@ public class Sound {
   }
 
   public static void pauseAll(){
+    footstepHorizontalFx.pause();
+    footstepVerticalFx.pause();
     if (backgroundMusic != null) {
       backgroundMusic.pause();
     }
     for (MediaPlayer m : sounds) {
       m.pause();
+    }
+  }
+
+  public static void resumeAll() {
+    if (backgroundMusic != null) {
+      backgroundMusic.play();
+    }
+    for (MediaPlayer m : sounds) {
+      m.play();
     }
   }
 }
