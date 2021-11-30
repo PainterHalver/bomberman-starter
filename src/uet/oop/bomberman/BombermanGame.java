@@ -62,12 +62,13 @@ public class BombermanGame extends Application {
             }
             if (!running) {
                 this.stop();
-                showGameOver(screenStage);
+                showGameOver();
                 Sound.stopAll();
+                Sound.sounds.clear();
                 Sound.playMusic(Sound.gameOverMusic);
                 Sound.gameOverMusic.setOnEndOfMedia(() -> {
                     Sound.gameOverMusic.stop();
-                    showMainMenu(screenStage);
+                    showMainMenu();
                 });
             }
             render();
@@ -85,10 +86,10 @@ public class BombermanGame extends Application {
 //        stage.setResizable(false);
         screenStage = stage;
 //        loadGame(screenStage, level);
-        showMainMenu(screenStage);
+        showMainMenu();
     }
 
-    public static void showMainMenu(Stage stage) {
+    public static void showMainMenu() {
         Scene menuScene = null;
         try {
             URL url = new File("res/scenes/main-menu.fxml").toURI().toURL();
@@ -96,12 +97,12 @@ public class BombermanGame extends Application {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        stage.setScene(menuScene);
-        stage.show();
+        screenStage.setScene(menuScene);
+        screenStage.show();
         Sound.playBackground(Sound.menuMusic);
     }
 
-    private static void showPauseMenu(Stage stage) {
+    private static void showPauseMenu() {
         Scene pauseScene = null;
         try {
             URL url = new File("res/scenes/pause-menu.fxml").toURI().toURL();
@@ -109,13 +110,13 @@ public class BombermanGame extends Application {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        stage.setScene(pauseScene);
-        stage.show();
+        screenStage.setScene(pauseScene);
+        screenStage.show();
     }
 
     public static void pauseGame() {
         Sound.pauseAll();
-        showPauseMenu(screenStage);
+        showPauseMenu();
         timer.stop();
     }
 
@@ -126,7 +127,7 @@ public class BombermanGame extends Application {
         timer.start();
     }
 
-    private static void showStageInfo(Stage stage) {
+    private static void showStageInfo() {
         Font font = Font.loadFont("file:res/PressStart2P-vaV7.ttf", 50);
         StackPane stageInfo = new StackPane();
         stageInfo.setMinWidth(Sprite.SCALED_SIZE * SCREEN_WIDTH);
@@ -138,11 +139,11 @@ public class BombermanGame extends Application {
         StackPane.setAlignment(stageInfo, Pos.CENTER_LEFT);
         stageInfo.getChildren().add(stageLevel);
         gameScene.setRoot(stageInfo);
-        stage.setScene(gameScene);
-        stage.show();
+        screenStage.setScene(gameScene);
+        screenStage.show();
     }
 
-    private static void showGameOver(Stage stage) {
+    private static void showGameOver() {
         Font font = Font.loadFont("file:res/PressStart2P-vaV7.ttf", 50);
         StackPane stageInfo = new StackPane();
         stageInfo.setMinWidth(Sprite.SCALED_SIZE * SCREEN_WIDTH);
@@ -154,11 +155,11 @@ public class BombermanGame extends Application {
         StackPane.setAlignment(stageInfo, Pos.CENTER_LEFT);
         stageInfo.getChildren().add(stageLevel);
         gameScene.setRoot(stageInfo);
-        stage.setScene(gameScene);
-        stage.show();
+        screenStage.setScene(gameScene);
+        screenStage.show();
     }
 
-    private static void showEzGame(Stage stage) {
+    private static void showEzGame() {
         Font font = Font.loadFont("file:res/PressStart2P-vaV7.ttf", 50);
         StackPane stageInfo = new StackPane();
         stageInfo.setMinWidth(Sprite.SCALED_SIZE * SCREEN_WIDTH);
@@ -170,18 +171,18 @@ public class BombermanGame extends Application {
         StackPane.setAlignment(stageInfo, Pos.CENTER_LEFT);
         stageInfo.getChildren().add(stageLevel);
         gameScene.setRoot(stageInfo);
-        stage.setScene(gameScene);
-        stage.show();
+        screenStage.setScene(gameScene);
+        screenStage.show();
     }
 
-    public static void loadGame(Stage stage, int curLevel) {
+    public static void loadGame(int curLevel) {
         // Dừng timer để xóa bỏ những gì còn lại từ level trước
         timer.stop();
         // Clear hết Sound còn lại tránh lỗi
         Sound.sounds.clear();
 
         if (curLevel > totalLevels) {
-            showEzGame(stage);
+            showEzGame();
             Sound.stopAll();
             Sound.playMusic(Sound.endingMusic);
             Sound.endingMusic.setOnEndOfMedia(() -> {
@@ -198,7 +199,7 @@ public class BombermanGame extends Application {
         screenPane.setMaxWidth(Sprite.SCALED_SIZE * SCREEN_WIDTH);
         screenPane.setMaxHeight(Sprite.SCALED_SIZE * SCREEN_HEIGHT);
 
-        showStageInfo(stage);
+        showStageInfo();
 
         Sound.stopAll();
         Sound.playMusic(Sound.stageStartMusic);
@@ -213,8 +214,8 @@ public class BombermanGame extends Application {
 
             // Them scene vao stage
             gameScene.setRoot(screenPane);
-            stage.setScene(gameScene);
-            stage.show();
+            screenStage.setScene(gameScene);
+            screenStage.show();
 
             running = true;
             timer.start();

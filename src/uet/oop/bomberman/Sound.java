@@ -9,8 +9,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Sound {
-  public static final double MUSIC_VOLUME = 0.1;
-  public static final double SFX_VOLUME = 0.4;
+  public static double MUSIC_VOLUME = 0.1;
+  public static double SFX_VOLUME = 0.4;
 
   public static List<MediaPlayer> sounds = new ArrayList<>();
   public static MediaPlayer backgroundMusic;

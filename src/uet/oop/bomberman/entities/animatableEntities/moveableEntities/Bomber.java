@@ -2,12 +2,8 @@ package uet.oop.bomberman.entities.animatableEntities.moveableEntities;
 
 import javafx.application.Platform;
 import javafx.scene.Scene;
-import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.control.Label;
 import javafx.scene.image.Image;
-import javafx.scene.layout.Pane;
 import javafx.scene.media.MediaPlayer;
-import javafx.util.Duration;
 import uet.oop.bomberman.Board;
 import uet.oop.bomberman.BombermanGame;
 import uet.oop.bomberman.Sound;
@@ -15,8 +11,6 @@ import uet.oop.bomberman.entities.Entity;
 import uet.oop.bomberman.entities.Portal;
 import uet.oop.bomberman.entities.animatableEntities.Bomb;
 import uet.oop.bomberman.entities.animatableEntities.Brick;
-import uet.oop.bomberman.entities.animatableEntities.Flame;
-import uet.oop.bomberman.entities.animatableEntities.moveableEntities.enemies.Balloon;
 import uet.oop.bomberman.entities.animatableEntities.moveableEntities.enemies.Enemy;
 import uet.oop.bomberman.entities.items.BombItem;
 import uet.oop.bomberman.entities.items.FlameItem;
@@ -30,6 +24,7 @@ public class Bomber extends MovableEntities {
     public static int flameSize = 1;
     private MediaPlayer footstep = Sound.footstepHorizontalFx;
     private boolean currentStageCleared = false;
+    private boolean listeningToKeyboard = true;
 
     public Bomber(int x, int y, Image img, Board board) {
         super(x,y,img, board);
@@ -49,8 +44,10 @@ public class Bomber extends MovableEntities {
         if(!alive) {
             if (deadAnimeTime > 0) {
                 --deadAnimeTime;
+                listeningToKeyboard = false;
             } else {
                 BombermanGame.running = false;
+//                listeningToKeyboard = false;
             }
             return;
         }
@@ -95,7 +92,7 @@ public class Bomber extends MovableEntities {
                     Sound.stageCompleteMusic.setOnEndOfMedia(() -> {
                         Sound.stageCompleteMusic.stop();
                         Sound.sounds.remove(Sound.stageCompleteMusic);
-                        BombermanGame.loadGame(BombermanGame.screenStage, BombermanGame.level + 1);
+                        BombermanGame.loadGame(BombermanGame.level + 1);
                     });
                 });
             }
@@ -195,46 +192,50 @@ public class Bomber extends MovableEntities {
 
     private void inputHandler(Scene scene) {
         scene.setOnKeyPressed(keyEvent -> {
-            switch (keyEvent.getCode()) {
-                case UP:
-                    this.up = true;
-                    break;
-                case RIGHT:
-                    this.right = true;
-                    break;
-                case DOWN:
-                    this.down = true;
-                    break;
-                case LEFT:
-                    this.left = true;
-                    break;
-                case SPACE:
-                    plantBomb();
-                    break;
-                case ESCAPE:
-                    BombermanGame.pauseGame();
-                    up = down = left = right = false;
-                    break;
-                default:
-                    break;
+            if (listeningToKeyboard) {
+                switch (keyEvent.getCode()) {
+                    case UP:
+                        this.up = true;
+                        break;
+                    case RIGHT:
+                        this.right = true;
+                        break;
+                    case DOWN:
+                        this.down = true;
+                        break;
+                    case LEFT:
+                        this.left = true;
+                        break;
+                    case SPACE:
+                        plantBomb();
+                        break;
+                    case ESCAPE:
+                        BombermanGame.pauseGame();
+                        up = down = left = right = false;
+                        break;
+                    default:
+                        break;
+                }
             }
         });
         scene.setOnKeyReleased(keyEvent -> {
-            switch (keyEvent.getCode()) {
-                case UP:
-                    this.up = false;
-                    break;
-                case RIGHT:
-                    this.right = false;
-                    break;
-                case DOWN:
-                    this.down = false;
-                    break;
-                case LEFT:
-                    this.left = false;
-                    break;
-                default:
-                    break;
+            if (listeningToKeyboard) {
+                switch (keyEvent.getCode()) {
+                    case UP:
+                        this.up = false;
+                        break;
+                    case RIGHT:
+                        this.right = false;
+                        break;
+                    case DOWN:
+                        this.down = false;
+                        break;
+                    case LEFT:
+                        this.left = false;
+                        break;
+                    default:
+                        break;
+                }
             }
         });
     }
