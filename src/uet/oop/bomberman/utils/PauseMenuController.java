@@ -54,11 +54,11 @@ public class PauseMenuController implements Initializable {
     sliderSfx.setValue(Sound.SFX_VOLUME * 100);
 
     sliderMusic.valueProperty().addListener((observable, oldValue, newValue) -> {
-      Sound.MUSIC_VOLUME = (double) newValue / 100;
+      Sound.setMusicVolume((double) newValue / 100);
     });
 
     sliderSfx.valueProperty().addListener((observable, oldValue, newValue) -> {
-      Sound.SFX_VOLUME = (double) newValue / 100;
+      Sound.setSfxVolume((double) newValue / 100);
     });
   }
 }

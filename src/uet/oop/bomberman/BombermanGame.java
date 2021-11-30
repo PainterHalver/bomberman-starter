@@ -50,9 +50,6 @@ public class BombermanGame extends Application {
         @Override
         public void handle(long l) {
             loopCount++;
-            for (MediaPlayer m : Sound.sounds) {
-                System.out.print(m + " ");
-            }
             System.out.println();
             if (System.currentTimeMillis() - start > 1000) {
                 log("FPS: " + loopCount, ANSI_BLUE);
@@ -64,7 +61,7 @@ public class BombermanGame extends Application {
                 this.stop();
                 showGameOver();
                 Sound.stopAll();
-                Sound.sounds.clear();
+                Sound.clearAll();
                 Sound.playMusic(Sound.gameOverMusic);
                 Sound.gameOverMusic.setOnEndOfMedia(() -> {
                     Sound.gameOverMusic.stop();
@@ -179,7 +176,7 @@ public class BombermanGame extends Application {
         // Dừng timer để xóa bỏ những gì còn lại từ level trước
         timer.stop();
         // Clear hết Sound còn lại tránh lỗi
-        Sound.sounds.clear();
+        Sound.clearAll();
 
         if (curLevel > totalLevels) {
             showEzGame();
@@ -205,7 +202,7 @@ public class BombermanGame extends Application {
         Sound.playMusic(Sound.stageStartMusic);
         Sound.stageStartMusic.setOnEndOfMedia(() -> {
             Sound.stageStartMusic.stop();
-            Sound.sounds.remove(Sound.stageStartMusic);
+            Sound.musics.remove(Sound.stageStartMusic);
             board = new Board(gameScene, level);
             // Tao Canvas
             canvas = new Canvas(Sprite.SCALED_SIZE * board.width, Sprite.SCALED_SIZE * board.height);

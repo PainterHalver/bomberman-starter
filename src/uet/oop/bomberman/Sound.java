@@ -12,8 +12,14 @@ public class Sound {
   public static double MUSIC_VOLUME = 0.1;
   public static double SFX_VOLUME = 0.4;
 
-  public static List<MediaPlayer> sounds = new ArrayList<>();
+  public static List<MediaPlayer> sfxs = new ArrayList<>();
+  public static List<MediaPlayer> musics = new ArrayList<>();
   public static MediaPlayer backgroundMusic;
+
+  public static void clearAll() {
+    sfxs.clear();
+    musics.clear();
+  }
 
   /*
   |--------------------------------------------------------------------------
@@ -54,23 +60,23 @@ public class Sound {
   }
 
   public static void playMusic(MediaPlayer mediaPlayer) {
-    sounds.add(mediaPlayer);
+    musics.add(mediaPlayer);
     mediaPlayer.setVolume(MUSIC_VOLUME);
     mediaPlayer.setOnEndOfMedia(new Runnable() {
       public void run() {
         mediaPlayer.stop();
-        sounds.remove(mediaPlayer);
+        musics.remove(mediaPlayer);
       }
     });
     mediaPlayer.play();
   }
   public static void playSFX(MediaPlayer mediaPlayer) {
-    sounds.add(mediaPlayer);
+    sfxs.add(mediaPlayer);
     mediaPlayer.setVolume(SFX_VOLUME);
     mediaPlayer.setOnEndOfMedia(new Runnable() {
       public void run() {
         mediaPlayer.stop();
-        sounds.remove(mediaPlayer);
+        sfxs.remove(mediaPlayer);
       }
     });
     mediaPlayer.play();
@@ -94,7 +100,10 @@ public class Sound {
     if (backgroundMusic != null) {
       backgroundMusic.stop();
     }
-    for (MediaPlayer m : sounds) {
+    for (MediaPlayer m : sfxs) {
+      m.stop();
+    }
+    for (MediaPlayer m : musics) {
       m.stop();
     }
   }
@@ -105,7 +114,10 @@ public class Sound {
     if (backgroundMusic != null) {
       backgroundMusic.pause();
     }
-    for (MediaPlayer m : sounds) {
+    for (MediaPlayer m : sfxs) {
+      m.pause();
+    }
+    for (MediaPlayer m : musics) {
       m.pause();
     }
   }
@@ -114,8 +126,33 @@ public class Sound {
     if (backgroundMusic != null) {
       backgroundMusic.play();
     }
-    for (MediaPlayer m : sounds) {
+    for (MediaPlayer m : sfxs) {
+      m.play();
+    }
+    for (MediaPlayer m : musics) {
       m.play();
     }
   }
+
+  public static void setSfxVolume(double volume) {
+    SFX_VOLUME = volume;
+    new Thread(() -> {
+      footstepHorizontalFx.setVolume(SFX_VOLUME);
+      footstepVerticalFx.setVolume(SFX_VOLUME);
+      for (MediaPlayer m : sfxs) {
+        m.setVolume(SFX_VOLUME);
+      }
+    }).start();
+  }
+
+  public static void setMusicVolume(double volume) {
+    MUSIC_VOLUME = volume;
+    new Thread(() -> {
+      backgroundMusic.setVolume(MUSIC_VOLUME);
+      for (MediaPlayer m : musics) {
+        m.setVolume(MUSIC_VOLUME);
+      }
+    }).start();
+  }
+
 }
