@@ -1,6 +1,7 @@
 package uet.oop.bomberman.utils;
 
 import javafx.application.Platform;
+import javafx.beans.binding.Bindings;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -28,8 +29,6 @@ public class MainMenuController implements Initializable {
   @FXML
   private Slider sliderSfx;
 
-  @FXML
-  private Label msgLabel;
 
 
   @Override
@@ -38,10 +37,6 @@ public class MainMenuController implements Initializable {
       BombermanGame.loadGame(BombermanGame.level);
     });
 
-    msgLabel.setVisible(false);
-    btnContinue.setOnMouseClicked(event -> {
-      msgLabel.setVisible(!msgLabel.isVisible());
-    });
 
     btnExit.setOnAction(event -> {
       Platform.exit();
@@ -53,6 +48,20 @@ public class MainMenuController implements Initializable {
     sliderMusic.valueProperty().addListener((observable, oldValue, newValue) -> {
       Sound.setMusicVolume((double) newValue / 100);
     });
+
+    sliderMusic.styleProperty().bind(Bindings.createStringBinding(() -> {
+      double percentage = (sliderMusic.getValue() - sliderMusic.getMin()) / (sliderMusic.getMax() - sliderMusic.getMin()) * 100.0 ;
+      return String.format("-slider-track-color: linear-gradient(to right, -slider-filled-track-color 0%%, "
+                      + "-slider-filled-track-color %f%%, -fx-base %f%%, -fx-base 100%%);",
+              percentage, percentage);
+    }, sliderMusic.valueProperty(), sliderMusic.minProperty(), sliderMusic.maxProperty()));
+
+    sliderSfx.styleProperty().bind(Bindings.createStringBinding(() -> {
+      double percentage = (sliderSfx.getValue() - sliderSfx.getMin()) / (sliderSfx.getMax() - sliderSfx.getMin()) * 100.0 ;
+      return String.format("-slider-track-color: linear-gradient(to right, -slider-filled-track-color 0%%, "
+                      + "-slider-filled-track-color %f%%, -fx-base %f%%, -fx-base 100%%);",
+              percentage, percentage);
+    }, sliderSfx.valueProperty(), sliderSfx.minProperty(), sliderSfx.maxProperty()));
 
     sliderSfx.valueProperty().addListener((observable, oldValue, newValue) -> {
       Sound.setSfxVolume((double) newValue / 100);

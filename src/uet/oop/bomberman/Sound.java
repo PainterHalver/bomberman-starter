@@ -111,9 +111,9 @@ public class Sound {
   public static void pauseAll(){
     footstepHorizontalFx.pause();
     footstepVerticalFx.pause();
-    if (backgroundMusic != null) {
-      backgroundMusic.pause();
-    }
+//    if (backgroundMusic != null) {
+//      backgroundMusic.pause();
+//    }
     for (MediaPlayer m : sfxs) {
       m.pause();
     }
@@ -123,9 +123,9 @@ public class Sound {
   }
 
   public static void resumeAll() {
-    if (backgroundMusic != null) {
-      backgroundMusic.play();
-    }
+//    if (backgroundMusic != null) {
+//      backgroundMusic.play();
+//    }
     for (MediaPlayer m : sfxs) {
       m.play();
     }
