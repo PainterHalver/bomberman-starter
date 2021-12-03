@@ -65,33 +65,35 @@ public abstract class MovableEntities extends AnimatableEntities {
     boardY = y / Sprite.SCALED_SIZE;
   }
 
-  public boolean canMove(int xS, int yS) {
-    int topLeftX = x + xS;
-    int topLeftY = y + yS;
-    int topRightX = topLeftX + Sprite.SCALED_SIZE - (3 * Sprite.SCALE);
-    int topRightY = topLeftY;
-    int botLeftX = topLeftX;
-    int botLeftY = topLeftY + Sprite.SCALED_SIZE - (3 * Sprite.SCALE);
-    int botRightX = topRightX;
-    int botRightY = botLeftY;
+//  public boolean canMove(int xS, int yS) {
+//    int topLeftX = x + xS;
+//    int topLeftY = y + yS;
+//    int topRightX = topLeftX + Sprite.SCALED_SIZE - (3 * Sprite.SCALE);
+//    int topRightY = topLeftY;
+//    int botLeftX = topLeftX;
+//    int botLeftY = topLeftY + Sprite.SCALED_SIZE - (3 * Sprite.SCALE);
+//    int botRightX = topRightX;
+//    int botRightY = botLeftY;
+//
+//
+//    Entity object = null;
+//
+//    object = board.getStillObjectByCanvas(topLeftX, topLeftY);
+//    if((object instanceof Wall || object instanceof Brick)) return false;
+//
+//    object = board.getStillObjectByCanvas(topRightX, topRightY);
+//    if((object instanceof Wall || object instanceof Brick)) return false;
+//
+//    object = board.getStillObjectByCanvas(botLeftX, botLeftY);
+//    if((object instanceof Wall || object instanceof Brick)) return false;
+//
+//    object = board.getStillObjectByCanvas(botRightX, botRightY);
+//    if((object instanceof Wall || object instanceof Brick)) return false;
+//
+//    return true;
+//  }
 
-
-    Entity object = null;
-
-    object = board.getStillObjectByCanvas(topLeftX, topLeftY);
-    if((object instanceof Wall || object instanceof Brick)) return false;
-
-    object = board.getStillObjectByCanvas(topRightX, topRightY);
-    if((object instanceof Wall || object instanceof Brick)) return false;
-
-    object = board.getStillObjectByCanvas(botLeftX, botLeftY);
-    if((object instanceof Wall || object instanceof Brick)) return false;
-
-    object = board.getStillObjectByCanvas(botRightX, botRightY);
-    if((object instanceof Wall || object instanceof Brick)) return false;
-
-    return true;
-  }
+  public abstract boolean canMove(int xS, int yS);
 
   public void seftDestruct() {
     // Khi giết được chú quái cuối cùng, alive để chỉ gọi hàm 1 lần

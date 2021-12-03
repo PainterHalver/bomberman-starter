@@ -20,10 +20,12 @@
 - ~~Scene và âm thanh khi clear hết tất cả các Level~~
 - ~~Không cho resize lại màn hình (uncomment dòng đầu tiên hàm start trong BombermanGame)~~
 - ~~Set volume từ Menu~~
-- Không cho input khi đang chuyển màn
+- ~~Không cho input khi đang chuyển màn~~
+- ~~resize body của enemy khi di chuyển không cho chạm vào tường~~
 - Thuật toán tìm đường trong một ma trận MxN (A* hoặc gì đó)
 - Điều khiển quái (hàm đi đến ô có tọa độ x,y)
 - Làm level mới.
+- update boardX,Y cua movable entities
 
 # Notes
 - Dùng Java 1.8 (Bản của Amazon coretto không dùng được Media, MediaPlayer)

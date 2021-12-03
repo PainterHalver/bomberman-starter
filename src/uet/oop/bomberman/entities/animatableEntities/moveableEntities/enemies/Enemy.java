@@ -1,5 +1,6 @@
 package uet.oop.bomberman.entities.animatableEntities.moveableEntities.enemies;
 
+import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import uet.oop.bomberman.Board;
 import uet.oop.bomberman.entities.Entity;
@@ -17,6 +18,11 @@ public abstract class Enemy extends MovableEntities {
 
   public Enemy(int x, int y, Image img, Board board) {
     super(x,y,img, board);
+
+    this.realBodyRectangle.setWidth(this.realBodyRectangle.getWidth() - 2 * Sprite.SCALE);
+    this.realBodyRectangle.setHeight(this.realBodyRectangle.getHeight() - 2 * Sprite.SCALE);
+    this.realBodyRectangle.setY(this.realBodyRectangle.getY() + 1 * Sprite.SCALE);
+    this.realBodyRectangle.setX(this.realBodyRectangle.getX() + 1 * Sprite.SCALE);
   }
 
   public void stopMoving() {
@@ -42,12 +48,12 @@ public abstract class Enemy extends MovableEntities {
   }
 
   public boolean canMove(int xS, int yS) {
-    int topLeftX = x + xS;
-    int topLeftY = y + yS;
-    int topRightX = topLeftX + Sprite.SCALED_SIZE - (3 * Sprite.SCALE);
+    int topLeftX = x + xS + 1 * Sprite.SCALE;
+    int topLeftY = y + yS + 1 * Sprite.SCALE;
+    int topRightX = topLeftX + Sprite.SCALED_SIZE - (2 * Sprite.SCALE);
     int topRightY = topLeftY;
     int botLeftX = topLeftX;
-    int botLeftY = topLeftY + Sprite.SCALED_SIZE - (3 * Sprite.SCALE);
+    int botLeftY = topLeftY + Sprite.SCALED_SIZE - (2 * Sprite.SCALE);
     int botRightX = topRightX;
     int botRightY = botLeftY;
 
@@ -68,6 +74,13 @@ public abstract class Enemy extends MovableEntities {
 
     return true;
   }
+
+  @Override
+    public void render(GraphicsContext gc) {
+        gc.drawImage(img, x, y);
+        gc.fillRect(realBodyRectangle.getX(), realBodyRectangle.getY(),realBodyRectangle.getWidth(),realBodyRectangle.getHeight());
+
+    }
 
   public abstract void AImove();
 

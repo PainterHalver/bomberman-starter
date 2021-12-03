@@ -92,6 +92,7 @@ public class Bomber extends MovableEntities {
                     Sound.stageCompleteMusic.setOnEndOfMedia(() -> {
                         Sound.stageCompleteMusic.stop();
                         Sound.sfxs.remove(Sound.stageCompleteMusic);
+                        listeningToKeyboard = false;
                         BombermanGame.loadGame(BombermanGame.level + 1);
                     });
                 });

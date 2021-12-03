@@ -50,7 +50,6 @@ public class BombermanGame extends Application {
         @Override
         public void handle(long l) {
             loopCount++;
-            System.out.println();
             if (System.currentTimeMillis() - start > 1000) {
                 log("FPS: " + loopCount, ANSI_BLUE);
                 screenStage.setTitle(loopCount + " FPS");
