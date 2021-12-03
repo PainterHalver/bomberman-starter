@@ -80,7 +80,7 @@ public class BombermanGame extends Application {
 
     @Override
     public void start(Stage stage) {
-//        stage.setResizable(false);
+        stage.setResizable(false);
         screenStage = stage;
 //        loadGame(screenStage, level);
         showMainMenu();
