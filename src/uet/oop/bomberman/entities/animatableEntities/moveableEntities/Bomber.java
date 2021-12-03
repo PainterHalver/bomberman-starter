@@ -207,6 +207,7 @@ public class Bomber extends MovableEntities {
                         this.left = true;
                         break;
                     case SPACE:
+                    case ENTER:
                         plantBomb();
                         break;
                     case ESCAPE:

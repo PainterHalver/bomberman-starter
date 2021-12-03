@@ -18,11 +18,12 @@
 - ~~Scene chuyển cảnh giứa các level/stage~~
 - ~~THÊM ÂM THANH~~
 - ~~Scene và âm thanh khi clear hết tất cả các Level~~
-- Không cho resize lại màn hình (uncomment dòng đầu tiên hàm start trong BombermanGame)
+- ~~Không cho resize lại màn hình (uncomment dòng đầu tiên hàm start trong BombermanGame)~~
+- ~~Set volume từ Menu~~
+- Không cho input khi đang chuyển màn
 - Thuật toán tìm đường trong một ma trận MxN (A* hoặc gì đó)
 - Điều khiển quái (hàm đi đến ô có tọa độ x,y)
 - Làm level mới.
-- Set volume từ Menu
 
 # Notes
 - Dùng Java 1.8 (Bản của Amazon coretto không dùng được Media, MediaPlayer)

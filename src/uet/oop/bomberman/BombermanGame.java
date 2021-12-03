@@ -60,7 +60,6 @@ public class BombermanGame extends Application {
             if (!running) {
                 this.stop();
                 showGameOver();
-                level = 1;
                 Sound.stopAll();
                 Sound.clearAll();
                 Sound.playMusic(Sound.gameOverMusic);
