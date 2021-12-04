@@ -22,10 +22,14 @@
 - ~~Set volume từ Menu~~
 - ~~Không cho input khi đang chuyển màn~~
 - ~~resize body của enemy khi di chuyển không cho chạm vào tường~~
-- Thuật toán tìm đường trong một ma trận MxN (A* hoặc gì đó)
-- Điều khiển quái (hàm đi đến ô có tọa độ x,y)
+- ~~Thuật toán tìm đường trong một ma trận MxN (A* hoặc gì đó)~~
+- ~~update boardX,Y cua movable entities~~
+- Điều khiển quái: 
+  + 1 loại đi trái phải, lên xuống
+  + 1 loại đi thẳng 1 hướng random, gặp tường thì chọn hướng khác
+  + 1 con đâm đầu vào Bomber, không có đường đi thì đi Random như con ở trên
 - Làm level mới.
-- update boardX,Y cua movable entities
+- Test level (full items...)
 
 # Notes
 - Dùng Java 1.8 (Bản của Amazon coretto không dùng được Media, MediaPlayer)
@@ -40,7 +44,7 @@
 - Enemy khi chết thì lú (~0.85s) rồi cycle 3 sprite chết (~0.85s)
 - MediaPlayer sau khi play thì phải stop nếu không lần sau sẽ không play được nữa
 - Các hàm va chạm chỉ nên xảy ra 1 lần (đặc biệt là các hàm có chứa code play Media)
-
+- BoardX, BoardY của 1 Moveable sẽ giữ nguyên cho đến khi hoàn toàn sang 1 ô khác?
 
 
 

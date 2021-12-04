@@ -7,6 +7,7 @@ import uet.oop.bomberman.entities.Entity;
 import uet.oop.bomberman.entities.animatableEntities.Bomb;
 import uet.oop.bomberman.entities.animatableEntities.Brick;
 import uet.oop.bomberman.entities.animatableEntities.moveableEntities.MovableEntities;
+import uet.oop.bomberman.entities.animatableEntities.moveableEntities.enemies.ai.Direction;
 import uet.oop.bomberman.entities.stillEntities.Wall;
 import uet.oop.bomberman.graphics.Sprite;
 
@@ -15,14 +16,17 @@ public abstract class Enemy extends MovableEntities {
   protected String lastHorizontalDirection = "LEFT"; // LEFT, RIGHT
   protected final double dieAnimationTime = 0.85 * 2 * 60;
   protected int deadAnime = 0;
+  protected Direction lastDirection = Direction.RIGHT;
 
-  public Enemy(int x, int y, Image img, Board board) {
-    super(x,y,img, board);
+  public Enemy(int boardX, int boardY, Image img, Board board) {
+    super(boardX,boardY,img, board);
+    this.speed = 0.3;
 
     this.realBodyRectangle.setWidth(this.realBodyRectangle.getWidth() - 2 * Sprite.SCALE);
     this.realBodyRectangle.setHeight(this.realBodyRectangle.getHeight() - 2 * Sprite.SCALE);
     this.realBodyRectangle.setY(this.realBodyRectangle.getY() + 1 * Sprite.SCALE);
     this.realBodyRectangle.setX(this.realBodyRectangle.getX() + 1 * Sprite.SCALE);
+
   }
 
   public void stopMoving() {
@@ -42,18 +46,18 @@ public abstract class Enemy extends MovableEntities {
       }
       return;
     }
-    AImove();
+    AIMoveHandler();
     moveHandler();
     collisionHandler();
   }
 
   public boolean canMove(int xS, int yS) {
-    int topLeftX = x + xS + 1 * Sprite.SCALE;
-    int topLeftY = y + yS + 1 * Sprite.SCALE;
-    int topRightX = topLeftX + Sprite.SCALED_SIZE - (2 * Sprite.SCALE);
+    int topLeftX = x + xS + (int)(1.25 * Sprite.SCALE);
+    int topLeftY = y + yS + (int)(1.25 * Sprite.SCALE);
+    int topRightX = topLeftX + Sprite.SCALED_SIZE - (int)(2.5 * Sprite.SCALE);
     int topRightY = topLeftY;
     int botLeftX = topLeftX;
-    int botLeftY = topLeftY + Sprite.SCALED_SIZE - (2 * Sprite.SCALE);
+    int botLeftY = topLeftY + Sprite.SCALED_SIZE - (int)(2.5 * Sprite.SCALE);
     int botRightX = topRightX;
     int botRightY = botLeftY;
 
@@ -82,7 +86,30 @@ public abstract class Enemy extends MovableEntities {
 
     }
 
-  public abstract void AImove();
+    public abstract void AIMoveHandler();
+
+  public void AIMove(Direction direction) {
+    if (direction == null) return;
+    lastDirection = direction;
+    switch (direction){
+      case LEFT:
+        stopMoving();
+        this.left = true;
+        break;
+      case RIGHT:
+        stopMoving();
+        this.right = true;
+        break;
+      case DOWN:
+        stopMoving();
+        this.down = true;
+        break;
+      case UP:
+        stopMoving();
+        this.up = true;
+        break;
+    }
+  }
 
   @Override
   public abstract void collide(Entity entity);

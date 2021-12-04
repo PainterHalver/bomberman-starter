@@ -83,6 +83,37 @@ public class Board {
     return null;
   }
 
+  public boolean isWall(int x, int y) {
+    if (this.getStillObjectByBoard(x, y) instanceof Wall) {
+      return true;
+    } else
+      return false;
+  }
+
+  public boolean isBrick(int x, int y) {
+    if (this.getStillObjectByBoard(x, y) instanceof Brick) {
+      return true;
+    }
+    else return false;
+  }
+
+  public boolean isBomb(int x, int y) {
+    if (this.getStillObjectByBoard(x, y) instanceof Bomb) {
+      return true;
+    }
+    else return false;
+  }
+
+  public Entity getBomber() {
+    for (int i = entities.size() - 1; i >= 0; --i) {
+      Entity object = entities.get(i);
+      if (object instanceof Bomber) {
+        return object;
+      }
+    }
+    return null;
+  }
+
   public int bombCount() {
     int count = 0;
     for (Entity entity : stillObjects) {

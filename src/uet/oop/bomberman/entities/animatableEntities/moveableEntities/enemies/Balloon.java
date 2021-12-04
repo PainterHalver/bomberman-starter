@@ -4,7 +4,11 @@ import javafx.scene.image.Image;
 import uet.oop.bomberman.Board;
 import uet.oop.bomberman.BombermanGame;
 import uet.oop.bomberman.entities.Entity;
+import uet.oop.bomberman.entities.EntityRectangle;
 import uet.oop.bomberman.entities.animatableEntities.moveableEntities.MovableEntities;
+
+import uet.oop.bomberman.entities.animatableEntities.moveableEntities.enemies.ai.Direction;
+import uet.oop.bomberman.entities.animatableEntities.moveableEntities.enemies.ai.PathFinding;
 import uet.oop.bomberman.graphics.Sprite;
 
 public class Balloon extends Enemy {
@@ -13,28 +17,16 @@ public class Balloon extends Enemy {
     super( boardX, boardY, img, board);
   }
 
-
   @Override
-  public void AImove() {
-//    int move = (int) (System.currentTimeMillis() / 1000 % 4);
-//    switch (move){
-//      case 0:
-//        stopMoving();
-//        this.left = true;
-//        break;
-//      case 1:
-//        stopMoving();
-//        this.right = true;
-//        break;
-//      case 2:
-//        stopMoving();
-//        this.down = true;
-//        break;
-//      case 3:
-//        stopMoving();
-//        this.up = true;
-//        break;
-//    }
+  public void AIMoveHandler() {
+    int boardPositionX = (int) (x + realBodyRectangle.getWidth() / 2) / Sprite.SCALED_SIZE;
+    int boardPositionY = (int) (y + realBodyRectangle.getHeight() / 2) / Sprite.SCALED_SIZE;
+    EntityRectangle candidate = new EntityRectangle(boardPositionX * Sprite.SCALED_SIZE, boardPositionY * Sprite.SCALED_SIZE, Sprite.SCALED_SIZE, Sprite.SCALED_SIZE);
+    if (candidate.contains(this.realBodyRectangle)) {
+      AIMove(Direction.random());
+    } else {
+      AIMove(lastDirection);
+    }
   }
 
   @Override

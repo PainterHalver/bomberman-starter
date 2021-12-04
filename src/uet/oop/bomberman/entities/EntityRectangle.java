@@ -11,4 +11,9 @@ public class EntityRectangle extends Rectangle {
   public boolean overlaps (Rectangle r) {
     return getX() < r.getX() + r.getWidth() && getX() + getWidth() > r.getX() && getY() < r.getY() + r.getHeight() && getY() + getHeight() > r.getY();
   }
+
+  public boolean contains (Rectangle r) {
+    return getX() <= r.getX() && getY() <= r.getY() && getX() + getWidth() >= r.getX() + r.getWidth() && getY() + getHeight() >= r.getY() + r.getHeight();
+  }
+
 }

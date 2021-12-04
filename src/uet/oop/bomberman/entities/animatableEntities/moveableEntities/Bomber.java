@@ -2,6 +2,7 @@ package uet.oop.bomberman.entities.animatableEntities.moveableEntities;
 
 import javafx.application.Platform;
 import javafx.scene.Scene;
+import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.media.MediaPlayer;
 import uet.oop.bomberman.Board;
@@ -26,8 +27,8 @@ public class Bomber extends MovableEntities {
     private boolean currentStageCleared = false;
     private boolean listeningToKeyboard = true;
 
-    public Bomber(int x, int y, Image img, Board board) {
-        super(x,y,img, board);
+    public Bomber(int boardX, int boardY, Image img, Board board) {
+        super(boardX,boardY,img, board);
         this.scene = board.getScene();
         inputHandler(scene);
         // Chỉnh hình chữ nhật cho khớp với nhân vật
@@ -101,11 +102,11 @@ public class Bomber extends MovableEntities {
     }
 
     // Hàm vẽ hình chữ nhật để debug
-//    @Override
-//    public void render(GraphicsContext gc) {
-//        gc.drawImage(img, x, y);
-//        gc.fillRect(realBodyRectangle.getX(), realBodyRectangle.getY(),realBodyRectangle.getWidth(),realBodyRectangle.getHeight());
-//    }
+    @Override
+    public void render(GraphicsContext gc) {
+        gc.drawImage(img, x, y);
+        gc.fillRect(realBodyRectangle.getX(), realBodyRectangle.getY(),realBodyRectangle.getWidth(),realBodyRectangle.getHeight());
+    }
 
     @Override
     public void seftDestruct() {
