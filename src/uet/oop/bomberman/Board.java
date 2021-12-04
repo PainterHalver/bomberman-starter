@@ -6,12 +6,11 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
 import uet.oop.bomberman.entities.*;
 import uet.oop.bomberman.entities.animatableEntities.Bomb;
+import uet.oop.bomberman.entities.animatableEntities.moveableEntities.enemies.*;
 import uet.oop.bomberman.entities.items.BombItem;
 import uet.oop.bomberman.entities.items.FlameItem;
 import uet.oop.bomberman.entities.items.SpeedItem;
-import uet.oop.bomberman.entities.animatableEntities.moveableEntities.enemies.Balloon;
 import uet.oop.bomberman.entities.animatableEntities.moveableEntities.Bomber;
-import uet.oop.bomberman.entities.animatableEntities.moveableEntities.enemies.Oneal;
 import uet.oop.bomberman.entities.animatableEntities.Brick;
 import uet.oop.bomberman.entities.stillEntities.Grass;
 import uet.oop.bomberman.entities.Portal;
@@ -191,6 +190,15 @@ public class Board {
             break;
           case '2':
             entities.add(new Oneal(j, i, Sprite.oneal_right1.getFxImage(), this));
+            break;
+          case '3':
+            entities.add(new Doll(j, i, Sprite.oneal_right1.getFxImage(), this));
+            break;
+          case '4':
+            entities.add(new Minvo(j, i, Sprite.oneal_right1.getFxImage(), this));
+            break;
+          case '5':
+            entities.add(new Kondoria(j, i, Sprite.oneal_right1.getFxImage(), this));
             break;
           case 'b':
             object = new BombItem(j, i, Sprite.powerup_bombs.getFxImage(), this);

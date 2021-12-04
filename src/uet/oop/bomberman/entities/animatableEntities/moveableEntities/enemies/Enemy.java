@@ -20,6 +20,7 @@ public abstract class Enemy extends MovableEntities {
   protected int deadAnime = 0;
   protected Direction lastDirection = Direction.RIGHT;
   protected AI ai = null;
+  protected int glitchFix = 0;
 
   public Enemy(int boardX, int boardY, Image img, Board board) {
     super(boardX,boardY,img, board);
@@ -99,9 +100,10 @@ public abstract class Enemy extends MovableEntities {
     int boardPositionX = (int) (x + realBodyRectangle.getWidth() / 2) / Sprite.SCALED_SIZE;
     int boardPositionY = (int) (y + realBodyRectangle.getHeight() / 2) / Sprite.SCALED_SIZE;
     EntityRectangle candidate = new EntityRectangle(boardPositionX * Sprite.SCALED_SIZE, boardPositionY * Sprite.SCALED_SIZE, Sprite.SCALED_SIZE, Sprite.SCALED_SIZE);
-    if (candidate.contains(this.realBodyRectangle)) {
+    if (candidate.contains(this.realBodyRectangle) && glitchFix > 20) {
       toGo = direction;
       lastDirection = direction;
+      glitchFix = 0;
     }
 
     switch (toGo){
@@ -122,6 +124,7 @@ public abstract class Enemy extends MovableEntities {
         this.up = true;
         break;
     }
+    glitchFix++;
   }
 
   @Override

@@ -2,20 +2,14 @@ package uet.oop.bomberman.entities.animatableEntities.moveableEntities.enemies;
 
 import javafx.scene.image.Image;
 import uet.oop.bomberman.Board;
-import uet.oop.bomberman.BombermanGame;
 import uet.oop.bomberman.entities.Entity;
-import uet.oop.bomberman.entities.EntityRectangle;
-import uet.oop.bomberman.entities.animatableEntities.moveableEntities.MovableEntities;
-
 import uet.oop.bomberman.entities.animatableEntities.moveableEntities.enemies.ai.Direction;
-import uet.oop.bomberman.entities.animatableEntities.moveableEntities.enemies.ai.PathFinding;
 import uet.oop.bomberman.graphics.Sprite;
 
-public class Balloon extends Enemy {
-
-  public Balloon(int boardX, int boardY, Image img, Board board) {
+public class Doll extends Enemy {
+  public Doll(int boardX, int boardY, Image img, Board board) {
     super( boardX, boardY, img, board);
-    lastDirection = Direction.RIGHT;
+    this.lastDirection = Direction.RIGHT;
   }
 
   @Override
@@ -23,7 +17,10 @@ public class Balloon extends Enemy {
     if (ai.canMove(lastDirection)) {
       AIMove(lastDirection);
     } else {
-        AIMove(lastDirection.reverse());
+      Direction dir = Direction.random();
+      if (ai.canMove(dir)) {
+        AIMove(dir);
+      }
     }
   }
 
@@ -37,7 +34,7 @@ public class Balloon extends Enemy {
     animate();
 
     if (!alive) {
-      this.img = Sprite.enemyDeathSprite(Sprite.balloom_dead, Sprite.mob_dead1, Sprite.mob_dead2, Sprite.mob_dead3, deadAnime, deadAnimeTime).getFxImage();
+      this.img = Sprite.enemyDeathSprite(Sprite.doll_dead, Sprite.mob_dead1, Sprite.mob_dead2, Sprite.mob_dead3, deadAnime, deadAnimeTime).getFxImage();
       return;
     }
     switch (facingDirection) {
@@ -53,15 +50,15 @@ public class Balloon extends Enemy {
 
     switch (lastHorizontalDirection) {
       case "RIGHT":
-        this.img = Sprite.balloom_right1.getFxImage();
+        this.img = Sprite.doll_right1.getFxImage();
         if (moving) {
-          this.img = Sprite.movingSprite(Sprite.balloom_right1, Sprite.balloom_right2, Sprite.balloom_right3, anime, 40).getFxImage();
+          this.img = Sprite.movingSprite(Sprite.doll_right1, Sprite.doll_right2, Sprite.doll_right3, anime, 40).getFxImage();
         }
         break;
       default:
-        this.img = Sprite.balloom_left1.getFxImage();
+        this.img = Sprite.doll_left1.getFxImage();
         if (moving) {
-          this.img = Sprite.movingSprite(Sprite.balloom_left1, Sprite.balloom_left2, Sprite.balloom_left3, anime, 40).getFxImage();
+          this.img = Sprite.movingSprite(Sprite.doll_left1, Sprite.doll_left2, Sprite.doll_left3, anime, 40).getFxImage();
         }
     }
   }

@@ -24,14 +24,10 @@
 - ~~resize body của enemy khi di chuyển không cho chạm vào tường~~
 - ~~Thuật toán tìm đường trong một ma trận MxN (A* hoặc gì đó)~~
 - ~~update boardX,Y cua movable entities~~
-- Điều khiển quái: 
-  + 1 loại đi trái phải, lên xuống (Level 1+)
-  + 1 loại đi thẳng 1 hướng random, gặp tường thì chọn hướng khác (Level 2+)
-  + 1 loại sẽ đi thẳng cho tới khi gặp ngã 3 hoặc ngã 4 và sẽ rẽ 1 hướng khác hướng đi tới (Level 2+)
-  + 1 con đâm đầu vào Bomber, không có đường đi thì đi Random như con ở trên (Level 3+)
 - Làm level mới.
 - Test level (full items...)
 - Điều chỉnh tốc độ của nhân vật và quái
+- Điểm và thời gian?
 
 # Notes
 - Dùng Java 1.8 (Bản của Amazon coretto không dùng được Media, MediaPlayer)
@@ -47,6 +43,12 @@
 - MediaPlayer sau khi play thì phải stop nếu không lần sau sẽ không play được nữa
 - Các hàm va chạm chỉ nên xảy ra 1 lần (đặc biệt là các hàm có chứa code play Media)
 - BoardX, BoardY của 1 Moveable sẽ giữ nguyên cho đến khi hoàn toàn sang 1 ô khác?
+- Điều khiển quái:
+    + 1 loại đi trái phải, lên xuống (Level 1+) (Balloon ngang, Oneal dọc)
+    + 1 loại đi thẳng 1 hướng random, gặp tường thì chọn hướng khác (Level 2+) (Doll)
+    + 1 loại sẽ đi thẳng cho tới khi gặp ngã 3 hoặc ngã 4 và sẽ rẽ 1 hướng khác hướng đi tới (Level 2+) (Minvo)
+    + 1 con đâm đầu vào Bomber, không có đường đi thì đi Random như con ở trên (Level 3+) (Kondoria)
+    + Xuyên tường??
 
 
 

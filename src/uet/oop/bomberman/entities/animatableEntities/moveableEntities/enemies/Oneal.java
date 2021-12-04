@@ -12,26 +12,16 @@ public class Oneal extends Enemy {
 
   public Oneal(int boardX, int boardY, Image img, Board board) {
     super( boardX, boardY, img, board);
+    this.lastDirection = Direction.DOWN;
   }
 
   @Override
   public void AIMoveHandler() {
-    PathFinding path = new PathFinding();
-
-    Entity bomber = this.board.getBomber();
-    Direction direction = null;
-    direction = path.findShortestPathToBomber(this.board, this.boardX, this.boardY, bomber.getBoardX(), bomber.getBoardY());
-    System.out.println(direction);
-
-    AIMove(direction);
-//    int boardPositionX = (int) (x + realBodyRectangle.getWidth() / 2) / Sprite.SCALED_SIZE;
-//    int boardPositionY = (int) (y + realBodyRectangle.getHeight() / 2) / Sprite.SCALED_SIZE;
-//    EntityRectangle candidate = new EntityRectangle(boardPositionX * Sprite.SCALED_SIZE, boardPositionY * Sprite.SCALED_SIZE, Sprite.SCALED_SIZE, Sprite.SCALED_SIZE);
-//    if (candidate.contains(this.realBodyRectangle)) {
-//      AIMove(direction);
-//    } else {
-//      AIMove(lastDirection);
-//    }
+    if (ai.canMove(lastDirection)) {
+      AIMove(lastDirection);
+    } else {
+      AIMove(lastDirection.reverse());
+    }
   }
 
   @Override

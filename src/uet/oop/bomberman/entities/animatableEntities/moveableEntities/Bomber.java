@@ -21,7 +21,7 @@ import uet.oop.bomberman.graphics.Sprite;
 
 public class Bomber extends MovableEntities {
     private Scene scene = null;
-    private int maxBomb = 1;
+    public static int maxBomb = 1;
     public static int flameSize = 1;
     private MediaPlayer footstep = Sound.footstepHorizontalFx;
     private boolean currentStageCleared = false;
