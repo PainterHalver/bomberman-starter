@@ -15,17 +15,18 @@ public class Balloon extends Enemy {
 
   public Balloon(int boardX, int boardY, Image img, Board board) {
     super( boardX, boardY, img, board);
+    lastDirection = Direction.RIGHT;
   }
 
   @Override
   public void AIMoveHandler() {
-    int boardPositionX = (int) (x + realBodyRectangle.getWidth() / 2) / Sprite.SCALED_SIZE;
-    int boardPositionY = (int) (y + realBodyRectangle.getHeight() / 2) / Sprite.SCALED_SIZE;
-    EntityRectangle candidate = new EntityRectangle(boardPositionX * Sprite.SCALED_SIZE, boardPositionY * Sprite.SCALED_SIZE, Sprite.SCALED_SIZE, Sprite.SCALED_SIZE);
-    if (candidate.contains(this.realBodyRectangle)) {
-      AIMove(Direction.random());
-    } else {
+    if (ai.canMove(lastDirection)) {
       AIMove(lastDirection);
+    } else {
+      Direction dir = Direction.random();
+      if (ai.canMove(dir)) {
+        AIMove(dir);
+      }
     }
   }
 

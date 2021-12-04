@@ -4,9 +4,11 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import uet.oop.bomberman.Board;
 import uet.oop.bomberman.entities.Entity;
+import uet.oop.bomberman.entities.EntityRectangle;
 import uet.oop.bomberman.entities.animatableEntities.Bomb;
 import uet.oop.bomberman.entities.animatableEntities.Brick;
 import uet.oop.bomberman.entities.animatableEntities.moveableEntities.MovableEntities;
+import uet.oop.bomberman.entities.animatableEntities.moveableEntities.enemies.ai.AI;
 import uet.oop.bomberman.entities.animatableEntities.moveableEntities.enemies.ai.Direction;
 import uet.oop.bomberman.entities.stillEntities.Wall;
 import uet.oop.bomberman.graphics.Sprite;
@@ -17,10 +19,12 @@ public abstract class Enemy extends MovableEntities {
   protected final double dieAnimationTime = 0.85 * 2 * 60;
   protected int deadAnime = 0;
   protected Direction lastDirection = Direction.RIGHT;
+  protected AI ai = null;
 
   public Enemy(int boardX, int boardY, Image img, Board board) {
     super(boardX,boardY,img, board);
     this.speed = 0.3;
+    this.ai = new AI(this, board);
 
     this.realBodyRectangle.setWidth(this.realBodyRectangle.getWidth() - 2 * Sprite.SCALE);
     this.realBodyRectangle.setHeight(this.realBodyRectangle.getHeight() - 2 * Sprite.SCALE);
@@ -79,19 +83,28 @@ public abstract class Enemy extends MovableEntities {
     return true;
   }
 
-  @Override
-    public void render(GraphicsContext gc) {
-        gc.drawImage(img, x, y);
-        gc.fillRect(realBodyRectangle.getX(), realBodyRectangle.getY(),realBodyRectangle.getWidth(),realBodyRectangle.getHeight());
-
-    }
+//  @Override
+//    public void render(GraphicsContext gc) {
+//        gc.drawImage(img, x, y);
+//        gc.fillRect(realBodyRectangle.getX(), realBodyRectangle.getY(),realBodyRectangle.getWidth(),realBodyRectangle.getHeight());
+//    }
 
     public abstract void AIMoveHandler();
 
   public void AIMove(Direction direction) {
     if (direction == null) return;
-    lastDirection = direction;
-    switch (direction){
+
+    Direction toGo = lastDirection;
+
+    int boardPositionX = (int) (x + realBodyRectangle.getWidth() / 2) / Sprite.SCALED_SIZE;
+    int boardPositionY = (int) (y + realBodyRectangle.getHeight() / 2) / Sprite.SCALED_SIZE;
+    EntityRectangle candidate = new EntityRectangle(boardPositionX * Sprite.SCALED_SIZE, boardPositionY * Sprite.SCALED_SIZE, Sprite.SCALED_SIZE, Sprite.SCALED_SIZE);
+    if (candidate.contains(this.realBodyRectangle)) {
+      toGo = direction;
+      lastDirection = direction;
+    }
+
+    switch (toGo){
       case LEFT:
         stopMoving();
         this.left = true;

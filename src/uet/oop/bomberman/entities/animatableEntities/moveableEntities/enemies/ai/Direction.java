@@ -25,6 +25,20 @@ public enum Direction {
         return dy;
     }
 
+    public Direction reverse() {
+        switch (this) {
+            case RIGHT:
+                return LEFT;
+            case UP:
+                return DOWN;
+            case DOWN:
+                return UP;
+            case LEFT:
+                return RIGHT;
+        }
+        return RIGHT;
+    }
+
     public static Direction random() {
         Direction[] dirs = {UP, RIGHT, DOWN, LEFT};
         Random rand = new Random();

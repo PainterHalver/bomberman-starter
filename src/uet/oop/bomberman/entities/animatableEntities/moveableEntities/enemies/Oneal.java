@@ -23,14 +23,15 @@ public class Oneal extends Enemy {
     direction = path.findShortestPathToBomber(this.board, this.boardX, this.boardY, bomber.getBoardX(), bomber.getBoardY());
     System.out.println(direction);
 
-    int boardPositionX = (int) (x + realBodyRectangle.getWidth() / 2) / Sprite.SCALED_SIZE;
-    int boardPositionY = (int) (y + realBodyRectangle.getHeight() / 2) / Sprite.SCALED_SIZE;
-    EntityRectangle candidate = new EntityRectangle(boardPositionX * Sprite.SCALED_SIZE, boardPositionY * Sprite.SCALED_SIZE, Sprite.SCALED_SIZE, Sprite.SCALED_SIZE);
-    if (candidate.contains(this.realBodyRectangle)) {
-      AIMove(direction);
-    } else {
-      AIMove(lastDirection);
-    }
+    AIMove(direction);
+//    int boardPositionX = (int) (x + realBodyRectangle.getWidth() / 2) / Sprite.SCALED_SIZE;
+//    int boardPositionY = (int) (y + realBodyRectangle.getHeight() / 2) / Sprite.SCALED_SIZE;
+//    EntityRectangle candidate = new EntityRectangle(boardPositionX * Sprite.SCALED_SIZE, boardPositionY * Sprite.SCALED_SIZE, Sprite.SCALED_SIZE, Sprite.SCALED_SIZE);
+//    if (candidate.contains(this.realBodyRectangle)) {
+//      AIMove(direction);
+//    } else {
+//      AIMove(lastDirection);
+//    }
   }
 
   @Override
