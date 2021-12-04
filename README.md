@@ -49,7 +49,7 @@
     + 1 loại sẽ đi thẳng cho tới khi gặp ngã 3 hoặc ngã 4 và sẽ rẽ 1 hướng khác hướng đi tới (Level 2+) (Minvo)
     + 1 con đâm đầu vào Bomber, không có đường đi thì đi Random như con ở trên (Level 3+) (Kondoria)
     + Xuyên tường??
-
+- Sang Level mới Bomber vẫn giữ nguyên buff từ Item (thêm xóa static)
 
 
 
