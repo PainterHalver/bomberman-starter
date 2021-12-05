@@ -36,6 +36,7 @@ public class PauseMenuController implements Initializable {
   @Override
   public void initialize(URL location, ResourceBundle resources) {
     btnNewGame.setOnAction(event -> {
+      BombermanGame.resetStats();
       BombermanGame.loadGame(1);
     });
 
@@ -44,6 +45,7 @@ public class PauseMenuController implements Initializable {
     });
 
     btnRestart.setOnAction(event -> {
+      BombermanGame.resetStats();
       BombermanGame.loadGame(BombermanGame.level);
     });
 

@@ -32,6 +32,7 @@ public class Bomber extends MovableEntities {
         super(boardX,boardY,img, board);
         this.scene = board.getScene();
         inputHandler(scene);
+        this.speed = BombermanGame.bomberSpeed;
         // Chỉnh hình chữ nhật cho khớp với nhân vật
         this.realBodyRectangle.setWidth(this.realBodyRectangle.getWidth() - 6 * Sprite.SCALE);
         this.realBodyRectangle.setHeight(this.realBodyRectangle.getHeight() - 6 * Sprite.SCALE);
@@ -82,7 +83,8 @@ public class Bomber extends MovableEntities {
             Sound.playSFX(Sound.boostedFx);
         }
         if (entity instanceof SpeedItem) {
-            this.speed+= 1 / Sprite.SCALE;
+            this.speed+= 1.0 / Sprite.SCALE;
+            BombermanGame.bomberSpeed += 1.0 / Sprite.SCALE;
             entity.removeFromBoard();
             Sound.playSFX(Sound.boostedFx);
         }

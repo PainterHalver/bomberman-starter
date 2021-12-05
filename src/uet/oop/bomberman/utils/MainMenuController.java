@@ -34,12 +34,15 @@ public class MainMenuController implements Initializable {
   @Override
   public void initialize(URL location, ResourceBundle resources) {
     btnNewGame.setOnAction(event -> {
+      BombermanGame.resetStats();
       BombermanGame.loadGame(1);
+
     });
 
     if (BombermanGame.level > 1) {
       btnContinue.setText(" Continue (Stage " + BombermanGame.level +")");
       btnContinue.setOnAction(event -> {
+        BombermanGame.resetStats();
         BombermanGame.loadGame(BombermanGame.level);
       });
     } else {

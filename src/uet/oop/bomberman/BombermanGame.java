@@ -15,6 +15,7 @@ import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
+import uet.oop.bomberman.entities.animatableEntities.moveableEntities.Bomber;
 import uet.oop.bomberman.graphics.Sprite;
 import uet.oop.bomberman.utils.GameScreen;
 
@@ -31,6 +32,7 @@ public class BombermanGame extends Application {
 
     public static boolean running = false;
     public static int level = 1;
+    public static double bomberSpeed = 2.0 / Sprite.SCALE;
     public static int totalLevels = new File("./res/levels").list().length; //this could cause trouble
 
     public static int loopCount = 0;
@@ -216,6 +218,12 @@ public class BombermanGame extends Application {
             running = true;
             timer.start();
         });
+    }
+
+    public static void resetStats() {
+        Bomber.maxBomb = 1;
+        Bomber.flameSize = 1;
+        bomberSpeed = 2.0 / Sprite.SCALE;
     }
 
 

@@ -50,6 +50,7 @@
     + 1 con đâm đầu vào Bomber, không có đường đi thì đi Random như con ở trên (Level 3+) (Kondoria)
     + Xuyên tường??
 - Sang Level mới Bomber vẫn giữ nguyên buff từ Item (thêm xóa static)
+- Có thể Continue hoặc Restart nhưng sẽ mất hết Buff.
 
 
 

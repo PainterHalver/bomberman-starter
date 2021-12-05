@@ -7,6 +7,8 @@ import uet.oop.bomberman.entities.animatableEntities.moveableEntities.enemies.ai
 import uet.oop.bomberman.entities.animatableEntities.moveableEntities.enemies.ai.PathFinding;
 import uet.oop.bomberman.graphics.Sprite;
 
+import java.util.Random;
+
 public class Kondoria extends Enemy {
   public Kondoria(int boardX, int boardY, Image img, Board board) {
     super( boardX, boardY, img, board);
@@ -19,9 +21,27 @@ public class Kondoria extends Enemy {
     Entity bomber = this.board.getBomber();
     Direction direction = null;
     direction = path.findShortestPathToBomber(this.board, this.boardX, this.boardY, bomber.getBoardX(), bomber.getBoardY());
-    System.out.println(direction);
 
-    AIMove(direction);
+    if (direction == null) {
+      Direction[] openDirections = ai.openDirections(lastDirection.reverse());
+      Random rand = new Random();
+      if (openDirections.length > 0) {
+        Direction dir = openDirections[rand.nextInt(openDirections.length)];
+        AIMove(dir);
+      } else {
+        if (ai.canMove(lastDirection)) {
+          AIMove(lastDirection);
+        } else {
+          Direction dir = Direction.random();
+          if (ai.canMove(dir)) {
+            AIMove(dir);
+          }
+        }
+      }
+    } else {
+      AIMove(direction);
+    }
+
 //    int boardPositionX = (int) (x + realBodyRectangle.getWidth() / 2) / Sprite.SCALED_SIZE;
 //    int boardPositionY = (int) (y + realBodyRectangle.getHeight() / 2) / Sprite.SCALED_SIZE;
 //    EntityRectangle candidate = new EntityRectangle(boardPositionX * Sprite.SCALED_SIZE, boardPositionY * Sprite.SCALED_SIZE, Sprite.SCALED_SIZE, Sprite.SCALED_SIZE);
