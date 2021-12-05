@@ -23,6 +23,7 @@ public class Bomber extends MovableEntities {
     private Scene scene = null;
     public static int maxBomb = 1;
     public static int flameSize = 1;
+
     private MediaPlayer footstep = Sound.footstepHorizontalFx;
     private boolean currentStageCleared = false;
     private boolean listeningToKeyboard = true;
@@ -81,7 +82,7 @@ public class Bomber extends MovableEntities {
             Sound.playSFX(Sound.boostedFx);
         }
         if (entity instanceof SpeedItem) {
-            this.speed+= 0.2;
+            this.speed+= 1 / Sprite.SCALE;
             entity.removeFromBoard();
             Sound.playSFX(Sound.boostedFx);
         }

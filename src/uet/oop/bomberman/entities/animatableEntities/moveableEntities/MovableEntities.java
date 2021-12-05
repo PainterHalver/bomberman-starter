@@ -18,7 +18,7 @@ public abstract class MovableEntities extends AnimatableEntities {
   protected String facingDirection = "RIGHT";
   protected boolean moving;
   protected boolean alive = true;
-  protected double speed = 1;
+  protected double speed = 2.0 / Sprite.SCALE;
   protected final int DIE_TIME_SECOND = 2;
   protected int deadAnimeTime = 60 * DIE_TIME_SECOND;
 

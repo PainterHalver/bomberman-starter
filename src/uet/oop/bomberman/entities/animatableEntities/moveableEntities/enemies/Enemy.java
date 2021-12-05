@@ -24,7 +24,7 @@ public abstract class Enemy extends MovableEntities {
 
   public Enemy(int boardX, int boardY, Image img, Board board) {
     super(boardX,boardY,img, board);
-    this.speed = 0.3;
+    this.speed = 1.0 / Sprite.SCALE;
     this.ai = new AI(this, board);
 
     this.realBodyRectangle.setWidth(this.realBodyRectangle.getWidth() - 2 * Sprite.SCALE);
