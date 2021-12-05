@@ -21,7 +21,6 @@ public class Kondoria extends Enemy {
     Entity bomber = this.board.getBomber();
     Direction direction = null;
     direction = path.findShortestPathToBomber(this.board, this.boardX, this.boardY, bomber.getBoardX(), bomber.getBoardY());
-    System.out.println(direction);
 
     if (direction == null || board.bomberIsOnBomb()) {
       Direction[] openDirections = ai.openDirections(lastDirection.reverse());

@@ -35,7 +35,7 @@ public class BombermanGame extends Application {
     public static boolean running = false;
     public static int level = 1;
     public static double bomberSpeed = 2.0 / Sprite.SCALE;
-    public static int totalLevels = new File("./res/levels").list().length; //this could cause trouble
+    public static int totalLevels = 4; //this could cause trouble
 
     public static int loopCount = 0;
     public static long start = System.currentTimeMillis();
@@ -181,7 +181,7 @@ public class BombermanGame extends Application {
         // Clear hết Sound còn lại tránh lỗi
         Sound.clearAll();
 
-        if (curLevel > totalLevels) {
+        if (curLevel > totalLevels && curLevel != 99) {
             showEzGame();
             Sound.stopAll();
             Sound.playMusic(Sound.endingMusic);

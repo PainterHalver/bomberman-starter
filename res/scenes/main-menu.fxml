@@ -42,6 +42,7 @@
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
             <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" />
@@ -49,7 +50,8 @@
             <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="2" />
             <Button fx:id="btnNewGame" mnemonicParsing="false" prefWidth="999.0" text="New Game" GridPane.columnIndex="1" />
             <Button fx:id="btnContinue" mnemonicParsing="false" prefWidth="999.0" text="Continue" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <Button fx:id="btnExit" mnemonicParsing="false" prefWidth="999.0" text="Exit" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <Button fx:id="btnTestLevel" mnemonicParsing="false" prefWidth="999.0" text="Test Level" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <Button fx:id="btnExit" mnemonicParsing="false" prefWidth="999.0" text="Exit" GridPane.columnIndex="1" GridPane.rowIndex="3" />
          </children>
       </GridPane>
       <GridPane GridPane.columnIndex="1" GridPane.rowIndex="2">

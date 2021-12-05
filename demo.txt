@@ -1,12 +1,12 @@
 Demo:
-- Có MainMenu để chọn chơi mới hoặc chơi tiếp nếu thua
+- Có MainMenu để chọn chơi mới hoặc continue/restart nếu thua (nhưng sẽ mất hết buff)
 - Bomber di chuyển theo điều khiển của người chơi
 - Enemy có độ thông minh khác nhau: (4 loại)
 	+ Balloon chỉ đi ngang, Oneal chỉ đi dọc
 	+ Doll đi thẳng đến khi gặp tường thì rẽ hướng khác
 	+ Minvo đi thẳng và rẽ khi gặp ngã 3 hoặc ngã 4
 	+ Kondoria tìm đường đi tới Bomber, nếu không có thì di chuyển như Minvo
-- Đã xử lý va chạm cha Bomber, Enemy, Wall, Brick, Bomb, Flame
+- Đã xử lý va chạm Bomber, Enemy, Wall, Brick, Bomb, Flame
 - Đã xử lý Bomb nổ, độ dài cũng như Sprite của Flame
 - Các hiệu ứng Bomb, Flame nổ, tường vỡ, quái chết mượt (chuẩn timimg từ game gốc) :)
 - Đã xử lý Bomber sử dụng các Item (tăng Flame, tăng Bomb, tăng Speed)
