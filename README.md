@@ -1,3 +1,25 @@
+# Notes
+- Dùng Java 1.8 (Bản của Amazon coretto không dùng được Media, MediaPlayer)
+- StillEntity(Không di chuyển): Bomb, Grass, Wall, Brick, Portal.
+- MoveableEntity (Di chuyển được trong Board): Bomber, Enemy.
+- Nếu Enemy đang trong hoạt ảnh chết thì Bomber chạm vào sẽ đứt hay không? (KHÔNG)
+- Có lỗi java.util.ConcurrentModificationException nên phải dùng List khác để đệm
+- Board của Entity không được null nếu check collide
+- Có đi qua hay đặt Bomb được lên Portal không?
+- Chỉ collide với Entity ở trên cùng (fix ăn Item trước cả khi phá Brick)
+- Bomb nở ra và co vào 2 lần rồi nổ (Tổng ~2,6s lv1), lửa nở ra rồi co vào 1 lần (~0.35s)
+- Enemy khi chết thì lú (~0.85s) rồi cycle 3 sprite chết (~0.85s)
+- MediaPlayer sau khi play thì phải stop nếu không lần sau sẽ không play được nữa
+- Các hàm va chạm chỉ nên xảy ra 1 lần (đặc biệt là các hàm có chứa code play Media)
+- BoardX, BoardY của 1 Moveable sẽ giữ nguyên cho đến khi hoàn toàn sang 1 ô khác?
+- Điều khiển quái:
+    + 1 loại đi trái phải, lên xuống (Level 1+) (Balloon ngang, Oneal dọc)
+    + 1 loại đi thẳng 1 hướng random, gặp tường thì chọn hướng khác (Level 2+) (Doll)
+    + 1 loại sẽ đi thẳng cho tới khi gặp ngã 3 hoặc ngã 4 và sẽ rẽ 1 hướng khác hướng đi tới (Level 2+) (Minvo)
+    + 1 con đâm đầu vào Bomber, không có đường đi thì đi Random như con ở trên (Level 3+) (Kondoria)
+- Sang Level mới Bomber vẫn giữ nguyên buff từ Item (thêm xóa static)
+- Có thể Continue hoặc Restart nhưng sẽ mất hết Buff.
+
 # TODO
 - ~~Class Board chứa màn chơi, phương thức để lấy Entity trên cùng của 1 ô~~
 - ~~Tạo class cho các Entity: Brick, Portal, Các Item, Quái (Balloon, Oneal)~~
@@ -24,33 +46,8 @@
 - ~~resize body của enemy khi di chuyển không cho chạm vào tường~~
 - ~~Thuật toán tìm đường trong một ma trận MxN (A* hoặc gì đó)~~
 - ~~update boardX,Y cua movable entities~~
+- ~~Điều chỉnh tốc độ của nhân vật và quái~~
 - Làm level mới.
-- Test level (full items...)
-- Điều chỉnh tốc độ của nhân vật và quái
-
-# Notes
-- Dùng Java 1.8 (Bản của Amazon coretto không dùng được Media, MediaPlayer)
-- StillEntity(Không di chuyển): Bomb, Grass, Wall, Brick, Portal.
-- MoveableEntity (Di chuyển được trong Board): Bomber, Enemy.
-- Nếu Enemy đang trong hoạt ảnh chết thì Bomber chạm vào sẽ đứt hay không? (KHÔNG)
-- Có lỗi java.util.ConcurrentModificationException nên phải dùng List khác để đệm
-- Board của Entity không được null nếu check collide
-- Có đi qua hay đặt Bomb được lên Portal không?
-- Chỉ collide với Entity ở trên cùng (fix ăn Item trước cả khi phá Brick)
-- Bomb nở ra và co vào 2 lần rồi nổ (Tổng ~2,6s lv1), lửa nở ra rồi co vào 1 lần (~0.35s)
-- Enemy khi chết thì lú (~0.85s) rồi cycle 3 sprite chết (~0.85s)
-- MediaPlayer sau khi play thì phải stop nếu không lần sau sẽ không play được nữa
-- Các hàm va chạm chỉ nên xảy ra 1 lần (đặc biệt là các hàm có chứa code play Media)
-- BoardX, BoardY của 1 Moveable sẽ giữ nguyên cho đến khi hoàn toàn sang 1 ô khác?
-- Điều khiển quái:
-    + 1 loại đi trái phải, lên xuống (Level 1+) (Balloon ngang, Oneal dọc)
-    + 1 loại đi thẳng 1 hướng random, gặp tường thì chọn hướng khác (Level 2+) (Doll)
-    + 1 loại sẽ đi thẳng cho tới khi gặp ngã 3 hoặc ngã 4 và sẽ rẽ 1 hướng khác hướng đi tới (Level 2+) (Minvo)
-    + 1 con đâm đầu vào Bomber, không có đường đi thì đi Random như con ở trên (Level 3+) (Kondoria)
-    + Xuyên tường??
-- Sang Level mới Bomber vẫn giữ nguyên buff từ Item (thêm xóa static)
-- Có thể Continue hoặc Restart nhưng sẽ mất hết Buff.
-
 
 
 
