@@ -27,7 +27,6 @@
 - Làm level mới.
 - Test level (full items...)
 - Điều chỉnh tốc độ của nhân vật và quái
-- Điểm và thời gian?
 
 # Notes
 - Dùng Java 1.8 (Bản của Amazon coretto không dùng được Media, MediaPlayer)

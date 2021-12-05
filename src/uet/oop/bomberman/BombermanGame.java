@@ -10,7 +10,9 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.Priority;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
@@ -163,7 +165,7 @@ public class BombermanGame extends Application {
         stageInfo.setMinWidth(Sprite.SCALED_SIZE * SCREEN_WIDTH);
         stageInfo.setMinHeight(Sprite.SCALED_SIZE * SCREEN_HEIGHT);
         stageInfo.styleProperty().set("-fx-background-color: black;");
-        Label stageLevel = new Label("Game is easy\n bye :P");
+        Label stageLevel = new Label("Congratulations! \n Game is easy\n bye :P");
         stageLevel.setFont(font);
         stageLevel.setTextFill(Color.color(1, 1, 1));
         StackPane.setAlignment(stageInfo, Pos.CENTER_LEFT);
@@ -185,8 +187,7 @@ public class BombermanGame extends Application {
             Sound.playMusic(Sound.endingMusic);
             Sound.endingMusic.setOnEndOfMedia(() -> {
                 Sound.endingMusic.stop();
-                Platform.exit();
-                System.exit(0);
+                showMainMenu();
             });
             return;
         }
@@ -212,6 +213,7 @@ public class BombermanGame extends Application {
 
             // Them scene vao stage
             gameScene.setRoot(screenPane);
+
             screenStage.setScene(gameScene);
             screenStage.show();
 

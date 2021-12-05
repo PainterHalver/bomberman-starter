@@ -105,11 +105,11 @@ public class Bomber extends MovableEntities {
     }
 
     // Hàm vẽ hình chữ nhật để debug
-    @Override
-    public void render(GraphicsContext gc) {
-        gc.drawImage(img, x, y);
-        gc.fillRect(realBodyRectangle.getX(), realBodyRectangle.getY(),realBodyRectangle.getWidth(),realBodyRectangle.getHeight());
-    }
+//    @Override
+//    public void render(GraphicsContext gc) {
+//        gc.drawImage(img, x, y);
+//        gc.fillRect(realBodyRectangle.getX(), realBodyRectangle.getY(),realBodyRectangle.getWidth(),realBodyRectangle.getHeight());
+//    }
 
     @Override
     public void seftDestruct() {
