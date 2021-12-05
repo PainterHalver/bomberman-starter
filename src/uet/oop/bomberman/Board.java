@@ -113,6 +113,16 @@ public class Board {
     return null;
   }
 
+  public boolean bomberIsOnBomb() {
+    Entity bomber = getBomber();
+    for (Entity e : stillObjects) {
+      if (e instanceof Bomb && e.getBoardX() == bomber.getBoardX() && e.getBoardY() == bomber.getBoardY()) {
+        return true;
+      }
+    }
+    return false;
+  }
+
   public int bombCount() {
     int count = 0;
     for (Entity entity : stillObjects) {
