@@ -56,7 +56,7 @@ public class BombermanGame extends Application {
             loopCount++;
             if (System.currentTimeMillis() - start > 1000) {
                 log("FPS: " + loopCount, ANSI_BLUE);
-                screenStage.setTitle(loopCount + " FPS");
+                screenStage.setTitle("BombermanGame | " + loopCount + " FPS");
                 loopCount = 0;
                 start = System.currentTimeMillis();
             }
@@ -98,6 +98,7 @@ public class BombermanGame extends Application {
             e.printStackTrace();
         }
         screenStage.setScene(menuScene);
+        screenStage.setTitle("BombermanGame");
         screenStage.show();
         Sound.playBackground(Sound.menuMusic);
     }
@@ -111,6 +112,7 @@ public class BombermanGame extends Application {
             e.printStackTrace();
         }
         screenStage.setScene(pauseScene);
+        screenStage.setTitle("BombermanGame");
         screenStage.show();
     }
 
@@ -140,6 +142,7 @@ public class BombermanGame extends Application {
         stageInfo.getChildren().add(stageLevel);
         gameScene.setRoot(stageInfo);
         screenStage.setScene(gameScene);
+        screenStage.setTitle("BombermanGame");
         screenStage.show();
     }
 
@@ -156,6 +159,7 @@ public class BombermanGame extends Application {
         stageInfo.getChildren().add(stageLevel);
         gameScene.setRoot(stageInfo);
         screenStage.setScene(gameScene);
+        screenStage.setTitle("BombermanGame");
         screenStage.show();
     }
 
@@ -172,6 +176,7 @@ public class BombermanGame extends Application {
         stageInfo.getChildren().add(stageLevel);
         gameScene.setRoot(stageInfo);
         screenStage.setScene(gameScene);
+        screenStage.setTitle("BombermanGame");
         screenStage.show();
     }
 
