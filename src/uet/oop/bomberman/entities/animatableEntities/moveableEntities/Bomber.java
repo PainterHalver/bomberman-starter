@@ -92,7 +92,7 @@ public class Bomber extends MovableEntities {
             if (((Portal) entity).isOpened() && !currentStageCleared) {
                 currentStageCleared = true;
                 Platform.runLater(() -> {
-                    Sound.playSFX(Sound.stageCompleteMusic);
+                    Sound.playMusic(Sound.stageCompleteMusic);
                     Sound.stageCompleteMusic.setOnEndOfMedia(() -> {
                         Sound.stageCompleteMusic.stop();
                         Sound.sfxs.remove(Sound.stageCompleteMusic);
