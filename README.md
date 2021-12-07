@@ -47,7 +47,7 @@
 - ~~Thuật toán tìm đường trong một ma trận MxN (A* hoặc gì đó)~~
 - ~~update boardX,Y cua movable entities~~
 - ~~Điều chỉnh tốc độ của nhân vật và quái~~
-- Làm level mới.
+- ~~Làm level mới.~~
 
 
 

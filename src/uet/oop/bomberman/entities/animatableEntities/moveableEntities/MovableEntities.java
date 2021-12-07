@@ -110,9 +110,18 @@ public abstract class MovableEntities extends AnimatableEntities {
   public abstract boolean canMove(int xS, int yS);
 
   public void seftDestruct() {
-    // Khi giết được chú quái cuối cùng, alive để chỉ gọi hàm 1 lần
-    if (this instanceof Enemy && board.getEntities().size() == 2 && alive) {
-      Sound.playMusic(Sound.stageClearedFx);
+    // alive để chỉ gọi hàm 1 lần
+    if (this instanceof Enemy && alive) {
+      alive = false;
+      int count = 0;
+      for (Entity e : board.getEntities()) {
+        if (((MovableEntities)e).alive) {
+          count++;
+        }
+      }
+      if (count == 1) {
+        Sound.playMusic(Sound.stageClearedFx);
+      }
     }
 
     moving = false;

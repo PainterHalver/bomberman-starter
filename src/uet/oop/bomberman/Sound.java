@@ -71,15 +71,17 @@ public class Sound {
     mediaPlayer.play();
   }
   public static void playSFX(MediaPlayer mediaPlayer) {
-    sfxs.add(mediaPlayer);
-    mediaPlayer.setVolume(SFX_VOLUME);
-    mediaPlayer.setOnEndOfMedia(new Runnable() {
+    MediaPlayer m = new MediaPlayer(mediaPlayer.getMedia());
+
+    sfxs.add(m);
+    m.setVolume(SFX_VOLUME);
+    m.setOnEndOfMedia(new Runnable() {
       public void run() {
-        mediaPlayer.stop();
+        m.stop();
         sfxs.remove(mediaPlayer);
       }
     });
-    mediaPlayer.play();
+    m.play();
   }
 
   // Chỉ dùng cho tiếng bước chân, không dùng cho các tiếng khác
